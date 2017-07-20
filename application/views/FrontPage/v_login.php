@@ -1,23 +1,30 @@
 <!--Pulling Awesome Font -->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-offset-5 col-md-3">
-            <div class="form-login">
-            <h4>Welcome back.</h4>
-            <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
-            </br>
-            <input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
-            </br>
-            <div class="wrapper">
-            <span class="group-btn">     
-                <a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
-            </span>
-            </div>
-            </div>
-        
-        </div>
+   <!--  <div class="notice">
+        <a href="" class="close">close</a>
+        <p class="warn">Whoops! We didn't recognise your username or password. Please try again.</p>
     </div>
-</div>
-</body>
+ -->
+
+
+    <!-- Primary Page Layout -->
+
+    <div class="container">
+        
+        <div class="form-bg">
+            <form role="form" action="<?php echo site_url('Welcome/login'); ?>" method="post">
+                <h2>Login</h2>
+                <p><input type="text" name = "username" placeholder="Username"></p>
+                <p><input type="password" name="password" placeholder="Password"></p>
+                <!-- <label for="remember">
+                  <input type="checkbox" id="remember" value="remember" />
+                  <span>Remember me on this computer</span>
+                </label> -->
+                <button type="submit"></button>
+            <form>
+        </div>
+
+        <!-- <p class="forgot">Forgot your password? <a href="">Click here to reset it.</a></p> -->
+
+    </div><!-- container -->
