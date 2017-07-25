@@ -17,8 +17,8 @@
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
 			$success = $this->db->insert('jenis_makanan', $data);
-			$this->oracle_db->trans_commit();
-			$this->oracle_db->trans_complete();
+			$this->db->trans_commit();
+			$this->db->trans_complete();
 				if(!$success){
 					$success = false;
 					$errNo   = $this->oracle_db->_error_number();
