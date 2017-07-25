@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdminController extends CI_Controller {
+class MenuMakananController extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -39,7 +39,7 @@ class AdminController extends CI_Controller {
 	public function index()
 	{
 		 $this->load->view('superadmin/v_header.php');
-		 $this->load->view('superadmin/v_mainpage.php');
+		 $this->load->view('superadmin/v_add_makanan.php');
 		 $this->load->view('superadmin/v_footer.php');
 
 		//$this->load->view('MainPage/v_mainpage.php');

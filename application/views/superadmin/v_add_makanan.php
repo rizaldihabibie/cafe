@@ -11,7 +11,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                 <ul class="nav" id="main-menu">
                 <li class="text-center">
                     <img src="<?php echo base_url(); ?>assets/images/find_user.png" class="user-image img-responsive"/>
-                </li>
+                    </li>
                 
                     <li>
                         <a href="#"><i class="fa fa-desktop fa-3x"></i> Menu Makanan<span class="fa arrow"></span></a>
@@ -28,8 +28,10 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                                 <a  href="<?php echo site_url('MenuMinumanController/index'); ?>"><i class="fa fa-desktop fa-3x"></i> Tambah Minuman</a>
                             </li>
                         </ul>
-                    </li>
-                    <li>
+                    </li> 
+
+                    
+                           <li>
                         <a  href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
                     </li>   
                       <li  >
@@ -85,16 +87,42 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Dashboard</h2>   
-                        <h5>Welcome Jhon Deo , Love to see you back. </h5>
-                       
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Tambah Menu Makanan
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>Nama Makanan</label>
+                                            <input class="form-control" placeholder="Nama Makanan" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Harga Makanan</label>
+                                            <input class="form-control" placeholder="Harga Makanan" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Jenis Makanan</label>
+                                            <select class="form-control">
+                                                <option>One Vale</option>
+                                                <option>Two Vale</option>
+                                                <option>Three Vale</option>
+                                                <option>Four Vale</option>
+                                            </select>
+                                        </div>
+                                    </form>                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
                  <!-- /. ROW  -->
                  <hr />
-               
-    </div>
-             <!-- /. PAGE INNER  -->
             </div>
-         <!-- /. PAGE WRAPPER  -->
+             <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
        
