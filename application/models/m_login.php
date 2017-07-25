@@ -19,7 +19,7 @@
 			// echo $username;
 			// echo "<br>";
 			// echo $password;
-			return $query->num_rows();
+			return $query->row();
 		}
 
 		public function select_user($data)
