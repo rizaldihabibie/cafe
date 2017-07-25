@@ -12,7 +12,6 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                 <li class="text-center">
                     <img src="<?php echo base_url(); ?>assets/images/find_user.png" class="user-image img-responsive"/>
                     </li>
-                
                     <li>
                         <a href="#"><i class="fa fa-spoon fa-3x"></i> Menu Makanan<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -47,28 +46,15 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                     <div class="col-md-12">
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                            Tambah Menu Makanan
+                            Tambah Kategori Minuman
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <form role="form">
                                         <div class="form-group">
-                                            <label>Nama Makanan</label>
-                                            <input class="form-control" placeholder="Nama Makanan" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Harga Makanan</label>
-                                            <input class="form-control" placeholder="Harga Makanan" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Jenis Makanan</label>
-                                            <select class="form-control">
-                                                <option>One Vale</option>
-                                                <option>Two Vale</option>
-                                                <option>Three Vale</option>
-                                                <option>Four Vale</option>
-                                            </select>
+                                            <label>Nama Kategori</label>
+                                            <input class="form-control" placeholder="Kategori Minuman" />
                                         </div>
                                     </form>                                 
                                 </div>
