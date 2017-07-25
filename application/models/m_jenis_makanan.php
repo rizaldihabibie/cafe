@@ -13,7 +13,7 @@
 			return $query->result();
 		}
 
-		public function saveKategori($data){
+		public function saveCategory($data){
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
 			$success = $this->db->insert('jenis_makanan', $data);

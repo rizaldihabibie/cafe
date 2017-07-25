@@ -51,11 +51,25 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <form role="form">
+                                <br>
+                                    <?php if($this->session->flashdata('error')): ?>
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                   <div class="fa fa-info-circle"></div>&nbsp;<?php echo $this->session->flashdata('error'); ?>
+                                                </div>
+                                    <?php endif; ?>
+                                    <?php if($this->session->flashdata('success')): ?>
+                                    <div class="alert alert-success alert-dismissible" role="alert">
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                   <div class="fa fa-info-circle"></div>&nbsp;<?php echo $this->session->flashdata('success'); ?>
+                                                </div>
+                                    <?php endif; ?>
+                                    <form role="form" action="<?php echo site_url('KategoriMakananController/saveCategory'); ?>" method="post">
                                         <div class="form-group">
                                             <label>Nama Kategori</label>
-                                            <input class="form-control" placeholder="Kategori Makanan" />
+                                            <input class="form-control" name = "namaKategori" placeholder="Kategori Makanan" />
                                         </div>
+                                        <button type="submit" class="btn btn-success">SIMPAN</button>
                                     </form>                                 
                                 </div>
                             </div>
