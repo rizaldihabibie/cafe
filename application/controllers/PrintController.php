@@ -50,6 +50,7 @@ class PrintController extends CI_Controller {
 		    $printer = new Escpos\Printer($connector);
 		    $printer->text("Hello World!\n");
 		    $printer->cut();
+		    $printer->pulse();
 
 		    /* Close printer */
 		    $printer -> close();
