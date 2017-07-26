@@ -34,6 +34,27 @@
 			return $this->db->update('menu', $data, array('id_menu' => $id));
 		}
 
+		public function selectFoodOnly() 
+		{
+			$this->db = $this->load->database('default', true);
+			
+			$this->db->select('*');
+			$this->db->from('menu');
+			$this->db->where("(kategori = '0')", NULL, FALSE);
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+		public function selectDrinkOnly() 
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');
+			$this->db->from('menu');
+			$this->db->where("(kategori = '1')", NULL, FALSE);
+			$query = $this->db->get();
+			return $query->result();
+		}
+
 	}
 
 ?>

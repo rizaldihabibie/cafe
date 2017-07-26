@@ -39,10 +39,12 @@ class KategoriMakananController extends CI_Controller {
 	}
 
 	public function index()
-	{
-		 $this->load->view('superadmin/v_header.php');
-		 $this->load->view('superadmin/v_add_kategori_makanan.php');
-		 $this->load->view('superadmin/v_footer.php');
+	{	
+		 $data = array();
+		 $data['listKategori'] = $this->M_jenis_makanan->selectFoodOnly();
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_add_kategori_makanan.php',$data);
+		 $this->load->view('superadmin/v_footer.php',$data);
 
 		//$this->load->view('MainPage/v_mainpage.php');
 	}

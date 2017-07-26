@@ -77,6 +77,50 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         </div>
                     </div>
                     </div>
+                    <div class="col-md-12">
+                  <!--   Kitchen Sink -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Data Kategori Minuman
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Kategori</th>
+                                            <th>Edit</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            $nomor=1;
+                                            foreach($listKategori as $row)
+                                            {
+                                            if($nomor%2){
+                                              echo "<tr>
+                                                <td class='warning'>".$nomor."</td>
+                                                <td class='warning'>".$row->nama_jenis_makanan."</td>
+                                                <td class='warning'><a href = 'editKategori/$row->id_jenis_makanan'>EDIT</a></td>
+                                              </tr>";
+                                            }else{
+                                              echo "<tr>
+                                                <td class='info'>".$nomor."</td>
+                                                <td class='info'>".$row->nama_jenis_makanan."</td>
+                                                <td class='info'><a href = 'editKategori/$row->id_jenis_makanan'>EDIT</a></td>
+                                              </tr>";
+                                            }
+                                              $nomor++;
+                                            }
+                                          ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- End  Kitchen Sink -->
+                </div>
                 </div>
                  <!-- /. ROW  -->
                  <hr />

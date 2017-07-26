@@ -31,17 +31,47 @@ class MenuMakananController extends CI_Controller {
 		$this->output->set_header('Cache-Control:no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control:post-check=0,pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
-
+		$this->load->helper(array('form','url', 'text_helper','date','file'));
+		$this->load->library(array('Pagination','image_lib','session'));
+		$this->load->model('M_jenis_makanan');
+		$this->load->model('M_menu');
 		// $this->load->library('Userauth');
 		
 	}
 
 	public function index()
 	{
-		 $this->load->view('superadmin/v_header.php');
-		 $this->load->view('superadmin/v_add_makanan.php');
-		 $this->load->view('superadmin/v_footer.php');
+		 $data = array();
+		 $data['listKategori'] = $this->M_jenis_makanan->selectFoodOnly();
+		 $data['listMakanan'] = $this->M_menu->selectFoodOnly();
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_add_makanan.php',$data);
+		 $this->load->view('superadmin/v_footer.php',$data);
+	}
 
-		//$this->load->view('MainPage/v_mainpage.php');
+	public function saveMenu(){
+		$categoryName = $this->input->post('namaKategori');
+		$namaMakanan = $this->input->post('namaMakanan');
+		$hargaPokokMakanan = $this->input->post('hargaPokokMakanan');
+		$hargaJualMakanan = $this->input->post('hargaJualMakanan');
+
+		$data = array();
+		$data["id_jenis_makanan"] = $categoryName;
+		$data["harga_pokok"] = $hargaPokokMakanan;
+		$data["nama_menu"] = $namaMakanan;
+		$data["harga_jual"] = $hargaJualMakanan;
+		$data["kategori"] = 0;
+		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
+			$this->session->set_flashdata('error', 'Isi Semua Data !');
+			redirect("MenuMakananController/index/");
+		}else{
+			if($this->M_menu->saveMenu($data)){
+				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
+				redirect("MenuMakananController/index/");
+			}else{
+				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
+				redirect("MenuMakananController/index/");
+			}
+		}
 	}
 }
