@@ -45,6 +45,7 @@ class MenuMinumanController extends CI_Controller {
 		 $data['listKategori'] = $this->M_jenis_makanan->selectDrinkOnly();
 		 $data['listMinuman'] = $this->M_menu->selectDrinkOnly();
 		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
 		 $this->load->view('superadmin/v_add_minuman.php',$data);
 		 $this->load->view('superadmin/v_footer.php',$data);
 	}
@@ -66,6 +67,44 @@ class MenuMinumanController extends CI_Controller {
 			redirect("MenuMinumanController/index/");
 		}else{
 			if($this->M_menu->saveMenu($data)){
+				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
+				redirect("MenuMinumanController/index/");
+			}else{
+				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
+				redirect("MenuMinumanController/index/");
+			}
+		}
+	}
+	public function editMinuman($idMenu)
+	{
+		 $data = array();
+		 $menu =  $this->M_menu->findById($idMenu);
+		 $data['listKategori'] = $this->M_jenis_makanan->findByCategory($menu->kategori);
+		 $data['menu'] = $menu;
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
+		 $this->load->view('superadmin/v_edit_menu_minuman.php',$data);
+		 $this->load->view('superadmin/v_footer.php',$data);
+	}
+
+	public function saveUpdate(){
+		$categoryName = $this->input->post('namaKategori');
+		$namaMakanan = $this->input->post('namaMakanan');
+		$hargaPokokMakanan = $this->input->post('hargaPokokMakanan');
+		$hargaJualMakanan = $this->input->post('hargaJualMakanan');
+		$id = $this->input->post("idData");
+
+		$data = array();
+		$data["id_jenis_makanan"] = $categoryName;
+		$data["harga_pokok"] = $hargaPokokMakanan;
+		$data["nama_menu"] = $namaMakanan;
+		$data["harga_jual"] = $hargaJualMakanan;
+		$data["kategori"] = 1;
+		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
+			$this->session->set_flashdata('error', 'Isi Semua Data !');
+			redirect("MenuMinumanController/index/");
+		}else{
+			if($this->M_menu->updateMenu($id,$data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
 				redirect("MenuMinumanController/index/");
 			}else{

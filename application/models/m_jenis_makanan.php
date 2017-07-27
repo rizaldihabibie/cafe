@@ -55,6 +55,16 @@
 			return $query->result();
 		}
 
+		public function findByCategory($category) 
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');
+			$this->db->from('jenis_makanan');
+			$this->db->where("kategori", $category);
+			$query = $this->db->get();
+			return $query->result();
+		}
+
 	}
 
 ?>

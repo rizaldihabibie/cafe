@@ -1,46 +1,3 @@
- 
-           
-<div style="color: white;
-padding: 15px 50px 5px 50px;
-float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="btn btn-danger square-btn-adjust">Logout</a> </div> 
-</nav>
-<!-- /. NAV TOP  -->
-                <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                <li class="text-center">
-                    <img src="<?php echo base_url(); ?>assets/images/find_user.png" class="user-image img-responsive"/>
-                    </li>
-                
-                     <li>
-                        <a href="#"><i class="fa fa-spoon fa-3x"></i> Menu Makanan<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a  href="<?php echo site_url('MenuMakananController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tambah Makanan</a>
-                            </li>
-                            <li>
-                                <a  href="<?php echo site_url('KategoriMakananController/index'); ?>"><i class="fa fa-info fa-3x"></i>Kategori Makanan</a>
-                            </li>
-                        </ul>
-                    </li> 
-                     <li>
-                        <a href="#"><i class="fa fa-glass fa-3x"></i> Menu Minuman<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a  href="<?php echo site_url('MenuMinumanController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tambah Minuman</a>
-                            </li>
-                            <li>
-                                <a  href="<?php echo site_url('KategoriMinumanController/index'); ?>"><i class="fa fa-info fa-3x"></i>Kategori Minuman</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-               
-            </div>
-            
-        </nav>  
-        <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
@@ -68,7 +25,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                                     <form action="<?php echo site_url('MenuMinumanController/saveMenu'); ?>" method="post">
                                         <div class="form-group">
                                             <label>Nama Minuman</label>
-                                            <input class="form-control" name = "namaMakanan" placeholder="Nama Makanan" required/>
+                                            <input class="form-control" name = "namaMakanan" placeholder="Nama Minuman" required/>
                                         </div>
                                         
                                         <div class="form-group">
@@ -87,11 +44,11 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                                 <br>
                                     <div class="form-group">
                                             <label>Harga Pokok Minuman</label>
-                                            <input class="form-control" name = "hargaPokokMakanan" placeholder="Harga Makanan" required />
+                                            <input class="form-control" name = "hargaPokokMakanan" placeholder="Harga Pokok" required />
                                     </div>
                                     <div class="form-group">
                                             <label>Harga Jual Minuman</label>
-                                            <input class="form-control" name = "hargaJualMakanan" placeholder="Harga Makanan" required/>
+                                            <input class="form-control" name = "hargaJualMakanan" placeholder="Harga Jual" required/>
                                     </div>
                                     <div class="form-group">
                                          <button type="submit" class="btn btn-success">SIMPAN</button>
@@ -134,7 +91,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                                                 <td class='warning'>".$row->nama_menu."</td>
                                                 <td class='warning'>".$row->harga_pokok."</td>
                                                 <td class='warning'>".$row->harga_jual."</td>
-                                                <td class='warning'><a href = 'editKategori/$row->id_menu'>EDIT</a></td>
+                                                <td class='warning'><a href = 'editMinuman/$row->id_menu'>EDIT</a></td>
                                               </tr>";
                                             }else{
                                               echo "<tr>
@@ -142,7 +99,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                                                 <td class='info'>".$row->nama_menu."</td>
                                                 <td class='info'>".$row->harga_pokok."</td>
                                                 <td class='info'>".$row->harga_jual."</td>
-                                                <td class='info'><a href = 'editKategori/$row->id_menu'>EDIT</a></td>
+                                                <td class='info'><a href = 'editMinuman/$row->id_menu'>EDIT</a></td>
                                               </tr>";
                                             }
                                               $nomor++;

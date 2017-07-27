@@ -39,6 +39,7 @@ class AdminController extends CI_Controller {
 	public function index()
 	{
 		 $this->load->view('superadmin/v_header.php');
+		 $this->load->view('superadmin/v_sidebar.php');
 		 $this->load->view('superadmin/v_mainpage.php');
 		 $this->load->view('superadmin/v_footer.php');
 

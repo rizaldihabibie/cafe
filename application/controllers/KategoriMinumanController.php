@@ -43,6 +43,7 @@ class KategoriMinumanController extends CI_Controller {
 		 $data = array();
 		 $data['listKategori'] = $this->M_jenis_makanan->selectDrinkOnly();
 		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
 		 $this->load->view('superadmin/v_add_kategori_minuman.php',$data);
 		 $this->load->view('superadmin/v_footer.php',$data);
 	}
