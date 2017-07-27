@@ -15,10 +15,10 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         <a href="#">Menu Makanan<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a  href="<?php echo site_url('MenuMakananController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tambah Makanan</a>
+                                <a  href="<?php echo site_url('MenuMakananController/index'); ?>">Tambah Makanan</a>
                             </li>
                             <li>
-                                <a  href="<?php echo site_url('KategoriMakananController/index'); ?>"><i class="fa fa-info fa-3x"></i>Kategori Makanan</a>
+                                <a  href="<?php echo site_url('KategoriMakananController/index'); ?>">Kategori Makanan</a>
                             </li>
                         </ul>
                     </li> 
@@ -26,10 +26,10 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         <a href="#"></i>Menu Minuman<i class="fa fa-glass fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a  href="<?php echo site_url('MenuMinumanController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tambah Minuman</a>
+                                <a  href="<?php echo site_url('MenuMinumanController/index'); ?>">Tambah Minuman</a>
                             </li>
                             <li>
-                                <a  href="<?php echo site_url('KategoriMinumanController/index'); ?>"><i class="fa fa-info fa-3x"></i>Kategori Minuman</a>
+                                <a  href="<?php echo site_url('KategoriMinumanController/index'); ?>">Kategori Minuman</a>
                             </li>
                         </ul>
                     </li>

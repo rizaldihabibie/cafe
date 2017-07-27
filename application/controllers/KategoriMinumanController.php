@@ -65,4 +65,33 @@ class KategoriMinumanController extends CI_Controller {
 			}
 		}
 	}
+	public function editKategori($idKategori)
+	{
+		 $data = array();
+		 $kategori =  $this->M_jenis_makanan->findById($idKategori);
+		 $data['kategori'] = $kategori;
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
+		 $this->load->view('superadmin/v_edit_kategori_minuman.php',$data);
+		 $this->load->view('superadmin/v_footer.php',$data);
+	}
+	public function saveUpdate(){
+		$categoryName = $this->input->post('namaKategori');
+		$id = $this->input->post('idData');
+		$data = array();
+		$data["nama_jenis_makanan"] = $categoryName;
+		$data["kategori"] = 1;
+		if($categoryName == null || $categoryName = ""){
+			$this->session->set_flashdata('error', 'Nama Kategori Kosong !');
+			redirect("KategoriMinumanController/index/");
+		}else{
+			if($this->M_jenis_makanan->updateCategory($id,$data)){
+				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
+				redirect("KategoriMinumanController/index/");
+			}else{
+				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
+				redirect("KategoriMinumanController/index/");
+			}
+		}
+	}
 }
