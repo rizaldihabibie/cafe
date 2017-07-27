@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class KasirController extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -31,37 +31,35 @@ class Welcome extends CI_Controller {
 		$this->output->set_header('Cache-Control:no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control:post-check=0,pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
-		$this->load->model('m_login');
+		$this->load->model('M_jenis_makanan');
+		$this->load->helper(array('form','url', 'text_helper','date','file'));
+		$this->load->library(array('Pagination','image_lib','session'));
+		$this->load->model('M_meja');
 		// $this->load->library('Userauth');
 		
 	}
 
 	public function index()
-	{
-		 $this->load->view('FrontPage/header.php');
-		 $this->load->view('FrontPage/v_login.php');
-		 $this->load->view('FrontPage/footer.php');
+	{	
+	
+		 $this->load->view('Kasir/v_header.php');
+		 $this->load->view('Kasir/v_sidebar.php');
+		 $this->load->view('Kasir/v_mainpage.php');
+		 $this->load->view('Kasir/v_footer.php');
 
 		//$this->load->view('MainPage/v_mainpage.php');
 	}
 
-	public function login(){
+	public function TambahOrderBaru()
+	{	
+		 $data = array();
+		 $data['listMeja'] = $this->M_meja->selectAll();
+		 $this->load->view('Kasir/v_header.php',$data);
+		 $this->load->view('Kasir/v_sidebar.php',$data);
+		 $this->load->view('Kasir/v_add_new_order.php',$data);
+		 $this->load->view('Kasir/v_footer.php',$data);
 
-		$username = $this->input->post('username');
-		$password = $this->input->post('password');
-
-		$data = array();
-		$data['username'] = $username;
-		$data['password'] = $password;
-		$user = $this->m_login->login($data);
-		if(sizeof($user)>0){
-			if($user->privilege=="super"){
-				redirect('AdminController');
-			}else if($user->privilege=="kasir"){
-				redirect('KasirController');
-			}	
-		}else{
-			echo "not registered";
-		}
+		//$this->load->view('MainPage/v_mainpage.php');
 	}
+
 }

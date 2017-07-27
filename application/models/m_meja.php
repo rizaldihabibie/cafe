@@ -51,10 +51,6 @@
 			return $this->db->update('meja', $data, array('id_meja' => $id));
 		}
        
-	   public function updateMeja($id, $data)
-		{
-			return $this->db->update('detail_meja', $data, array('id_meja' => $id));
-		}
 	}
 
 ?>
