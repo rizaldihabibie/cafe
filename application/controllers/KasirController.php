@@ -62,4 +62,24 @@ class KasirController extends CI_Controller {
 		//$this->load->view('MainPage/v_mainpage.php');
 	}
 
+	public function saveTable(){
+
+		$input = array();
+		$dataTable = $this->M_meja->selectAll();
+		foreach ($dataTable as $row) {
+			$x = $this->input->post($row->id_meja);
+			if($x != ""){
+				$input[] = $row->id_meja;
+			}
+				
+		}
+		if(sizeof($input)==0){
+			redirect("KasirController/TambahOrderBaru/");
+		}else{
+			for($i=0;$i<sizeof($input);$i++){
+				echo $input[$i];
+			}
+		}
+	}
+
 }

@@ -1,7 +1,7 @@
          <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                    
+                    <form role="form" action="<?php echo site_url('KasirController/saveTable'); ?>" method="post">
                     <div class="col-md-12">
                   <!--   Kitchen Sink -->
                     <div class="panel panel-default">
@@ -15,25 +15,27 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Status</th>
+                                            <th>#</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $nomor = 1;
                                             foreach($listMeja as $row)
                                             {
-                                            if($nomor%2){
+                                            if($row->status == "DIPAKAI"){
                                               echo "<tr>
-                                                <td class='warning'>".$row->id_meja."</td>
-                                                <td class='warning'>Ready</td>
+                                                <td class='bg-danger'>".$row->id_meja."</td>
+                                                <td class='bg-danger'>".$row->status."</td>
+                                                <td><input type='checkbox' name='$row->id_meja' value='$row->id_meja' disabled/></td>
                                               </tr>";
                                             }else{
                                               echo "<tr>
-                                                <td class='info'>".$row->id_meja."</td>
-                                                <td class='info'>Ready</td>
+                                                <td class='bg-success'>".$row->id_meja."</td>
+                                                <td class='bg-success'>".$row->status."</td>
+                                                <td><input type='checkbox' name='$row->id_meja' value='$row->id_meja'/></td>
                                               </tr>";
                                             }
-                                              $nomor++;
+                                       
                                             }
                                           ?>
                                     </tbody>
@@ -43,6 +45,8 @@
                     </div>
                      <!-- End  Kitchen Sink -->
                 </div>
+                <button type="submit" class=" form-control btn btn-success ">MUTASI</button>
+                </form>
                 </div>
                  <!-- /. ROW  -->
                  <hr />
