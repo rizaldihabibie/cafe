@@ -23,13 +23,29 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         </ul>
                     </li> 
                      <li>
-                        <a href="#"></i>Menu Minuman<i class="fa fa-glass fa-3x"></i><span class="fa arrow"></span></a>
+                        <a href="#">Menu Minuman<i class="fa fa-glass fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a  href="<?php echo site_url('MenuMinumanController/index'); ?>">Tambah Minuman</a>
                             </li>
                             <li>
                                 <a  href="<?php echo site_url('KategoriMinumanController/index'); ?>">Kategori Minuman</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Pesanan<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a  href="<?php echo site_url('PesanMejaController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tambah Pesanan Baru</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Pembayaran<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a  href="<?php echo site_url('PembayaranController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tutup Pesanan</a>
                             </li>
                         </ul>
                     </li>
