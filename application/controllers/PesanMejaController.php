@@ -40,7 +40,7 @@ class AdminController extends CI_Controller {
 	{
 		 $this->load->view('superadmin/v_header.php');
 		 $this->load->view('superadmin/v_sidebar.php');
-		 $this->load->view('superadmin/v_pesan_meja.php');
+		 $this->load->view('superadmin/v_add_makanan.php');
 		 $this->load->view('superadmin/v_footer.php');
 
 		//$this->load->view('MainPage/v_mainpage.php');

@@ -37,7 +37,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         <a href="#">Pesanan<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a  href="<?php echo site_url('PesanMejaController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tambah Pesanan Baru</a>
+                                <a  href="<?php echo site_url('PesanMejaController/index'); ?>">Buat Pesanan Baru</a>
                             </li>
                         </ul>
                     </li>
@@ -45,7 +45,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         <a href="#">Pembayaran<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a  href="<?php echo site_url('PembayaranController/index'); ?>"><i class="fa fa-plus-circle fa-3x"></i>Tutup Pesanan</a>
+                                <a  href="<?php echo site_url('PembayaranController/index'); ?>">Tutup Pesanan</a>
                             </li>
                         </ul>
                     </li>
