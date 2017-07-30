@@ -68,7 +68,7 @@
 
 /* CSS only version */
 .toggle-btn-grp.cssonly * {
-    width:140px;
+    width:80px;
     height:30px;
     line-height:30px;
 }
@@ -136,18 +136,53 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
-
-                                 <div class=\"toggle-btn-grp cssonly shaon\" id=\"no_meja\"> 
-	<div><input type=\"checkbox\" name=\"meja[]\" value=\"table1\" disabled/>
-	<label onclick=\"\" class=\"toggle-btn\" >01</label>
-	</div></div>
-
-
-
-                                </div><div class=\"toggle-btn-grp cssonly \" id=\"no_meja\"> 
-	<div><input type=\"checkbox\" name=\"meja[]\" value=\"table2\" />
-	<label onclick=\"\" class=\"toggle-btn\" >02</label>
-	</div></div>
+                                  <table  border='1'  width='50%' cellspacing='5' cellpadding='40'>
+                                  <tr>
+                                  <td> 
+                                   LANTAI 1
+                                     <table  border='1'  width='50%' cellspacing='0' cellpadding='0'>
+                                  <tr>
+                                  <td> 
+                                    <div class="toggle-btn-grp cssonly shaon" id="no_meja"> 
+	                                  <div><input type="checkbox" name="meja[]" value="table1" disabled/>
+	                                    <label onclick=\"\" class="toggle-btn" >01</label>
+	                                  </div>
+                                    </div>
+                                   </td>
+                                   <td>
+                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
+	                                 <div><input type="checkbox" name="meja[]" value="table2" />
+	                                  <label onclick=\"\" class="toggle-btn" >02</label>
+	                                </div>
+                                 </div>
+                                 </td>
+                                   </tr>
+                                   </table>
+                                   </td>
+                                  
+                                  <td>
+                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
+	                                 <div><input type="checkbox" name="meja[]" value="table3" />
+	                                  <label onclick=\"\" class="toggle-btn" >03</label>
+	                                </div>
+                                 </div>
+                                 </td>
+                                  <td>
+                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
+	                                 <div><input type="checkbox" name="meja[]" value="table4" />
+	                                  <label onclick=\"\" class="toggle-btn" >02</label>
+	                                </div>
+                                 </div>
+                                 </td>
+                                  <td>
+                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
+	                                 <div><input type="checkbox" name="meja[]" value="table5" />
+	                                  <label onclick=\"\" class="toggle-btn" >02</label>
+	                                </div>
+                                 </div>
+                                 </td>
+                                </tr>
+                              </table>
                             </div>
                         </div>
                     </div> 
