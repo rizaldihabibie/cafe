@@ -56,7 +56,7 @@ class KasirController extends CI_Controller {
 		 $data['listMeja'] = $this->M_meja->selectAll();
 		 $this->load->view('Kasir/v_header.php',$data);
 		 $this->load->view('Kasir/v_sidebar.php',$data);
-		 $this->load->view('Kasir/v_add_new_order.php',$data);
+		 $this->load->view('Kasir/v_choose_table.php',$data);
 		 $this->load->view('Kasir/v_footer.php',$data);
 
 		//$this->load->view('MainPage/v_mainpage.php');
@@ -76,9 +76,14 @@ class KasirController extends CI_Controller {
 		if(sizeof($input)==0){
 			redirect("KasirController/TambahOrderBaru/");
 		}else{
-			for($i=0;$i<sizeof($input);$i++){
-				echo $input[$i];
-			}
+			$this->session->set_flashdata('dataTable', $input);
+			$data = array();
+		 	$data['listKategoriMakanan'] = $this->M_jenis_makanan->selectFoodOnly();
+		 	$data['listKategoriMinuman'] = $this->M_jenis_makanan->selectDrinkOnly();
+			$this->load->view('Kasir/v_header.php',$data);
+			$this->load->view('Kasir/v_sidebar.php',$data);
+			$this->load->view('Kasir/v_input_order.php',$data);
+			$this->load->view('Kasir/v_footer.php',$data);
 		}
 	}
 

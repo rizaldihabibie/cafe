@@ -41,11 +41,13 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <button type="submit" class=" form-control btn btn-success ">Pilih Meja</button>
                         </div>
+
                     </div>
                      <!-- End  Kitchen Sink -->
                 </div>
-                <button type="submit" class=" form-control btn btn-success ">MUTASI</button>
+                
                 </form>
                 </div>
                  <!-- /. ROW  -->
