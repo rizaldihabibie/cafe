@@ -135,27 +135,52 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
+                                 <form method="post" action="books.php">
+                                   <table border=0 width='100%'>			
+				                     <tr>
+                                      <td>  <div class="pull-right">Pilih Meja Kemudian Tekan Selanjutnya.<br><input type="submit" class="btn btn-lg btn-success btn-block" value="Selanjutnya"/></div></td>
+                                     </tr>
+                                   </table> 
+                                 <br><br><br>
+
                                 <div class="col-md-6">
-                                  <table  border='1'  width='50%' cellspacing='5' cellpadding='40'>
+                                  
+                                 
+                                  <table  border='1'  width='100%' cellspacing='5' cellpadding='40'>
                                   <tr>
                                   <td> 
                                    LANTAI 1
-                                     <table  border='1'  width='50%' cellspacing='0' cellpadding='0'>
+                                     <table  border='1'  width='100%' cellspacing='0' cellpadding='0'>
                                   <tr>
+                                   <?php
+                                        foreach($listMeja1 as $row1)
+                                              {
+                                        if($row1->status == "1"){
+                                            echo 'tes3';
+                                    ?>
                                   <td> 
                                     <div class="toggle-btn-grp cssonly shaon" id="no_meja"> 
-	                                  <div><input type="checkbox" name="meja[]" value="table1" disabled/>
-	                                    <label onclick=\"\" class="toggle-btn" >01</label>
+	                                  <div><input type="checkbox" name="meja[]" value=<?php echo $row1->no_meja ?> disabled/>
+	                                    <label onclick=\"\" class="toggle-btn" ><?php echo $row1->no_meja ?></label>
 	                                  </div>
                                     </div>
                                    </td>
+                                   <?php
+                                       }
+                                       else if ($row1->status == "0"){
+                                      //     echo $row1->no_meja;
+                                   ?>
                                    <td>
-                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
-	                                 <div><input type="checkbox" name="meja[]" value="table2" />
-	                                  <label onclick=\"\" class="toggle-btn" >02</label>
+                                  <div class="toggle-btn-grp cssonly" id="no_meja">  
+	                                 <div><input type="checkbox" name="meja[]" value=<?php echo $row1->no_meja ?> />
+	                                  <label onclick=\"\" class="toggle-btn" > <?php echo $row1->no_meja; ?></label>
 	                                </div>
                                  </div>
                                  </td>
+                                 <?php
+                                       }
+                                              } 
+                                 ?>
                                    </tr>
                                    </table>
                                    </td>
@@ -187,7 +212,8 @@
                         </div>
                     </div> 
                     </div>
-                </div>
+                </form> 
+                </div><!--akhir form--> 
                  <!-- /. ROW  -->
                  <hr />
             </div>

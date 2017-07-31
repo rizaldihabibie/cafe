@@ -12,6 +12,24 @@
 			$query = $this->db->get();
 			return $query->result();
 		}
+			public function mejaLantai1() 
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');
+			$this->db->from('meja');
+			$this->db->where("(lantai = '1')", NULL, FALSE);
+			$query = $this->db->get();
+			return $query->result();
+		}
+		   public function mejaLantai2() 
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');
+			$this->db->from('meja');
+			$this->db->where("(lantai = '2')", NULL, FALSE);
+			$query = $this->db->get();
+			return $query->result();
+		}
 
 		public function saveMeja($data){
 			$this->db = $this->load->database('default', true);
