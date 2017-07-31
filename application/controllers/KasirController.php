@@ -31,10 +31,12 @@ class KasirController extends CI_Controller {
 		$this->output->set_header('Cache-Control:no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control:post-check=0,pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
-		$this->load->model('M_jenis_makanan');
+		
 		$this->load->helper(array('form','url', 'text_helper','date','file'));
 		$this->load->library(array('Pagination','image_lib','session'));
 		$this->load->model('M_meja');
+		$this->load->model('M_jenis_makanan');
+		$this->load->model('M_menu');
 		// $this->load->library('Userauth');
 		
 	}
@@ -80,10 +82,27 @@ class KasirController extends CI_Controller {
 			$data = array();
 		 	$data['listKategoriMakanan'] = $this->M_jenis_makanan->selectFoodOnly();
 		 	$data['listKategoriMinuman'] = $this->M_jenis_makanan->selectDrinkOnly();
+		 	$data['listMenu'] = $this->M_menu->selectAll();
+		 	$data['menuArray'] = $this->M_menu->selectArray();
+		 	// for($i=0;$i<sizeof($data['menuArray']);$i++){
+		 	// 	echo $data['menuArray'][$i][1];
+		 	// 	echo "<br>";
+		 	// }
+		 	// exit();
 			$this->load->view('Kasir/v_header.php',$data);
 			$this->load->view('Kasir/v_sidebar.php',$data);
 			$this->load->view('Kasir/v_input_order.php',$data);
 			$this->load->view('Kasir/v_footer.php',$data);
+		}
+	}
+
+	public function savePesanan(){
+		$data['menuArray'] = $this->M_menu->selectArray();
+		for($i=0;$i<sizeof($data['menuArray']);$i++){
+			if($this->input->post($data['menuArray'][$i][0])!=null){
+				echo $this->input->post($data['menuArray'][$i][0]);
+			}
+				echo "<br>";
 		}
 	}
 
