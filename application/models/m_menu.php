@@ -13,6 +13,24 @@
 			return $query->result();
 		}
 
+		public function selectArray() 
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');
+			$this->db->from('menu');
+			$query = $this->db->get();
+			$data = array();
+			$list = $query->result();
+			$indexRow = 0;
+			foreach ($list as $row) {
+				$data[$indexRow][0] = $row->id_menu;
+				$data[$indexRow][1] = $row->nama_menu;
+				$data[$indexRow][2] = $row->id_jenis_makanan;
+				$indexRow++;
+			}
+			return $data;
+		}
+
 		public function saveMenu($data){
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
