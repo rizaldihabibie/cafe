@@ -49,6 +49,14 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                             </li>
                         </ul>
                     </li>
+                       <li>
+                        <a href="#">Utilitas<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a  href="<?php echo site_url('UserController/index'); ?>">Daftar User Baru</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                
             </div>

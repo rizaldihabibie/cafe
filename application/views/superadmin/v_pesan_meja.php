@@ -146,17 +146,18 @@
                                 <div class="col-md-6">
                                   
                                  
-                                  <table  border='1'  width='100%' cellspacing='5' cellpadding='40'>
+                                  <table  border='1'  width='100%' cellspacing='0' cellpadding='0'>
                                   <tr>
                                   <td> 
-                                   LANTAI 1
-                                     <table  border='1'  width='100%' cellspacing='0' cellpadding='0'>
-                                  <tr>
+                                   <table  border='1'  width='100%' cellspacing='0' cellpadding='0'>
+                                      <tr><td>LANTAI 1</td></tr>
+                                    </table>
+                                    <table  border='1'  width='100%' cellspacing='0' cellpadding='0'>
+                                  <tr><BR><BR><br> <br>
                                    <?php
                                         foreach($listMeja1 as $row1)
                                               {
                                         if($row1->status == "1"){
-                                            echo 'tes3';
                                     ?>
                                   <td> 
                                     <div class="toggle-btn-grp cssonly shaon" id="no_meja"> 
@@ -184,30 +185,85 @@
                                    </tr>
                                    </table>
                                    </td>
+                                   <!-- akhir td lantai !-->
                                   
-                                  <td>
-                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
-	                                 <div><input type="checkbox" name="meja[]" value="table3" />
-	                                  <label onclick=\"\" class="toggle-btn" >03</label>
+                                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <!-- baris kosong antara lantai 1 dan 2-->
+
+                                    <td> 
+                                   <table  border='1'  width='100%' cellspacing='0' cellpadding='0'>
+                                      <tr><td>LANTAI 2</td></tr>
+                                    </table>
+                                    <table  border='1'  width='100%' cellspacing='0' cellpadding='0'>
+                                  <tr><BR><BR><br> <br>
+                                   <?php
+                                    $no=1;
+                                        foreach($listMeja2 as $row2)
+                                              {
+                                        if($no%5 == 0)
+                                          {
+                                            echo '</tr><tr>';  
+                                        if($row2->status == "1"){
+                                    ?>
+                                  <td> 
+                                    <div class="toggle-btn-grp cssonly shaon" id="no_meja"> 
+	                                  <div><input type="checkbox" name="meja[]" value=<?php echo $row2->no_meja ?> disabled/>
+	                                    <label onclick=\"\" class="toggle-btn" ><?php echo $row2->no_meja ?></label>
+	                                  </div>
+                                    </div>
+                                   </td>
+                                   <?php
+                                       }
+                                       else if ($row2->status == "0"){
+                                      //     echo $row1->no_meja;
+                                   ?>
+                                   <td>
+                                  <div class="toggle-btn-grp cssonly" id="no_meja">  
+	                                 <div><input type="checkbox" name="meja[]" value=<?php echo $row2->no_meja ?> />
+	                                  <label onclick=\"\" class="toggle-btn" > <?php echo $row2->no_meja; ?></label>
 	                                </div>
                                  </div>
                                  </td>
-                                  <td>
-                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
-	                                 <div><input type="checkbox" name="meja[]" value="table4" />
-	                                  <label onclick=\"\" class="toggle-btn" >02</label>
+                                 <?php
+                                       }     
+                                          }
+                                          else if($no%5 != 0)
+                                          {
+                                           if($row2->status == "1"){     
+                                ?>
+                                 <td> 
+                                    <div class="toggle-btn-grp cssonly shaon" id="no_meja"> 
+	                                  <div><input type="checkbox" name="meja[]" value=<?php echo $row2->no_meja ?> disabled/>
+	                                    <label onclick=\"\" class="toggle-btn" ><?php echo $row2->no_meja ?></label>
+	                                  </div>
+                                    </div>
+                                   </td>
+                                   <?php
+                                       }
+                                       else if ($row2->status == "0"){
+                                      //     echo $row1->no_meja;
+                                   ?>
+                                   <td>
+                                  <div class="toggle-btn-grp cssonly" id="no_meja">  
+	                                 <div><input type="checkbox" name="meja[]" value=<?php echo $row2->no_meja ?> />
+	                                  <label onclick=\"\" class="toggle-btn" > <?php echo $row2->no_meja; ?></label>
 	                                </div>
                                  </div>
-                                 </td>
-                                  <td>
-                                  <div class="toggle-btn-grp cssonly" id="no_meja"> 
-	                                 <div><input type="checkbox" name="meja[]" value="table5" />
-	                                  <label onclick=\"\" class="toggle-btn" >02</label>
-	                                </div>
-                                 </div>
-                                 </td>
+                                 </td> 
+                                <?php
+                                       }
+                                          } // akhir %5 
+                                       $no++;
+                                              } // akhir foreach
+                                 ?>
+                                   </tr>
+                                   </table>
+                                   </td>
+                                
                                 </tr>
                               </table>
+                                &nbsp;&nbsp; 
+
                             </div>
                         </div>
                     </div> 

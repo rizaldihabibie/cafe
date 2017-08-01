@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AdminController extends CI_Controller {
+class PesanMejaController extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -31,18 +31,24 @@ class AdminController extends CI_Controller {
 		$this->output->set_header('Cache-Control:no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control:post-check=0,pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
+		$this->load->helper(array('form','url', 'text_helper','date','file'));
+		$this->load->library(array('Pagination','image_lib','session'));
+		$this->load->model('M_meja');
 
 		// $this->load->library('Userauth');
 		
 	}
 
-	public function index()
-	{
-		 $this->load->view('superadmin/v_header.php');
-		 $this->load->view('superadmin/v_sidebar.php');
-		 $this->load->view('superadmin/v_add_makanan.php');
-		 $this->load->view('superadmin/v_footer.php');
+		public function index()
+    	{
+         $data = array();
+		 $data['listMeja1'] = $this->M_meja->mejaLantai1();	
+		 $data['listMeja2'] = $this->M_meja->mejaLantai2();
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
+		 $this->load->view('superadmin/v_pesan_meja.php',$data); //mainpage
+		 $this->load->view('superadmin/v_footer.php',$data);
 
 		//$this->load->view('MainPage/v_mainpage.php');
-	}
+	   }
 }
