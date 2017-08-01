@@ -64,4 +64,9 @@ class Welcome extends CI_Controller {
 			echo "not registered";
 		}
 	}
+	function logout()
+	{
+		session_destroy();
+		echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
+	}
 }
