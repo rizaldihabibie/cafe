@@ -54,7 +54,40 @@
                                 </div>
                             </div>
                             </div>
-                            <button type="submit" class=" form-control btn btn-success ">SIMPAN PESANAN</button>
+                            <button type="button" id="buttonAdd" class=" form-control btn btn-success " onclick = "addOrder()">TAMBAH PESANAN</button>
+                            
+                        </div>
+                        
+                    </div>
+                     </form>
+                </div>
+                <br>
+                <br>
+                <div class="row">
+                    <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Daftar Pesanan
+                                </div>
+                                <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table id="tabelOrder"  class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Menu</th>
+                                                <th>Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="listOrder">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            </div>
+                            <button type="button" id="buttonAdd" class=" form-control btn btn-success " onclick = "addOrder()">SIMPAN PESANAN</button>
                             
                         </div>
                         
@@ -69,8 +102,8 @@
         <!-- /. PAGE WRAPPER  -->
         
 <script type="text/Javascript">
-
-  function showMenu(){
+var order = [];
+function showMenu(){
     var e = document.getElementById("kategoriMakanan");
     var f = document.getElementById("kategoriMinuman");
 
@@ -88,6 +121,7 @@
     var obj = <?php echo json_encode($menuArray); ?>;
     var x;
     var indexRow = 1;
+
     x = document.getElementById('bookMenu').insertRow(0);
     x.insertCell(0);
     x.insertCell(1);
@@ -100,7 +134,6 @@
             x.insertCell(2);
             indexRow++;
         }
-        // console.log(obj[i][1]);
     }
 
     indexRow = 1;
@@ -111,6 +144,8 @@
             myTable.rows[indexRow].cells[1].innerHTML = obj[i][1];
             var input = document.createElement("input");
             input.type = "text";
+            input.id = obj[i][0];
+            input.value = "0";
             input.name = obj[i][0];
             input.className = "form-control"; // set the CSS class
             myTable.rows[indexRow].cells[2].appendChild(input); 
@@ -124,11 +159,53 @@
 
   }
 
-  // function numberWithCommas(name) {
-  //   var numb = document.getElementById(""+name).value
-  //   var result = numb.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  //   $('input[name="'+name+'"]').val(result).val();
-  // }
+function addOrder() {
+    var obj = <?php echo json_encode($menuArray); ?>;
+    var listInput = null;
+    var jml = 0;
+
+    var index = order.length;
+    for (var i = 0; i < obj.length; i++) {
+        listInput = document.getElementById(obj[i][0]);
+        if(listInput != null){
+            if(listInput.value){
+                if(listInput.value !== "0"){
+                    var arr1 = [obj[i][0],obj[i][1],listInput.value];
+                    order [index] = arr1;
+                    index++;
+                }
+            }
+        }
+
+    }
+    // console.log(order.length);
+    var myTable = document.getElementById('tabelOrder');
+    while(myTable.rows.length > 1) {
+      myTable.deleteRow(1);
+    }
+    var x;
+    var indexRow = 1;
+    
+    x = document.getElementById('listOrder').insertRow(0);
+    x.insertCell(0);
+    x.insertCell(1);
+    x.insertCell(2);
+
+    for (var i = 0; i < order.length; i++) {
+            x = document.getElementById('listOrder').insertRow(indexRow);
+            x.insertCell(0);
+            x.insertCell(1);
+            x.insertCell(2);
+            indexRow++;
+    }
+    var indexRow = 1;
+    for (var i = 0; i < order.length; i++) {
+            myTable.rows[indexRow].cells[0].innerHTML = indexRow;
+            myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
+            myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
+            indexRow++;
+    }
+ }
  
 </script>
        
