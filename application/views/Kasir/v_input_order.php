@@ -79,6 +79,7 @@
                                                 <th>No</th>
                                                 <th>Nama Menu</th>
                                                 <th>Jumlah</th>
+                                                <th>#</th>
                                             </tr>
                                         </thead>
                                         <tbody id="listOrder">
@@ -147,7 +148,7 @@ function showMenu(){
             input.id = obj[i][0];
             input.value = "0";
             input.name = obj[i][0];
-            input.className = "form-control"; // set the CSS class
+            input.className = "form-controlg"; // set the CSS class
             myTable.rows[indexRow].cells[2].appendChild(input); 
             indexRow++;
         }
@@ -190,12 +191,14 @@ function addOrder() {
     x.insertCell(0);
     x.insertCell(1);
     x.insertCell(2);
+    x.insertCell(3);
 
     for (var i = 0; i < order.length; i++) {
             x = document.getElementById('listOrder').insertRow(indexRow);
             x.insertCell(0);
             x.insertCell(1);
             x.insertCell(2);
+            x.insertCell(3);
             indexRow++;
     }
     var indexRow = 1;
@@ -203,6 +206,13 @@ function addOrder() {
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
             myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
+            var input = document.createElement("button");
+            input.type = "button";
+            input.id = indexRow;
+            input.innerHTML = "X";
+            input.name = "buttonRemove";
+            input.className = "form-control  btn btn-danger"; // set the CSS class
+            myTable.rows[indexRow].cells[3].appendChild(input);
             indexRow++;
     }
  }
