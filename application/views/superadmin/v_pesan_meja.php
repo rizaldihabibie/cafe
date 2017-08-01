@@ -177,12 +177,18 @@
 	                                  <label onclick=\"\" class="toggle-btn" > <?php echo $row1->no_meja; ?></label>
 	                                </div>
                                  </div>
+                                 
                                  </td>
                                  <?php
                                        }
                                               } 
                                  ?>
                                    </tr>
+                                   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                                   <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
                                    </table>
                                    </td>
                                    <!-- akhir td lantai !-->
