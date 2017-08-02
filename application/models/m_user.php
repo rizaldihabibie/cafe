@@ -49,47 +49,27 @@
 		{
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
-			$this->db->where('id_menu',$id);
-			$success = $this->db->update('menu', $data);
+		    $success = $this->db->query("update");
 			$this->db->trans_commit();
 			$this->db->trans_complete();
 			if(!$success){
 					$success = false;
-					$errNo   = $this->oracle_db->_error_number();
-					$errMess = $this->oracle_db->_error_message();
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
 					array_push($errors, array($errNo, $errMess));
 				}
 
 			return $success;
 		}
 
-		public function selectFoodOnly() 
-		{
-			$this->db = $this->load->database('default', true);
-			
-			$this->db->select('*');
-			$this->db->from('menu');
-			$this->db->where("(kategori = '0')", NULL, FALSE);
-			$query = $this->db->get();
-			return $query->result();
-		}
-
-		public function selectDrinkOnly() 
-		{
-			$this->db = $this->load->database('default', true);
-			$this->db->select('*');
-			$this->db->from('menu');
-			$this->db->where("(kategori = '1')", NULL, FALSE);
-			$query = $this->db->get();
-			return $query->result();
-		}
+	
 
 		public function findById($id) 
 		{
 			$this->db = $this->load->database('default', true);
 			$this->db->select('*');
-			$this->db->from('menu');
-			$this->db->where("id_menu", $id);
+			$this->db->from('user');
+			$this->db->where("id_credential", $id);
 			$query = $this->db->get();
 			return $query->row();
 		}
