@@ -48,8 +48,6 @@ class KasirController extends CI_Controller {
 		 $this->load->view('Kasir/v_sidebar.php');
 		 $this->load->view('Kasir/v_mainpage.php');
 		 $this->load->view('Kasir/v_footer.php');
-
-		//$this->load->view('MainPage/v_mainpage.php');
 	}
 
 	public function TambahOrderBaru()
@@ -84,11 +82,7 @@ class KasirController extends CI_Controller {
 		 	$data['listKategoriMinuman'] = $this->M_jenis_makanan->selectDrinkOnly();
 		 	$data['listMenu'] = $this->M_menu->selectAll();
 		 	$data['menuArray'] = $this->M_menu->selectArray();
-		 	// for($i=0;$i<sizeof($data['menuArray']);$i++){
-		 	// 	echo $data['menuArray'][$i][1];
-		 	// 	echo "<br>";
-		 	// }
-		 	// exit();
+		 	// $data['listWaitress'] = $this->M_user->selectWaitress();
 			$this->load->view('Kasir/v_header.php',$data);
 			$this->load->view('Kasir/v_sidebar.php',$data);
 			$this->load->view('Kasir/v_input_order.php',$data);
@@ -98,12 +92,29 @@ class KasirController extends CI_Controller {
 
 	public function savePesanan(){
 		$data['menuArray'] = $this->M_menu->selectArray();
+		$namaPemesan = $this->input->post('namaPemesan');
 		for($i=0;$i<sizeof($data['menuArray']);$i++){
-			if($this->input->post($data['menuArray'][$i][0])!=null){
-				echo $this->input->post($data['menuArray'][$i][0]);
+			// echo "order".$data['menuArray'][$i][0];
+			if($this->input->post("order".$data['menuArray'][$i][0])!=null){
+				echo $this->input->post("order".$data['menuArray'][$i][0]);
+				$daftarOrder[] = $this->input->post("order".$data['menuArray'][$i][0]);
 			}
 				echo "<br>";
 		}
+
+		$dataPesanan = new Array();
+		$dataPesanan['nama_pemesan'] = $namaPemesan;
+		$dataPesanan['date_pesanan'] = date("Y/m/d");
+
+		for($i=0;$i<sizeof($daftarOrder);$i++){
+			$separate =explode("@",$daftarOrder[$i]);
+			$data["id_menu"]=$separate[0];
+			$data["jumlah"]=$separate[1];
+			echo "Id Menu : ".$data["id_menu"];
+			echo "<br>";
+			echo "jumlah pesanan : ".$data["jumlah"];
+		}
+
 	}
 
 }
