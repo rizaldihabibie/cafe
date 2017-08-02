@@ -1,15 +1,30 @@
+        <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post">
          <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                    <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post">
+                    
                     <div class="col-md-12">
                         <div class="col-md-3">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    Kategori
+                                    Data Pesanan
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <label>Nama Pemesan</label>
+                                <input class="form-control" name = "namaPemesan" placeholder="Nama" />
+                            </div>
+                            <!-- <div class="form-group">
+                                <label>Waitress</label>
+                                <select class="form-control" id="kategoriMakanan" name = "namaKategori" onChange="showMenu()">
+                                <option value="0-0">-- Waitress --</option>
+                                <?php 
+                                    foreach($listWaitress as $row){
+                                        echo '<option value="'.$row->id_user.'">'.$row->nama_user.'</option>';
+                                    }
+                                ?>
+                                 </select>
+                            </div> -->
                             <div class="form-group">
                                 <label>Jenis Makanan</label>
                                 <select class="form-control" id="kategoriMakanan" name = "namaKategori" onChange="showMenu()">
@@ -59,15 +74,15 @@
                         </div>
                         
                     </div>
-                     </form>
+                     <!-- </form> -->
                 </div>
                 <br>
                 <br>
                 <div class="row">
-                    <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post">
+                    <!-- <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post"> -->
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            <div class="panel panel-default">
+                            <div id="main" class="panel panel-default">
                                 <div class="panel-heading">
                                     Daftar Pesanan
                                 </div>
@@ -88,12 +103,12 @@
                                 </div>
                             </div>
                             </div>
-                            <button type="button" id="buttonAdd" class=" form-control btn btn-success " onclick = "addOrder()">SIMPAN PESANAN</button>
+                            <button type="submit" id="buttonAdd" class=" form-control btn btn-success ">SIMPAN PESANAN</button>
                             
                         </div>
                         
                     </div>
-                     </form>
+                     
                 </div>
                  <!-- /. ROW  -->
                  <hr />
@@ -101,6 +116,7 @@
              <!-- /. PAGE INNER  -->
         </div>
         <!-- /. PAGE WRAPPER  -->
+        </form>
         
 <script type="text/Javascript">
 var order = [];
@@ -148,7 +164,7 @@ function showMenu(){
             input.id = obj[i][0];
             input.value = "0";
             input.name = obj[i][0];
-            input.className = "form-controlg"; // set the CSS class
+            input.className = "form-control"; // set the CSS class
             myTable.rows[indexRow].cells[2].appendChild(input); 
             indexRow++;
         }
@@ -201,20 +217,35 @@ function addOrder() {
             x.insertCell(3);
             indexRow++;
     }
+    
     var indexRow = 1;
+    var container = document.getElementById('main');
     for (var i = 0; i < order.length; i++) {
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
             myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
-            var input = document.createElement("button");
-            input.type = "button";
-            input.id = indexRow;
-            input.innerHTML = "X";
-            input.name = "buttonRemove";
-            input.className = "form-control  btn btn-danger"; // set the CSS class
-            myTable.rows[indexRow].cells[3].appendChild(input);
+            var div = document.createElement("div");
+            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
+            myTable.rows[indexRow].cells[3].appendChild(div);
+            var inputHidden = document.createElement("input");
+            inputHidden.type = "hidden";
+            inputHidden.id = "order"+order[i][0];
+            inputHidden.value = order[i][0]+"@"+order[i][2];
+            inputHidden.name = "order"+order[i][0];
+            container.appendChild(inputHidden); 
+            
             indexRow++;
     }
+ }
+
+ function removeRow(index,hidden){
+    var myTable = document.getElementById('tabelOrder');
+    myTable.deleteRow(index);
+    order.splice(index-1, 1);
+    var container = document.getElementById('main');
+    var child = document.getElementById("order"+hidden);
+    container.removeChild(child);
+    
  }
  
 </script>
