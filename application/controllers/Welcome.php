@@ -59,7 +59,10 @@ class Welcome extends CI_Controller {
 				redirect('AdminController');
 			}else if($user->privilege=="kasir"){
 				redirect('KasirController');
+			}	else if($user->privilege=="waitress"){
+				echo "not registered";
 			}	
+
 		}else{
 			echo "not registered";
 		}

@@ -37,19 +37,20 @@
                                         </div>
                                           <div class="form-group">
                                             <label>Alamat User</label>
-                                            <textarea  name='alamat' class="form-control" rows="3"></textarea>
+                                            <textarea  name='alamat' class="form-control" rows="3" required></textarea>
                                         </div>
-                                          <div class="form-group">
-                                            <label>No HP</label>
-                                            <input class="form-control" name = "notelepon" placeholder="No Telepon" />
-                                        </div>
+                                        
                                              
                                 </div>
                                 <div class="col-md-6">
                                 <br>
+                                  <div class="form-group">
+                                            <label>No HP</label>
+                                            <input class="form-control" name = "notelepon" placeholder="No Telepon" required />
+                                        </div>
                                          <div class="form-group">
                                             <label>No KTP</label>
-                                            <input class="form-control" name = "noktp" placeholder="No KTP" />
+                                            <input class="form-control" name = "noktp" placeholder="No KTP"  required />
                                         </div>
                                          <div class="form-group">
                                             <label>Jabatan</label>

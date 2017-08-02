@@ -24,10 +24,10 @@
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
 			$success = $this->db->query("
-		insert into user (id_credential,nama_user,alamat_user,no_ktp,no_telp) (select max(id_user)+1 id_baru,'nama','alamat'
-		,'no_ktp','no_telp' from user)");
+		insert into user (id_credential,nama_user,alamat_user,no_ktp,no_telp) (select max(id_user)+1 id_baru,".$this->db->escape($data['namalengkap']).",".$this->db->escape($data['alamat'])."
+		,".$this->db->escape($data['noktp']).",".$this->db->escape($data['notelepon'])." from user)");
 		    $success2 = $this->db->query("
-		insert into credential (username,password,privilege,status) values()");
+		insert into credential (username,password,privilege,status) values(".$this->db->escape($data['username']).",".$this->db->escape($data['password']).",".$this->db->escape($data['jabatan']).",".$this->db->escape($data['status']).")");
 			$this->db->trans_commit();
 			$this->db->trans_complete();
 				if(!$success){
