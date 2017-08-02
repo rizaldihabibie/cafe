@@ -43,6 +43,10 @@
                                             <label>No HP</label>
                                             <input class="form-control" name = "notelepon" placeholder="No Telepon" />
                                         </div>
+                                             
+                                </div>
+                                <div class="col-md-6">
+                                <br>
                                          <div class="form-group">
                                             <label>No KTP</label>
                                             <input class="form-control" name = "noktp" placeholder="No KTP" />
@@ -53,10 +57,15 @@
                                                 <label>
                                                     <input type="radio" name="jabatan" id="jabatan" value="super" checked />Admin
                                                 </label>
-                                            </div>
-                                            <div class="radio">
+                                             </div>
+                                             <div class="radio">   
                                                 <label>
                                                     <input type="radio" name="jabatan" id="jabatan" value="kasir"/>Kasir
+                                                </label>
+                                              </div>
+                                              <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="waitress"/>Waitress
                                                 </label>
                                             </div>
                                         </div>
@@ -73,18 +82,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                                         
-                                </div>
-                                <div class="col-md-6">
-                                <br>
-                                    <div class="form-group">
-                                            <label>Harga Pokok Makanan</label>
-                                            <input class="form-control" name = "hargaPokokMakanan" placeholder="Harga Makanan" required />
-                                    </div>
-                                    <div class="form-group">
-                                            <label>Harga Jual Makanan</label>
-                                            <input class="form-control" name = "hargaJualMakanan" placeholder="Harga Makanan" required/>
-                                    </div>
+                                                
                                     <div class="form-group">
                                          <button type="submit" class="btn btn-success">SIMPAN</button>
                                     </div>
