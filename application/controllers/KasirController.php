@@ -149,7 +149,7 @@ class KasirController extends CI_Controller {
 		    for($i=0;$i<sizeof($makanan);$i++){
 		    	$printer->text($number.". ".$makanan[$i][0]);	
 		    	// $printer->setJustification();
-		    	$printer->text("<br>".$makanan[$i][1]."\n");
+		    	$printer->text("                       ".$makanan[$i][1]."\n");
 
 		    	$number++;
 		    }
