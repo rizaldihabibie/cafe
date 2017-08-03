@@ -48,7 +48,8 @@ class PrintController extends CI_Controller {
 		    $connector = new  Escpos\PrintConnectors\WindowsPrintConnector("Printer Receipt");
 		    /* Print a "Hello world" receipt" */
 		    $printer = new Escpos\Printer($connector);
-		    $printer->text("Hello World!\n");
+		    $printer->text("======= Hello World ========\n");
+		    $printer->text("Martabak cuuuuuuuuuuuy hhi !\n");
 		    $printer->cut();
 		    $printer->pulse();
 

@@ -26,6 +26,7 @@
 				$data[$indexRow][0] = $row->id_menu;
 				$data[$indexRow][1] = $row->nama_menu;
 				$data[$indexRow][2] = $row->id_jenis_makanan;
+				$data[$indexRow][3] = $row->kategori;
 				$indexRow++;
 			}
 			return $data;

@@ -1,6 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+
 class KasirController extends CI_Controller {
 
 	/**
@@ -32,11 +35,12 @@ class KasirController extends CI_Controller {
 		$this->output->set_header('Cache-Control:post-check=0,pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
 		
-		$this->load->helper(array('form','url', 'text_helper','date','file'));
+		$this->load->helper(array('form','url', 'text_helper','date','file','printer_helper'));
 		$this->load->library(array('Pagination','image_lib','session'));
 		$this->load->model('M_meja');
 		$this->load->model('M_jenis_makanan');
 		$this->load->model('M_menu');
+		$this->load->model('M_pesanan');
 		// $this->load->library('Userauth');
 		
 	}
@@ -94,27 +98,70 @@ class KasirController extends CI_Controller {
 		$data['menuArray'] = $this->M_menu->selectArray();
 		$namaPemesan = $this->input->post('namaPemesan');
 		for($i=0;$i<sizeof($data['menuArray']);$i++){
-			// echo "order".$data['menuArray'][$i][0];
 			if($this->input->post("order".$data['menuArray'][$i][0])!=null){
-				echo $this->input->post("order".$data['menuArray'][$i][0]);
 				$daftarOrder[] = $this->input->post("order".$data['menuArray'][$i][0]);
 			}
-				echo "<br>";
 		}
-
-		$dataPesanan = new Array();
-		$dataPesanan['nama_pemesan'] = $namaPemesan;
-		$dataPesanan['date_pesanan'] = date("Y/m/d");
-
+		$dataPemesan['nama_pemesan'] = $namaPemesan;
+		$dataPemesan['date_pesanan'] = date("Y/m/d");
 		for($i=0;$i<sizeof($daftarOrder);$i++){
 			$separate =explode("@",$daftarOrder[$i]);
-			$data["id_menu"]=$separate[0];
-			$data["jumlah"]=$separate[1];
-			echo "Id Menu : ".$data["id_menu"];
-			echo "<br>";
-			echo "jumlah pesanan : ".$data["jumlah"];
+			$daftarPesanan[$i]=[$separate[0],$separate[1]];
+		}
+		$dataMakanan = array();
+		$dataMinuman = array();
+		$indexMakanan = 0;
+		$indexMinuman = 0;
+		for($i=0;$i<sizeof($daftarPesanan);$i++){
+			for($j=0;$j<sizeof($data['menuArray']);$j++){
+				if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$i][3] == 0){
+					$dataMakanan[$indexMakanan]=[$data['menuArray'][$j][1],$daftarPesanan[$i][1]];
+					$indexMakanan++;
+				}else if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$i][3] == 1){
+					$dataMinuman[$indexMinuman]=[$data['menuArray'][$j][1],$daftarPesanan[$i][1]];
+					$indexMinuman++;
+				}
+			}
 		}
 
+		if($this->M_pesanan->savePesanan($dataPemesan,$daftarPesanan)){
+			$this->cetak($dataMakanan,$dataMinuman);
+			exit();
+		}
+
+
+	}
+
+	public function cetak($makanan,$minuman)
+	{
+		 $this->load->library("EscPos.php");
+
+		try {
+		    // Enter the share name for your USB printer here
+			// $connector = new Escpos\PrintConnectors\FilePrintConnector("/dev/usb/lp0");
+		    $connector = new  Escpos\PrintConnectors\WindowsPrintConnector("Printer Receipt");
+		    /* Print a "Hello world" receipt" */
+		    $printer = new Escpos\Printer($connector);
+
+		    $printer->text("============= Cafe 2 Minggu ==========\n");
+		    $printer->text("                KALISARI              \n");
+		    $number = 1;
+		    for($i=0;$i<sizeof($makanan);$i++){
+		    	$printer->text($number.". ".$makanan[$i][0]);	
+		    	// $printer->setJustification();
+		    	$printer->text("<br>".$makanan[$i][1]."\n");
+
+		    	$number++;
+		    }
+		    $printer->cut();
+		    $printer->pulse();
+
+		    /* Close printer */
+		    $printer -> close();
+		} catch(Exception $e) {
+		    echo "Couldn't print to this printer: " . $e -> getMessage() . "\n";
+
+		}
 	}
 
 }
