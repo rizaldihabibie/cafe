@@ -94,10 +94,13 @@ class UserController extends CI_Controller {
 	}
 
 	public function saveUpdate(){
-		$categoryName = $this->input->post('namaKategori');
-		$namaMakanan = $this->input->post('namaMakanan');
-		$hargaPokokMakanan = $this->input->post('hargaPokokMakanan');
-		$hargaJualMakanan = $this->input->post('hargaJualMakanan');
+	    $Username = $this->input->post('username');
+		$NamaLengkap = $this->input->post('namalengkap');
+		$Alamat = $this->input->post('alamat');
+		$NoTelepon = $this->input->post('notelepon');
+		$Noktp = $this->input->post('noktp');
+		$Jabatan = $this->input->post('jabatan');
+		$Status = $this->input->post('status');
 		$id = $this->input->post("idData");
 
 		$data = array();
