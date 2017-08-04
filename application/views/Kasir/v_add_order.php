@@ -1,4 +1,4 @@
-        <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post">
+        <form role="form" action="<?php echo site_url('KasirController/saveAddOrder'); ?>" method="post">
          <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
@@ -12,7 +12,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Nama Pemesan</label>
-                                <input class="form-control" name = "namaPemesan" placeholder="Nama" required />
+                                <input class="form-control" name = "namaPemesan" value = "<?php if($pemesan!="") echo $pemesan->nama_pemesan; ?>" readonly />
+                                <input type="hidden" value = "<?php if($pemesan!="") echo $pemesan->id_pesanan; ?>"name = "idPesanan"  readonly/>
                             </div>
                             <!-- <div class="form-group">
                                 <label>Waitress</label>

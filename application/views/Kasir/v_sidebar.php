@@ -21,7 +21,9 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                             </li>
                         </ul> -->
                 </li> 
-                     
+                <li>
+                    <a href="<?php echo site_url('KasirController/dataPesanan'); ?>">Data Pesanan<span class="fa arrow"></span></a>
+                </li>
                 </ul>
                
             </div>

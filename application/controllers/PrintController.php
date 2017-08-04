@@ -80,23 +80,23 @@ class PrintController extends CI_Controller {
 
       /* Do some printing */
             $connector = new FilePrintConnector($file);
-$printer = new Printer($connector);
-$items = array(
-    new item("Example item #1", "4.00"),
-    new item("Another thing", "3.50"),
-    new item("Something else", "1.00"),
-    new item("A final item", "4.45"),
-);
-$subtotal = new item('Subtotal', '12.95');
-$tax = new item('A local tax', '1.30');
-$total = new item('Total', '14.25', true);
-/* Date is kept the same for testing */
-// $date = date('l jS \of F Y h:i:s A');
-$date = "Monday 6th of April 2015 02:56:25 PM";
+			$printer = new Printer($connector);
+			$items = array(
+			    new item("Example item #1", "4.00"),
+			    new item("Another thing", "3.50"),
+			    new item("Something else", "1.00"),
+			    new item("A final item", "4.45"),
+			);
+			$subtotal = new item('Subtotal', '12.95');
+			$tax = new item('A local tax', '1.30');
+			$total = new item('Total', '14.25', true);
+			/* Date is kept the same for testing */
+			// $date = date('l jS \of F Y h:i:s A');
+			$date = "Monday 6th of April 2015 02:56:25 PM";
 
-/* Start the printer */
-//$logo = EscposImage::load("../resources/escpos-php-small.png", false);
-$printer = new Printer($connector);
+			/* Start the printer */
+			//$logo = EscposImage::load("../resources/escpos-php-small.png", false);
+			$printer = new Printer($connector);
 
 /* Print top logo */
 $printer -> setJustification(Printer::JUSTIFY_CENTER);
