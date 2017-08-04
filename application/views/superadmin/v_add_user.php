@@ -116,6 +116,7 @@
                                             <th>Jabatan</th>
                                             <th>Status</th>
                                             <th>&nbsp;</th>
+                                            <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -133,8 +134,8 @@
                                                 <td class='warning'>".$row->no_telp."</td>
                                                 <td class='warning'>".$row->privilege."</td>
                                                 <td class='warning'>".$row->status."</td> 
-                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a>
-                                                &nbsp;nbsp;<a href = 'gantiPass/$row->id_user'>Ganti Password</a>
+                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a></td>
+                                               <td class='warning'><a href = 'gantiPass/$row->id_user'>Ganti Password</a>
                                                 </td>
                                               </tr>";
                                             }else{
@@ -147,8 +148,8 @@
                                                 <td class='warning'>".$row->no_telp."</td>
                                                 <td class='warning'>".$row->privilege."</td>
                                                 <td class='warning'>".$row->status."</td> 
-                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a>
-                                                &nbsp; &nbsp; <a href = 'gantiPass/$row->id_user'>Ganti Password</a>
+                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a></td>
+                                                <td class='warning'><a href = 'gantiPass/$row->id_user'>Ganti Password</a>
                                                 </td>
                                               </tr>";                                            }
                                               $nomor++;

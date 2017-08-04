@@ -91,7 +91,17 @@ class UserController extends CI_Controller {
 		 $this->load->view('superadmin/v_edit_user.php',$data);
 		 $this->load->view('superadmin/v_footer.php',$data);
 	}
-
+   
+   	public function gantiPass($idCreden)
+	{
+		 $data = array();
+		 $user =  $this->M_user->findById($idCreden);
+		 $data['user'] = $user;
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
+		 $this->load->view('superadmin/v_ganti_pass.php',$data);
+		 $this->load->view('superadmin/v_footer.php',$data);
+	}
 	public function saveUpdate(){
 	    $Username = $this->input->post('username');
 		$NamaLengkap = $this->input->post('namalengkap');
@@ -110,8 +120,10 @@ class UserController extends CI_Controller {
 		$data["noktp"] = $Noktp;
 		$data["jabatan"] = $Jabatan;
 		$data["status"] = $Status;
+		$data["id"] = $id;
 
-		if($Username == "" || $NamaLengkap = "" || $NoTelepon = "" || $Noktp = "" || $Alamat = ""){
+
+		if( $NamaLengkap = "" || $NoTelepon = "" || $Noktp = "" || $Alamat = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');
 			redirect("UserController/index/");
 		}else{
@@ -124,4 +136,39 @@ class UserController extends CI_Controller {
 			}
 		}
 	}
+
+	
+	public function savePass(){
+	
+		$PasswordBaru = $this->input->post('password_baru');
+		$PasswordUlang = $this->input->post('password_ulang');
+		$id = $this->input->post("idData");
+		
+        $Passs=md5($PasswordBaru);
+		$Passs2=md5($PasswordUlang);
+	
+
+		$data = array();
+		
+		$data["password_baru"] = $Passs;
+		$data["password_ulang"] = $Passs2;
+		$data["id"] = $id;
+		
+		if($PasswordUlang == "" || $PasswordBaru == "" ){
+			$this->session->set_flashdata('error', 'Isi Semua Data !');
+			redirect("UserController/index/");
+		}else if($PasswordUlang != $PasswordBaru  ){
+			$this->session->set_flashdata('error', 'Password Baru dan Ulang Password tidak sama !');
+			redirect("UserController/index/");	
+		}else{
+			if($this->M_user->updatePasswordBaru($id,$data)){
+				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
+				redirect("UserController/index/");
+			}else{
+				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
+				redirect("UserController/index/");
+			}
+		}
+	}
 }
+

@@ -49,7 +49,25 @@
 		{
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
-		    $success = $this->db->query("update");
+		    $success = $this->db->query("update user set nama_user=".$this->db->escape($data['namalengkap']).",alamat_user=".$this->db->escape($data['alamat']).",no_ktp=".$this->db->escape($data['noktp']).",no_telp=".$this->db->escape($data['notelepon'])." where id_user=".$this->db->escape($data['id'])." ");
+			 $success2 = $this->db->query("update credential set privilege=".$this->db->escape($data['jabatan']).",status=".$this->db->escape($data['status'])." where id_credential=".$this->db->escape($data['id'])." ");
+			$this->db->trans_commit();
+			$this->db->trans_complete();
+			if(!$success){
+					$success = false;
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
+					array_push($errors, array($errNo, $errMess));
+				}
+
+			return $success;
+		} 
+     	public function updatePasswordBaru($id, $data)
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->trans_begin();
+		    
+			 $success = $this->db->query("update credential set password=".$this->db->escape($data['password_baru'])." where id_credential=".$this->db->escape($data['id'])." ");
 			$this->db->trans_commit();
 			$this->db->trans_complete();
 			if(!$success){
@@ -61,17 +79,15 @@
 
 			return $success;
 		}
-
+ 
 	
 
 		public function findById($id) 
 		{
 			$this->db = $this->load->database('default', true);
-			$this->db->select('*');
-			$this->db->from('user');
-			$this->db->where("id_credential", $id);
-			$query = $this->db->get();
-			return $query->row();
+	        	$success = $this->db->query("
+		select a.*,b.username,b.privilege,b.status from user a,credential b where a.id_credential =b.id_credential and b.id_credential=".$id."");	
+				return $success->row();
 		}
 
 	}

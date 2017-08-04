@@ -31,7 +31,7 @@
                                         
                                         <div class="form-group">
                                             <label>Alamat User</label>
-                                            <textarea  name='alamat' class="form-control" rows="3" value="<?php if($user!="") echo $user->alamat_user; ?>" required></textarea>
+                                            <textarea  name='alamat' class="form-control" rows="3" required>  <?php if($user!="") echo $user->alamat_user; ?></textarea>
                                         </div>
                                 </div>
                                 <div class="col-md-6">
@@ -46,6 +46,10 @@
                                         </div>
                                          <div class="form-group">
                                             <label>Jabatan</label>
+                                            <?php
+                                            if ($user->privilege == 'super' )
+                                            { 
+                                            ?>
                                             <div class="radio">
                                                 <label>
                                                     <input type="radio" name="jabatan" id="jabatan" value="super" checked />Admin
@@ -61,6 +65,51 @@
                                                     <input type="radio" name="jabatan" id="jabatan" value="waitress"/>Waitress
                                                 </label>
                                             </div>
+                                            <?php
+                                            }
+                                            
+                                            else if ($user->privilege == 'kasir' )
+                                            { 
+                                            ?>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="super"  />Admin
+                                                </label>
+                                             </div>
+                                             <div class="radio">   
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="kasir" checked/>Kasir
+                                                </label>
+                                              </div>
+                                              <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="waitress"/>Waitress
+                                                </label>
+                                            </div>
+                                            <?php
+                                            }
+                                            
+                                            else if ($user->privilege == 'waitress' )
+                                            { 
+                                            ?>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="super"  />Admin
+                                                </label>
+                                             </div>
+                                             <div class="radio">   
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="kasir"/>Kasir
+                                                </label>
+                                              </div>
+                                              <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="waitress" checked/>Waitress
+                                                </label>
+                                            </div>
+                                            <?php
+                                            }
+                                            ?>
                                         </div>
                                         <div class="form-group">
                                             <label>Status</label>

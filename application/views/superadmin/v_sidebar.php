@@ -1,8 +1,8 @@
 <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="btn btn-danger square-btn-adjust">Logout</a> </div> 
-</nav>
+font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo site_url('Welcome/logout'); ?>" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+ </nav>
 <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
@@ -53,7 +53,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="login.html" class="
                         <a href="#">Utilitas<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a  href="<?php echo site_url('UserController/index'); ?>">Daftar User Baru</a>
+                                <a  href="<?php echo site_url('UserController/index'); ?>">Manajemen User</a>
                             </li>
                         </ul>
                     </li>
