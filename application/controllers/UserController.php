@@ -81,15 +81,14 @@ class UserController extends CI_Controller {
 			}
 		}
 	}
-	public function editMakanan($idMenu)
+	public function editUser($idCreden)
 	{
 		 $data = array();
-		 $menu =  $this->M_menu->findById($idMenu);
-		 $data['listKategori'] = $this->M_jenis_makanan->findByCategory($menu->kategori);
-		 $data['menu'] = $menu;
+		 $user =  $this->M_user->findById($idCreden);
+		 $data['user'] = $user;
 		 $this->load->view('superadmin/v_header.php',$data);
 		 $this->load->view('superadmin/v_sidebar.php',$data);
-		 $this->load->view('superadmin/v_edit_menu_makanan.php',$data);
+		 $this->load->view('superadmin/v_edit_user.php',$data);
 		 $this->load->view('superadmin/v_footer.php',$data);
 	}
 
@@ -104,21 +103,24 @@ class UserController extends CI_Controller {
 		$id = $this->input->post("idData");
 
 		$data = array();
-		$data["id_jenis_makanan"] = $categoryName;
-		$data["harga_pokok"] = $hargaPokokMakanan;
-		$data["nama_menu"] = $namaMakanan;
-		$data["harga_jual"] = $hargaJualMakanan;
-		$data["kategori"] = 0;
-		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
+		$data["username"] = $Username;
+		$data["namalengkap"] = $NamaLengkap;
+		$data["alamat"] = $Alamat;		
+		$data["notelepon"] = $NoTelepon;
+		$data["noktp"] = $Noktp;
+		$data["jabatan"] = $Jabatan;
+		$data["status"] = $Status;
+
+		if($Username == "" || $NamaLengkap = "" || $NoTelepon = "" || $Noktp = "" || $Alamat = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');
-			redirect("MenuMakananController/index/");
+			redirect("UserController/index/");
 		}else{
-			if($this->M_menu->updateMenu($id,$data)){
+			if($this->M_user->updateUser($id,$data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("MenuMakananController/index/");
+				redirect("UserController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("MenuMakananController/index/");
+				redirect("UserController/index/");
 			}
 		}
 	}

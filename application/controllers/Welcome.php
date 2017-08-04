@@ -54,9 +54,12 @@ class Welcome extends CI_Controller {
 		$data['username'] = $username;
 		$data['password'] = $password;
 		$user = $this->m_login->login($data);
+		redirect('PrintController/cetak');
+		/*
 		if(sizeof($user)>0){
 			if($user->privilege=="super"){
-				redirect('AdminController');
+			//redirect('AdminController');
+			redirect('PrintController/cetak');
 			}else if($user->privilege=="kasir"){
 				redirect('KasirController');
 			}	else if($user->privilege=="waitress"){
@@ -65,7 +68,7 @@ class Welcome extends CI_Controller {
 
 		}else{
 			echo "not registered";
-		}
+		} */
 	}
 	function logout()
 	{

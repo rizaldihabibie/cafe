@@ -133,7 +133,9 @@
                                                 <td class='warning'>".$row->no_telp."</td>
                                                 <td class='warning'>".$row->privilege."</td>
                                                 <td class='warning'>".$row->status."</td> 
-                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a></td>
+                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a>
+                                                &nbsp;nbsp;<a href = 'gantiPass/$row->id_user'>Ganti Password</a>
+                                                </td>
                                               </tr>";
                                             }else{
                                               echo "<tr>
@@ -145,7 +147,9 @@
                                                 <td class='warning'>".$row->no_telp."</td>
                                                 <td class='warning'>".$row->privilege."</td>
                                                 <td class='warning'>".$row->status."</td> 
-                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a></td>
+                                                <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a>
+                                                &nbsp; &nbsp; <a href = 'gantiPass/$row->id_user'>Ganti Password</a>
+                                                </td>
                                               </tr>";                                            }
                                               $nomor++;
                                             }

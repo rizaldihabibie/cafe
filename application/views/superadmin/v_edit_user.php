@@ -22,40 +22,59 @@
                                    <div class="fa fa-info-circle"></div>&nbsp;<?php echo $this->session->flashdata('success'); ?>
                                                 </div>
                                     <?php endif; ?>
-                                    <form action="<?php echo site_url('MenuMakananController/saveUpdate'); ?>" method="post">
-                                        <input name = "idData" type="hidden" value="<?php if($menu!="") echo $menu->id_menu; ?>"/>
+                                    <form action="<?php echo site_url('UserController/saveUpdate'); ?>" method="post">
+                                        <input name = "idData" type="hidden" value="<?php if($user!="") echo $user->id_user; ?>"/>
                                         <div class="form-group">
-                                            <label>Nama Menu</label>
-                                            <input class="form-control" name = "namaMakanan" value="<?php if($menu!="") echo $menu->nama_menu; ?>" placeholder="Nama Makanan" required/>
+                                            <label>Nama Lengkap</label>
+                                            <input class="form-control" name = "namalengkap" value="<?php if($user!="") echo $user->nama_user; ?>" placeholder="Nama Lengkap" required/>
                                         </div>
                                         
                                         <div class="form-group">
-                                            <label>Jenis Menu</label>
-                                            <select class="form-control" name = "namaKategori">
-                                                <option value="0-0">-- Pilih Kategori --</option>
-                                                <?php 
-                                                foreach($listKategori as $row){
-                                                if ($row->id_jenis_makanan === $menu->id_jenis_makanan) {
-                                                     $selected = 'selected';
-                                                } else {
-                                                     $selected = '';
-                                                }
-                                                 echo '<option value="'.$row->id_jenis_makanan.'"'.$selected.'>'.$row->nama_jenis_makanan.'</option>';
-                                                }
-                                               ?>
-                                            </select>
-                                        </div>                        
+                                            <label>Alamat User</label>
+                                            <textarea  name='alamat' class="form-control" rows="3" value="<?php if($user!="") echo $user->alamat_user; ?>" required></textarea>
+                                        </div>
                                 </div>
                                 <div class="col-md-6">
                                 <br>
                                     <div class="form-group">
-                                            <label>Harga Pokok Makanan</label>
-                                            <input class="form-control" value="<?php if($menu!="") echo $menu->harga_pokok; ?>"name = "hargaPokokMakanan" placeholder="Harga Makanan" required />
-                                    </div>
-                                    <div class="form-group">
-                                            <label>Harga Jual Makanan</label>
-                                            <input class="form-control" value="<?php if($menu!="") echo $menu->harga_jual; ?>"name = "hargaJualMakanan" placeholder="Harga Makanan" required/>
-                                    </div>
+                                            <label>No HP</label>
+                                            <input class="form-control" name = "notelepon" placeholder="No Telepon" value="<?php if($user!="") echo $user->no_telp; ?>" required />
+                                        </div>
+                                      <div class="form-group">
+                                            <label>No KTP</label>
+                                            <input class="form-control" name = "noktp" placeholder="No KTP" value="<?php if($user!="") echo $user->no_ktp; ?>"  required />
+                                        </div>
+                                         <div class="form-group">
+                                            <label>Jabatan</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="super" checked />Admin
+                                                </label>
+                                             </div>
+                                             <div class="radio">   
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="kasir"/>Kasir
+                                                </label>
+                                              </div>
+                                              <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="jabatan" id="jabatan" value="waitress"/>Waitress
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="status" id="status" value="AKTIF" checked />AKTIF
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="status" id="status" value="PASIF"/>NON AKTIF
+                                                </label>
+                                            </div>
+                                        </div>
                                     <div class="form-group">
                                          <button type="submit" class="btn btn-success">SIMPAN PERUBAHAN</button>
                                     </div>
