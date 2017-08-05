@@ -1,7 +1,7 @@
 <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo site_url('Welcome/logout'); ?>" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo site_url('Welcome/logout'); ?>" class="btn btn-danger square-btn-adjust">Logout</a> </div> 
  </nav>
 <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">

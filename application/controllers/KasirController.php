@@ -324,6 +324,7 @@ class KasirController extends CI_Controller {
 		}
 		
 		$this->nota($dataMakanan,$dataMinuman);
+		redirect("KasirController/dataPesanan/");
 
 	}
 
@@ -439,17 +440,16 @@ public function nota($makanan,$minuman)
       /* Do some printing */
             $connector = new FilePrintConnector($file);
 			$printer = new Printer($connector);
-			
+
+
+			$jumlahHarga = 0;
 			$items = array();
 			if(sizeof($makanan)>0){
 				$number = 1;
-				for($i=0;$i<sizeof($makanan)+1;$i++){
-
-					if($i==0){
-						$items[$i] = new nota("=== MAKANAN ===","","");
-					}else{
-						$items[$i] = new nota($makanan[$i-1][0],$makanan[$i-1][1],$makanan[$i-1][2]);
-					}
+				for($i=0;$i<sizeof($makanan);$i++){
+					
+						$jumlahHarga = $jumlahHarga + $makanan[$i][2];
+						$items[$i] = new nota($makanan[$i][0],$makanan[$i][1],$makanan[$i][2]);
 					$number++;
 				}
 
@@ -459,20 +459,21 @@ public function nota($makanan,$minuman)
 			
 
 			if(sizeof($minuman)>0){
-				$items[$number] = new nota("=== MINUMAN ===","","");
-				$number++;
 				for($i=0;$i<sizeof($minuman);$i++){
+					$jumlahHarga = $jumlahHarga + $minuman[$i][2];
 					$items[$number] = new nota($minuman[$i][0],$minuman[$i][1],$minuman[$i][2]);
 					$number++;
 				}
 			}
 
-			$subtotal = new nota('Subtotal', '12.95');
-			$tax = new nota('A local tax', '1.30');
-			$total = new nota('Total', '14.25', true);
+			$subtotal = new nota('Subtotal', '',$jumlahHarga);
+			$ppn = $jumlahHarga * 0.1;
+			$tax = new nota('PPN', '',$ppn);
+			$totalHarga = $jumlahHarga + $ppn;
+			$total = new nota('Total','', $totalHarga, true);
 			/* Date is kept the same for testing */
 			// $date = date('l jS \of F Y h:i:s A');
-			$date = "Monday 6th of April 2015 02:56:25 PM";
+			$date = date("d/m/Y H:m:s");
 
 			/* Start the printer */
 			//$logo = EscposImage::load("../resources/escpos-php-small.png", false);
@@ -484,24 +485,22 @@ public function nota($makanan,$minuman)
 
 			/* Name of shop */
 			$printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
-			$printer -> text("ExampleMart Ltd.\n");
+			$printer -> text("WAROENG ROPAN\n");
 			$printer -> selectPrintMode();
-			$printer -> text("Shop No. 42.\n");
+			$printer -> text("Jl. Dr. Sutomo No. 11 Ruko C\n");
 			$printer -> feed();
 
-			/* Title of receipt */
-			$printer -> setEmphasis(true);
-			$printer -> text("SALES INVOICE\n");
-			$printer -> setEmphasis(false);
-
-			/* Items */
-			$printer -> setJustification(Printer::JUSTIFY_LEFT);
-			$printer -> setEmphasis(true);
-			$printer -> text(new item('', '$'));
-			$printer -> setEmphasis(false);
 			foreach ($items as $item) {
 			    $printer -> text($item);
 			}
+
+			$printer -> feed();
+			$printer -> setJustification(Printer::JUSTIFY_CENTER);
+			$printer -> setEmphasis(true);
+			$printer -> text("===================\n");
+			$printer -> setEmphasis(false);
+			$printer -> feed();
+
 			$printer -> setEmphasis(true);
 			$printer -> text($subtotal);
 			$printer -> setEmphasis(false);
@@ -509,15 +508,16 @@ public function nota($makanan,$minuman)
 
 			/* Tax and total */
 			$printer -> text($tax);
-			$printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+			$printer -> feed();
+			$printer -> setEmphasis(true);
 			$printer -> text($total);
+			$printer -> setEmphasis(false);
 			$printer -> selectPrintMode();
 
 			/* Footer */
 			$printer -> feed(2);
 			$printer -> setJustification(Printer::JUSTIFY_CENTER);
-			$printer -> text("Thank you for shopping at ExampleMart\n");
-			$printer -> text("For trading hours, please visit example.com\n");
+			$printer -> text("Terima Kasih Atas Kunjungan Anda\n");
 			$printer -> feed(2);
 			$printer -> text($date . "\n");
 
