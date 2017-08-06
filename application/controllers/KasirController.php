@@ -165,7 +165,7 @@ class KasirController extends CI_Controller {
 		$dataPemesan['date_pesanan'] = date("Y/m/d");
 		for($i=0;$i<sizeof($daftarOrder);$i++){
 			$separate =explode("@",$daftarOrder[$i]);
-			$daftarPesanan[$i]=[$separate[0],$separate[1]];
+			$daftarPesanan[$i]=array($separate[0],$separate[1]);
 		}
 		$dataMakanan = array();
 		$dataMinuman = array();
@@ -175,11 +175,11 @@ class KasirController extends CI_Controller {
 			for($j=0;$j<sizeof($data['menuArray']);$j++){
 				if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 0){
 
-					$dataMakanan[$indexMakanan]=[$data['menuArray'][$j][1],$daftarPesanan[$i][1]];
+					$dataMakanan[$indexMakanan]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
 					$indexMakanan++;
 			
 				}else if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 1){
-					$dataMinuman[$indexMinuman]=[$data['menuArray'][$j][1],$daftarPesanan[$i][1]];
+					$dataMinuman[$indexMinuman]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
 					$indexMinuman++;
 				}
 			}
@@ -265,7 +265,7 @@ class KasirController extends CI_Controller {
 		}
 		for($i=0;$i<sizeof($daftarOrder);$i++){
 			$separate =explode("@",$daftarOrder[$i]);
-			$daftarPesanan[$i]=[$separate[0],$separate[1],$id];
+			$daftarPesanan[$i]=array($separate[0],$separate[1],$id);
 		}
 
 		$dataMakanan = array();
@@ -275,10 +275,10 @@ class KasirController extends CI_Controller {
 		for($i=0;$i<sizeof($daftarPesanan);$i++){
 			for($j=0;$j<sizeof($data['menuArray']);$j++){
 				if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 0){
-					$dataMakanan[$indexMakanan]=[$data['menuArray'][$j][1],$daftarPesanan[$i][1]];
+					$dataMakanan[$indexMakanan]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
 					$indexMakanan++;
 				}else if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 1){
-					$dataMinuman[$indexMinuman]=[$data['menuArray'][$j][1],$daftarPesanan[$i][1]];
+					$dataMinuman[$indexMinuman]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
 					$indexMinuman++;
 				}
 			}
@@ -313,11 +313,11 @@ class KasirController extends CI_Controller {
 		foreach($detailPesanan as $row){
 			if($row->kategori == 0){
 				$totalHarga = $row->jumlah * $row->harga_jual;
-				$dataMakanan[$indexMakanan]=[$row->nama_menu,$row->jumlah, $totalHarga];
+				$dataMakanan[$indexMakanan]=array($row->nama_menu,$row->jumlah, $totalHarga);
 				$indexMakanan++;
 			}else if($row->kategori == 1){
 				$totalHarga = $row->jumlah * $row->harga_jual;
-				$dataMinuman[$indexMinuman]=[$row->nama_menu,$row->jumlah, $totalHarga];
+				$dataMinuman[$indexMinuman]=array($row->nama_menu,$row->jumlah, $totalHarga);
 				$indexMinuman++;
 			}
 			
@@ -416,7 +416,7 @@ class KasirController extends CI_Controller {
 
 			/* Cut the receipt and open the cash drawer */
 			$printer -> cut();
-			$printer -> pulse();
+			//$printer -> pulse();
 
 			$printer -> close();
 			copy($file, "//localhost/Printer Receipt");  # Lakukan cetak
