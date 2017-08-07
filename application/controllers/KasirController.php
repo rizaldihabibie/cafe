@@ -115,32 +115,52 @@ class KasirController extends CI_Controller {
 
 	public function TambahOrderBaru()
 	{	
-		 $data = array();
-		 $data['listMeja'] = $this->M_meja->selectAll();
-		 $this->load->view('Kasir/v_header.php',$data);
-		 $this->load->view('Kasir/v_sidebar.php',$data);
-		 $this->load->view('Kasir/v_choose_table.php',$data);
-		 $this->load->view('Kasir/v_footer.php',$data);
+		 // $data = array();
+		 // $data['listMeja'] = $this->M_meja->selectAll();
+		 // $this->load->view('Kasir/v_header.php',$data);
+		 // $this->load->view('Kasir/v_sidebar.php',$data);
+		 // $this->load->view('Kasir/v_choose_table.php',$data);
+		 // $this->load->view('Kasir/v_footer.php',$data);
 
-		//$this->load->view('MainPage/v_mainpage.php');
+		$data = array();
+		$data['listMeja1'] = $this->M_meja->mejaLantai1();	
+		$data['listMeja2'] = $this->M_meja->mejaLantai2();
+		$this->load->view('Kasir/v_header.php',$data);
+		$this->load->view('Kasir/v_sidebar.php',$data);
+		$this->load->view('Kasir/v_find_table.php',$data);
+		$this->load->view('Kasir/v_footer.php',$data);
 	}
 
 	public function saveTable(){
 
 		$input = array();
 		$dataTable = $this->M_meja->selectAll();
+		$index = 0;
 		foreach ($dataTable as $row) {
 			$x = $this->input->post($row->id_meja);
 			if($x != ""){
-				$input[] = $row->id_meja;
+				$input[$index][0] = $row->id_meja;
+				$input[$index][1] = $row->no_meja;
+				$index++;
 			}
 				
 		}
+		$noMeja = null;
+		for($i=0;$i<sizeof($input);$i++){
+			$noMeja = $noMeja.$input[$i][1];
+			if($i != sizeof($input)-1){
+				$noMeja = $noMeja."-";
+			}
+		}
+
+
 		if(sizeof($input)==0){
-			redirect("KasirController/TambahOrderBaru/");
+			$this->TambahOrderBaru();
+			// redirect("KasirController/TambahOrderBaru/");
 		}else{
-			$this->session->set_flashdata('dataTable', $input);
+			// $this->session->set_flashdata('dataTable', $input);
 			$data = array();
+			$data["noMeja"] = $noMeja;
 		 	$data['listKategoriMakanan'] = $this->M_jenis_makanan->selectFoodOnly();
 		 	$data['listKategoriMinuman'] = $this->M_jenis_makanan->selectDrinkOnly();
 		 	$data['listMenu'] = $this->M_menu->selectAll();
@@ -154,6 +174,18 @@ class KasirController extends CI_Controller {
 	}
 
 	public function savePesanan(){
+		$noMeja = $this->input->post('noMeja');
+		// echo $noMeja;
+		if(strpos($noMeja, '-')!==false){
+			$noMeja = explode("-",$noMeja);
+			// echo "here";
+		}else{
+			$noMeja = array();
+			$noMeja[0] = $this->input->post('noMeja');
+		}
+
+		// exit();
+
 		$data['menuArray'] = $this->M_menu->selectArray();
 		$namaPemesan = $this->input->post('namaPemesan');
 		for($i=0;$i<sizeof($data['menuArray']);$i++){
@@ -185,7 +217,7 @@ class KasirController extends CI_Controller {
 			}
 		}
 
-		if($this->M_pesanan->savePesanan($dataPemesan,$daftarPesanan)){
+		if($this->M_pesanan->savePesanan($dataPemesan,$daftarPesanan, $noMeja)){
 			$this->cetak($dataMakanan,$dataMinuman);
 			$this->TambahOrderBaru();
 		}
@@ -211,6 +243,17 @@ class KasirController extends CI_Controller {
 	{	
 		$data = array();
 		$data['pemesan'] = $this->M_pesanan->findById($param);
+		$detailMeja = $this->M_meja->findByIdPesanan($param);
+		$noMeja = "";
+		$index = 0;
+		foreach($detailMeja as $row){
+			$noMeja =$noMeja.$row->no_meja;
+			if($index != sizeof($detailMeja)-1){
+				$noMeja = $noMeja."-";
+			}
+			$index++;
+		}
+		$data["noMeja"] = $noMeja;
 		$data['listDetailMenu'] = $this->M_pesanan->selectDetailPesanan($param);
 		$this->load->view('Kasir/v_header.php',$data);
 		$this->load->view('Kasir/v_sidebar.php',$data);
@@ -296,6 +339,17 @@ class KasirController extends CI_Controller {
 		$data = array();
 		$data['pemesan'] = $this->M_pesanan->findById($param);
 		$data['listDetailMenu'] = $this->M_pesanan->selectDetailPesanan($param);
+		$detailMeja = $this->M_meja->findByIdPesanan($param);
+		$noMeja = "";
+		$index = 0;
+		foreach($detailMeja as $row){
+			$noMeja =$noMeja.$row->no_meja;
+			if($index != sizeof($detailMeja)-1){
+				$noMeja = $noMeja."-";
+			}
+			$index++;
+		}
+		$data["noMeja"] = $noMeja;
 		$this->load->view('Kasir/v_header.php',$data);
 		$this->load->view('Kasir/v_sidebar.php',$data);
 		$this->load->view('Kasir/v_payment.php',$data);
@@ -304,6 +358,7 @@ class KasirController extends CI_Controller {
 	}
 	public function bayar(){
 		$id = $this->input->post('idPesanan');
+		$nomorMeja = $this->input->post('noMeja');
 		$dataMakanan = array();
 		$dataMinuman = array();
 		$indexMakanan = 0;
@@ -323,9 +378,8 @@ class KasirController extends CI_Controller {
 			
 		}
 		
-		$this->nota($dataMakanan,$dataMinuman);
-		redirect("KasirController/dataPesanan/");
-
+		$this->nota($dataMakanan,$dataMinuman,$nomorMeja);
+		$this->dataPesanan();
 	}
 
 	public function cetak($makanan,$minuman)
@@ -428,7 +482,7 @@ class KasirController extends CI_Controller {
 		}
 	}
 
-public function nota($makanan,$minuman)
+public function nota($makanan,$minuman,$nomorMeja)
 	{
 		 $this->load->library("EscPos.php");
 
@@ -490,10 +544,15 @@ public function nota($makanan,$minuman)
 			$printer -> text("Jl. Dr. Sutomo No. 11 Ruko C\n");
 			$printer -> feed();
 
+			$printer -> setJustification(Printer::JUSTIFY_CENTER);
+			$printer -> setEmphasis(true);
+			$printer -> text("Nomor Meja : ".$nomorMeja."\n");
+			$printer -> setEmphasis(false);
+			$printer -> feed();
+
 			foreach ($items as $item) {
 			    $printer -> text($item);
 			}
-
 			$printer -> feed();
 			$printer -> setJustification(Printer::JUSTIFY_CENTER);
 			$printer -> setEmphasis(true);

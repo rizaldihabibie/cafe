@@ -8,16 +8,22 @@
                                 Data Pemesan
                             </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Nama Pemesan</label>
                                     <input class="form-control" name = "namaPemesan"  value = "<?php if($pemesan!="") echo $pemesan->nama_pemesan; ?>" readonly/>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Tanggal Pesanan</label>
                                     <input class="form-control" name = "tanggalPesanan" value= "<?php if($pemesan!="") echo date('d/m/Y',strtotime($pemesan->date_pesanan)); ?>" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nomor Meja</label>
+                                    <input class="form-control" name = "nomorMeja"  value = "<?php if($noMeja!="") echo $noMeja; ?>" readonly/>
                                 </div>
                             </div>
                     </div>

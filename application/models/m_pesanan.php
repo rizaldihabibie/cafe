@@ -21,15 +21,15 @@
 			return $t->row();
 		}
 
-		public function savePesanan($dataPemesan, $detailPesanan){
+		public function savePesanan($dataPemesan, $detailPesanan, $noMeja){
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
 			$success = $this->db->insert('pesanan', $dataPemesan);
 			
 				if(!$success){
 					$success = false;
-					$errNo   = $this->oracle_db->_error_number();
-					$errMess = $this->oracle_db->_error_message();
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
 					array_push($errors, array($errNo, $errMess));
 				}else{
 					$idPemesan =  $this->db->insert_id();
@@ -40,13 +40,47 @@
 						$isi['jumlah'] =  $detailPesanan[$i][1];
 						$success = $this->db->insert('detail_pesanan', $isi);
 						if(!$success){
-
 							$success = false;
-							$errNo   = $this->oracle_db->_error_number();
-							$errMess = $this->oracle_db->_error_message();
+							$errNo   = $this->db->_error_number();
+							$errMess = $this->db->_error_message();
 							array_push($errors, array($errNo, $errMess));
 							break;
 						}
+					}
+					if($success){
+						for($i=0;$i<sizeof($noMeja);$i++){
+							$this->db->select("*");
+							$this->db->where('no_meja',$noMeja[$i]);
+							$t=$this->db->get('meja');
+							$idMeja = $t->row()->id_meja;
+
+							$detailMeja = array();
+							$detailMeja['id_meja'] = $idMeja;
+							$detailMeja['id_pesanan'] = $idPemesan;
+
+							$success = $this->db->insert('detail_meja', $detailMeja);
+							if($success){
+								$this->db->set('status', "1"); //value that used to update column  
+								$this->db->where('id_meja', $idMeja);
+								$success = $this->db->update('meja');
+								if(!$success){
+									$success = false;
+									$errNo   = $this->db->_error_number();
+									$errMess = $this->db->_error_message();
+									array_push($errors, array($errNo, $errMess));
+									break;
+								}
+							
+							}else{
+								$success = false;
+								$errNo   = $this->db->_error_number();
+								$errMess = $this->db->_error_message();
+								array_push($errors, array($errNo, $errMess));
+								break;
+							}
+
+						}
+						
 					}
 					$this->db->trans_commit();
 					$this->db->trans_complete();
@@ -71,8 +105,8 @@
 				$success = $this->db->insert('detail_pesanan', $isi);
 				if(!$success){
 					$success = false;
-					$errNo   = $this->oracle_db->_error_number();
-					$errMess = $this->oracle_db->_error_message();
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
 					array_push($errors, array($errNo, $errMess));
 					break;
 				}
@@ -92,8 +126,8 @@
 				$success = $this->db->update('detail_pesanan', $isi);
 				if(!$success){
 				$success = false;
-				$errNo   = $this->oracle_db->_error_number();
-				$errMess = $this->oracle_db->_error_message();
+				$errNo   = $this->db->_error_number();
+				$errMess = $this->db->_error_message();
 				array_push($errors, array($errNo, $errMess));
 				break;
 				}	

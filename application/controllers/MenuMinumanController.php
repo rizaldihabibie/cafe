@@ -64,14 +64,17 @@ class MenuMinumanController extends CI_Controller {
 		$data["kategori"] = 1;
 		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');
-			redirect("MenuMinumanController/index/");
+			$this->index();
+			// redirect("MenuMinumanController/index/");
 		}else{
 			if($this->M_menu->saveMenu($data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("MenuMinumanController/index/");
+				$this->index();
+				// redirect("MenuMinumanController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("MenuMinumanController/index/");
+				$this->index();
+				// redirect("MenuMinumanController/index/");
 			}
 		}
 	}
@@ -102,14 +105,17 @@ class MenuMinumanController extends CI_Controller {
 		$data["kategori"] = 1;
 		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');
-			redirect("MenuMinumanController/index/");
+			$this->index();
+			// redirect("MenuMinumanController/index/");
 		}else{
 			if($this->M_menu->updateMenu($id,$data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("MenuMinumanController/index/");
+				$this->index();
+				// redirect("MenuMinumanController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("MenuMinumanController/index/");
+				$this->index();
+				// redirect("MenuMinumanController/index/");
 			}
 		}
 	}

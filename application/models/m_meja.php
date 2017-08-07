@@ -68,6 +68,16 @@
 		{
 			return $this->db->update('meja', $data, array('id_meja' => $id));
 		}
+
+		public function findByIdPesanan($id){
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');    
+			$this->db->from('meja');
+			$this->db->join('detail_meja', 'meja.id_meja = detail_meja.id_meja');
+			$this->db->where('detail_meja.id_pesanan',$id);
+			$query = $this->db->get();
+			return $query->result();
+		}
        
 	}
 

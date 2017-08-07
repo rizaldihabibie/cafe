@@ -83,14 +83,17 @@ class KategoriMinumanController extends CI_Controller {
 		$data["kategori"] = 1;
 		if($categoryName == null || $categoryName = ""){
 			$this->session->set_flashdata('error', 'Nama Kategori Kosong !');
-			redirect("KategoriMinumanController/index/");
+			$this->index();
+			// redirect("KategoriMinumanController/index/");
 		}else{
 			if($this->M_jenis_makanan->updateCategory($id,$data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("KategoriMinumanController/index/");
+				$this->index();
+				// redirect("KategoriMinumanController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("KategoriMinumanController/index/");
+				$this->index();
+				// redirect("KategoriMinumanController/index/");
 			}
 		}
 	}

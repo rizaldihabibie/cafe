@@ -57,14 +57,17 @@ class KategoriMakananController extends CI_Controller {
 		$data["kategori"] = 0;
 		if($categoryName == null || $categoryName = ""){
 			$this->session->set_flashdata('error', 'Nama Kategori Kosong !');
-			redirect("KategoriMakananController/index/");
+			$this->index();
+			// redirect("KategoriMakananController/index/");
 		}else{
 			if($this->M_jenis_makanan->saveCategory($data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("KategoriMakananController/index/");
+				$this->index();
+				// redirect("KategoriMakananController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("KategoriMakananController/index/");
+				$this->index();
+				// redirect("KategoriMakananController/index/");
 			}
 		}
 	}
@@ -86,14 +89,17 @@ class KategoriMakananController extends CI_Controller {
 		$data["kategori"] = 0;
 		if($categoryName == null || $categoryName = ""){
 			$this->session->set_flashdata('error', 'Nama Kategori Kosong !');
-			redirect("KategoriMakananController/index/");
+			$this->index();
+			// redirect("KategoriMakananController/index/");
 		}else{
 			if($this->M_jenis_makanan->updateCategory($id,$data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("KategoriMakananController/index/");
+				$this->index();
+				// redirect("KategoriMakananController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("KategoriMakananController/index/");
+				$this->index();
+				// redirect("KategoriMakananController/index/");
 			}
 		}
 	}

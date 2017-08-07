@@ -11,6 +11,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>No Meja </label>
+                                <input class="form-control" name = "noMeja" value= "<?php if($noMeja!=null) echo $noMeja ?>" readonly />
+                            </div>
+                            <div class="form-group">
                                 <label>Nama Pemesan</label>
                                 <input class="form-control" name = "namaPemesan" placeholder="Nama" required />
                             </div>
