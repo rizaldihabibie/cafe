@@ -78,6 +78,37 @@
 			$query = $this->db->get();
 			return $query->result();
 		}
+
+		public function openTable($data){
+			$this->db = $this->load->database('default', true);
+			for($i=0;$i<sizeof($data);$i++){
+				$this->db->select("*");
+				$this->db->where('no_meja',$data[$i]);
+				$t=$this->db->get('meja');
+				$idMeja = $t->row()->id_meja;
+
+				$this->db->set('status', "0"); //value that used to update column  
+				$this->db->where('id_meja', $idMeja);
+				$success = $this->db->update('meja');
+				if(!$success){
+					$success = false;
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
+					array_push($errors, array($errNo, $errMess));
+					break;
+				}
+			}
+			// $this->db->set('status', "1"); //value that used to update column  
+			// $this->db->where('id_meja', $idMeja);
+			// $success = $this->db->update('meja');
+			// if(!$success){
+			// 	$success = false;
+			// 	$errNo   = $this->db->_error_number();
+			// 	$errMess = $this->db->_error_message();
+			// 	array_push($errors, array($errNo, $errMess));
+			// 	break;
+			// }
+		}
        
 	}
 

@@ -161,6 +161,7 @@ class KasirController extends CI_Controller {
 			// $this->session->set_flashdata('dataTable', $input);
 			$data = array();
 			$data["noMeja"] = $noMeja;
+			$data['dataWaitress'] = $this->M_user->selectWaitress();
 		 	$data['listKategoriMakanan'] = $this->M_jenis_makanan->selectFoodOnly();
 		 	$data['listKategoriMinuman'] = $this->M_jenis_makanan->selectDrinkOnly();
 		 	$data['listMenu'] = $this->M_menu->selectAll();
@@ -379,6 +380,14 @@ class KasirController extends CI_Controller {
 		}
 		
 		$this->nota($dataMakanan,$dataMinuman,$nomorMeja);
+		if(strpos($nomorMeja, '-')!==false){
+			$nomorMeja = explode("-",$nomorMeja);
+			// echo "here";
+		}else{
+			$nomorMeja = array();
+			$nomorMeja[0] = $this->input->post('noMeja');
+		}
+		$this->M_meja->openTable($nomorMeja);
 		$this->dataPesanan();
 	}
 

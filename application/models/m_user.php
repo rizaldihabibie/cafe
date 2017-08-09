@@ -90,6 +90,16 @@
 				return $success->row();
 		}
 
+		public function selectWaitress() 
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');
+			$this->db->from('user');
+			$this->db->where("(status = 'WAITRESS')", NULL, FALSE);
+			$query = $this->db->get();
+			return $query->result();
+		}
+
 	}
 
 ?>
