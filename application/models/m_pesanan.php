@@ -5,10 +5,11 @@
 
 		public function selectAll() 
 		{
+			$date = date('Y-m-d');
 			$this->db = $this->load->database('default', true);
-			
 			$this->db->select('*');
 			$this->db->from('pesanan');
+			$this->db->where('date_pesanan',$date);
 			$query = $this->db->get();
 			return $query->result();
 		}

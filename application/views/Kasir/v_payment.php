@@ -9,23 +9,32 @@
                                 Data Pemesan
                             </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Nama Pemesan</label>
-                                    <input class="form-control" name = "namaPemesan"  value = "<?php if($pemesan!="") echo $pemesan->nama_pemesan; ?>" readonly/>
-                                    <input type="hidden" name = "idPesanan"  value = "<?php if($pemesan!="") echo $pemesan->id_pesanan; ?>" readonly/>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>waitress</label>
+                                        <input class="form-control" name = "namaWaitress"  value = "<?php if($waitress!="") echo $waitress->nama_user; ?>" readonly/>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Nomor Meja</label>
-                                    <input class="form-control" name = "noMeja"  value = "<?php if($noMeja!="") echo $noMeja; ?>" readonly/>
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Nama Pemesan</label>
+                                        <input class="form-control" name = "namaPemesan"  value = "<?php if($pemesan!="") echo $pemesan->nama_pemesan; ?>" readonly/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Tanggal Pesanan</label>
-                                    <input class="form-control" name = "tanggalPesanan" value= "<?php if($pemesan!="") echo date('d/m/Y',strtotime($pemesan->date_pesanan)); ?>" readonly/>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Tanggal Pesanan</label>
+                                        <input class="form-control" name = "tanggalPesanan" value= "<?php if($pemesan!="") echo date('d/m/Y',strtotime($pemesan->date_pesanan)); ?>" readonly/>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Nomor Meja</label>
+                                        <input class="form-control" name = "nomorMeja"  value = "<?php if($noMeja!="") echo $noMeja; ?>" readonly/>
+                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -83,28 +92,33 @@
                         </div>
                         </div>
                         <div class="col-md-12">
-                           
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                             </div>
-                            <div class="col-md-3">
-                            </div>
-                            <div class="col-md-3">
-                                <div class="col-md-6">
+                            <div class="col-md-4">
                                     <div class="form-group">
                                         <label >Sub Total :</label>
-                                        <input class="form-control" type="text" name="subTotal" value = "<?php if($subTotal!="") echo $subTotal; ?>"name = "idPesanan"  readonly/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>PPN :</label>
-                                        <input class="form-control" type="text" value = "10%" name = "ppn"  readonly/>
+                                        <input class="form-control" type="text" id="subTotal" name="subTotal" value = "<?php if($subTotal!="") echo $subTotal; ?>"name = "idPesanan"  readonly/>
                                     </div>
                                     <div class="form-group">
                                         <label>DISKON :</label>
-                                        <input class="form-control" type="text" name = "diskon" />
+                                        <input class="form-control" type="text" id="diskon" onChange = "countDiskon()" name = "diskon" />
                                     </div>
-                                </div>
+                                    <div class="form-group">
+                                        <label>Grand Total :</label>
+                                        <input class="form-control" type="text" id="grandTotal" name = "grandTotal" readonly />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tunai :</label>
+                                        <input class="form-control" type="text" onChange = "countChange()" id="tunai" name = "tunai"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kembali :</label>
+                                        <input class="form-control" type="text" id = "kembalian" name = "kembalian" readonly />
+                                    </div>
+                                    
+                              
                             <button type="submit" class=" form-control btn btn-success ">BAYAR</button>
                             </div>
                         </div>
@@ -120,4 +134,33 @@
              <!-- /. PAGE INNER  -->
         </div>
         <!-- /. PAGE WRAPPER  -->
+
+<script type="text/Javascript">
+      function countDiskon() {
+       var diskon = document.getElementById('diskon').value;
+       diskon = diskon.replace('%','');
+       var subTotal = document.getElementById('subTotal').value;
+       var total = subTotal-((diskon/100)*subTotal);
+       total = total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+       document.getElementById('grandTotal').value = total;
+      }
+
+      function countChange(){
+       var tunai = document.getElementById('tunai').value;
+       tunai = tunai.replace('.','');
+       var grandTotal = document.getElementById('grandTotal').value;
+       grandTotal = grandTotal.replace('.','');
+       var kembalian = tunai - grandTotal;
+       kembalian = kembalian.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+       tunai = tunai.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+       document.getElementById('kembalian').value = kembalian;
+       document.getElementById('tunai').value = tunai;
+      }
+
+      function numberWithCommas(name) {
+        var numb = document.getElementById(""+name).value
+        var result = numb.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        $('input[name="'+name+'"]').val(result).val();
+      }
+</script>
        

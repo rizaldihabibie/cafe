@@ -20,7 +20,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Waitress</label>
-                                <select class="form-control" id="kategoriMakanan" name = "namaKategori" onChange="showMenu()">
+                                <select class="form-control" id="waitress" name = "waitress">
                                 <option value="0-0">-- Waitress --</option>
                                 <?php 
                                     foreach($listWaitress as $row){

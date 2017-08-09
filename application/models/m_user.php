@@ -72,16 +72,6 @@
 
 			return $success;
 		}
- 
-	
-
-		public function findById($id) 
-		{
-			$this->db = $this->load->database('default', true);
-	        	$success = $this->db->query("
-		select a.*,b.username,b.privilege,b.status from user a,credential b where a.id_credential =b.id_credential and b.id_credential=".$id."");	
-				return $success->row();
-		}
 
 		public function selectWaitress() 
 		{
@@ -92,6 +82,16 @@
 			$this->db->where("(credential.privilege = 'waitress')", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->result();
+		}
+
+		public function findById($id) 
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->select('*');
+			$this->db->from('user');
+			$this->db->where("id_user", $id);
+			$query = $this->db->get();
+			return $query->row();
 		}
 
 	}

@@ -23,8 +23,6 @@
         Timer();
       };
     </script>
-    
-    
    
 </body>
 </html>

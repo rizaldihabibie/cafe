@@ -195,6 +195,8 @@ class KasirController extends CI_Controller {
 				$daftarOrder[] = $this->input->post("order".$data['menuArray'][$i][0]);
 			}
 		}
+
+		$dataPemesan['id_user'] = $this->input->post('waitress');
 		$dataPemesan['nama_pemesan'] = $namaPemesan;
 		$dataPemesan['date_pesanan'] = date("Y/m/d");
 		for($i=0;$i<sizeof($daftarOrder);$i++){
@@ -246,6 +248,7 @@ class KasirController extends CI_Controller {
 		$data = array();
 		$data['pemesan'] = $this->M_pesanan->findById($param);
 		$detailMeja = $this->M_meja->findByIdPesanan($param);
+		$data['waitress'] = $this->M_user->findById($data['pemesan']->id_user);
 		$noMeja = "";
 		$index = 0;
 		foreach($detailMeja as $row){
@@ -341,6 +344,7 @@ class KasirController extends CI_Controller {
 		$data = array();
 		$data['pemesan'] = $this->M_pesanan->findById($param);
 		$data['listDetailMenu'] = $this->M_pesanan->selectDetailPesanan($param);
+		$data['waitress'] = $this->M_user->findById($data['pemesan']->id_user);
 		$detailMeja = $this->M_meja->findByIdPesanan($param);
 		$noMeja = "";
 		$index = 0;
@@ -360,7 +364,11 @@ class KasirController extends CI_Controller {
 	}
 	public function bayar(){
 		$id = $this->input->post('idPesanan');
-		$nomorMeja = $this->input->post('noMeja');
+		$nomorMeja = $this->input->post('nomorMeja');
+		$data['grandTotal'] = $this->input->post('grandTotal');
+		$data['tunai'] = $this->input->post('tunai');
+		$data['kembali'] = $this->input->post('kembalian');
+		$data['diskon'] = $this->input->post('diskon'); 
 		$dataMakanan = array();
 		$dataMinuman = array();
 		$indexMakanan = 0;
@@ -380,13 +388,13 @@ class KasirController extends CI_Controller {
 			
 		}
 		
-		$this->nota($dataMakanan,$dataMinuman,$nomorMeja);
+		$this->nota($dataMakanan,$dataMinuman,$nomorMeja,$data);
 		if(strpos($nomorMeja, '-')!==false){
 			$nomorMeja = explode("-",$nomorMeja);
-			// echo "here";
+			
 		}else{
 			$nomorMeja = array();
-			$nomorMeja[0] = $this->input->post('noMeja');
+			$nomorMeja[0] = $this->input->post('nomorMeja');
 		}
 		$this->M_meja->openTable($nomorMeja);
 		$this->dataPesanan();
@@ -492,7 +500,7 @@ class KasirController extends CI_Controller {
 		}
 	}
 
-public function nota($makanan,$minuman,$nomorMeja)
+public function nota($makanan,$minuman,$nomorMeja,$data)
 	{
 		 $this->load->library("EscPos.php");
 
@@ -530,11 +538,14 @@ public function nota($makanan,$minuman,$nomorMeja)
 				}
 			}
 
-			$subtotal = new nota('Subtotal', '',$jumlahHarga);
-			$ppn = $jumlahHarga * 0.1;
-			$tax = new nota('PPN', '',$ppn);
-			$totalHarga = $jumlahHarga + $ppn;
-			$total = new nota('Total','', $totalHarga, true);
+			$subtotal = new nota('Subtotal', '',$jumlahHarga, true);
+			// $ppn = $jumlahHarga * 0.1;
+			$diskon = new nota('Diskon', '',$data->diskon);
+			// $totalHarga = $jumlahHarga + $ppn;
+			$total = new nota('Grand Total','', $data->grandTotal, true);
+			$tunai = new nota('Grand Total','', $data->tunai, true);
+			$kembali = new nota('Grand Total','', $data->kembali, true);
+
 			/* Date is kept the same for testing */
 			// $date = date('l jS \of F Y h:i:s A');
 			$date = date("d/m/Y H:m:s");
@@ -575,13 +586,27 @@ public function nota($makanan,$minuman,$nomorMeja)
 			$printer -> setEmphasis(false);
 			$printer -> feed();
 
-			/* Tax and total */
-			$printer -> text($tax);
+			$printer -> setEmphasis(true);
+			$printer -> text($diskon);
+			$printer -> setEmphasis(false);
 			$printer -> feed();
+
+			/* Tax and total */
 			$printer -> setEmphasis(true);
 			$printer -> text($total);
 			$printer -> setEmphasis(false);
 			$printer -> selectPrintMode();
+			$printer -> feed();
+
+			$printer -> setEmphasis(true);
+			$printer -> text($tunai);
+			$printer -> setEmphasis(false);
+			$printer -> feed();
+
+			$printer -> setEmphasis(true);
+			$printer -> text($kembali);
+			$printer -> setEmphasis(false);
+			$printer -> feed();
 
 			/* Footer */
 			$printer -> feed(2);
