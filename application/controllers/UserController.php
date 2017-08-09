@@ -74,10 +74,12 @@ class UserController extends CI_Controller {
 		}else{
 			if($this->M_user->saveUser($data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("UserController/index/");
+				$this->index();
+				//redirect("UserController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("UserController/index/");
+				$this->index();
+				//redirect("UserController/index/");
 			}
 		}
 	}
@@ -125,14 +127,17 @@ class UserController extends CI_Controller {
 
 		if( $NamaLengkap = "" || $NoTelepon = "" || $Noktp = "" || $Alamat = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');
-			redirect("UserController/index/");
+			$this->index();
+			//redirect("UserController/index/");
 		}else{
 			if($this->M_user->updateUser($id,$data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("UserController/index/");
+				$this->index();
+				//redirect("UserController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("UserController/index/");
+				$this->index();
+				//redirect("UserController/index/");
 			}
 		}
 	}
@@ -156,17 +161,21 @@ class UserController extends CI_Controller {
 		
 		if($PasswordUlang == "" || $PasswordBaru == "" ){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');
-			redirect("UserController/index/");
+			$this->index();
+			//redirect("UserController/index/");
 		}else if($PasswordUlang != $PasswordBaru  ){
 			$this->session->set_flashdata('error', 'Password Baru dan Ulang Password tidak sama !');
-			redirect("UserController/index/");	
+			$this->index();
+			//redirect("UserController/index/");	
 		}else{
 			if($this->M_user->updatePasswordBaru($id,$data)){
 				$this->session->set_flashdata('success', 'Data Berhasil Disimpan !');
-				redirect("UserController/index/");
+				$this->index();
+				//redirect("UserController/index/");
 			}else{
 				$this->session->set_flashdata('error', 'Data Gagal Disimpan !');
-				redirect("UserController/index/");
+				$this->index();
+				//redirect("UserController/index/");
 			}
 		}
 	}

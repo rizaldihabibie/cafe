@@ -7,6 +7,7 @@
 		{
 			$this->db = $this->load->database('default', true);
 			$username = $data['username'];
+			$status =  'AKTIF';
 			$password = md5($data['password']);
 			// $password = $data['password'];
 			// echo $password;
@@ -15,6 +16,7 @@
 			$this->db->from('credential');
 			$this->db->where('username', $username);
 			$this->db->where('password', $password);
+			$this->db->where('status', $status);
 			$query = $this->db->get();
 			// echo $username;
 			// echo "<br>";

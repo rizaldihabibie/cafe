@@ -111,6 +111,10 @@
                                             }
                                             ?>
                                         </div>
+                                        <?php
+                                        if($user->status == 'AKTIF')
+                                        {
+                                        ?>
                                         <div class="form-group">
                                             <label>Status</label>
                                             <div class="radio">
@@ -124,6 +128,27 @@
                                                 </label>
                                             </div>
                                         </div>
+                                      <?php
+                                        }
+                                       else if($user->status=='PASIF')
+                                       { 
+                                      ?> 
+                                       <div class="form-group">
+                                            <label>Status</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="status" id="status" value="AKTIF"  />AKTIF
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="status" id="status" value="PASIF" checked/>NON AKTIF
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <?php
+                                       }
+                                        ?> 
                                     <div class="form-group">
                                          <button type="submit" class="btn btn-success">SIMPAN PERUBAHAN</button>
                                     </div>

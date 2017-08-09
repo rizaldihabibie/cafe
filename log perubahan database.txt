@@ -1,0 +1,3 @@
+tambah structure jenis makanan => status as defined AKTIF var char 20
+
+tambah structure menu => status as defined AKTIF varchar 20

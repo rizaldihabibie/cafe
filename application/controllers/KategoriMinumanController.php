@@ -77,9 +77,11 @@ class KategoriMinumanController extends CI_Controller {
 	}
 	public function saveUpdate(){
 		$categoryName = $this->input->post('namaKategori');
+		$Status = $this->input->post('status');
 		$id = $this->input->post('idData');
 		$data = array();
 		$data["nama_jenis_makanan"] = $categoryName;
+		$data["status"] = $Status;
 		$data["kategori"] = 1;
 		if($categoryName == null || $categoryName = ""){
 			$this->session->set_flashdata('error', 'Nama Kategori Kosong !');
