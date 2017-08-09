@@ -11,14 +11,7 @@
 		select a.*,b.username,b.privilege,b.status from user a,credential b where a.id_credential =b.id_credential");
 		return $success->result();
 		}
-      	public function selectWaitress() 
-		{
-			$this->db = $this->load->database('default', true);
-			
-			$success = $this->db->query("
-		select a.*,b.username,b.privilege,b.status from user a,credential b where a.id_credential =b.id_credential and privilege='waitress' ");
-		return $success->result();
-		}
+      
 	
 		public function saveUser($data){
 			$this->db = $this->load->database('default', true);
@@ -95,7 +88,8 @@
 			$this->db = $this->load->database('default', true);
 			$this->db->select('*');
 			$this->db->from('user');
-			$this->db->where("(status = 'WAITRESS')", NULL, FALSE);
+			$this->db->join('credential', 'credential.id_credential = user.id_credential');
+			$this->db->where("(credential.privilege = 'waitress')", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->result();
 		}

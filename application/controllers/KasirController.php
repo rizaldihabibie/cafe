@@ -100,6 +100,7 @@ class KasirController extends CI_Controller {
 		$this->load->model('M_jenis_makanan');
 		$this->load->model('M_menu');
 		$this->load->model('M_pesanan');
+		$this->load->model('M_user');
 		// $this->load->library('Userauth');
 		
 	}
@@ -161,7 +162,7 @@ class KasirController extends CI_Controller {
 			// $this->session->set_flashdata('dataTable', $input);
 			$data = array();
 			$data["noMeja"] = $noMeja;
-			$data['dataWaitress'] = $this->M_user->selectWaitress();
+			$data['listWaitress'] = $this->M_user->selectWaitress();
 		 	$data['listKategoriMakanan'] = $this->M_jenis_makanan->selectFoodOnly();
 		 	$data['listKategoriMinuman'] = $this->M_jenis_makanan->selectDrinkOnly();
 		 	$data['listMenu'] = $this->M_menu->selectAll();

@@ -18,7 +18,7 @@
                                 <label>Nama Pemesan</label>
                                 <input class="form-control" name = "namaPemesan" placeholder="Nama" required />
                             </div>
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <label>Waitress</label>
                                 <select class="form-control" id="kategoriMakanan" name = "namaKategori" onChange="showMenu()">
                                 <option value="0-0">-- Waitress --</option>
@@ -28,7 +28,7 @@
                                     }
                                 ?>
                                  </select>
-                            </div> -->
+                            </div>
                             <div class="form-group">
                                 <label>Jenis Makanan</label>
                                 <select class="form-control" id="kategoriMakanan" name = "namaKategori" onChange="showMenu()">
