@@ -365,10 +365,11 @@ class KasirController extends CI_Controller {
 	public function bayar(){
 		$id = $this->input->post('idPesanan');
 		$nomorMeja = $this->input->post('nomorMeja');
-		$data['grandTotal'] = $this->input->post('grandTotal');
-		$data['tunai'] = $this->input->post('tunai');
-		$data['kembali'] = $this->input->post('kembalian');
-		$data['diskon'] = $this->input->post('diskon'); 
+		$data = array();
+		$data[0] = $this->input->post('grandTotal');
+		$data[1] = $this->input->post('tunai');
+		$data[2] = $this->input->post('kembalian');
+		$data[3]= $this->input->post('diskon'); 
 		$dataMakanan = array();
 		$dataMinuman = array();
 		$indexMakanan = 0;
@@ -387,8 +388,10 @@ class KasirController extends CI_Controller {
 			}
 			
 		}
-		
+		// echo $data[0];
+		// exit();
 		$this->nota($dataMakanan,$dataMinuman,$nomorMeja,$data);
+
 		if(strpos($nomorMeja, '-')!==false){
 			$nomorMeja = explode("-",$nomorMeja);
 			
@@ -540,11 +543,11 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 
 			$subtotal = new nota('Subtotal', '',$jumlahHarga, true);
 			// $ppn = $jumlahHarga * 0.1;
-			$diskon = new nota('Diskon', '',$data->diskon);
+			$diskon = new nota('Diskon', '',$data[3]);
 			// $totalHarga = $jumlahHarga + $ppn;
-			$total = new nota('Grand Total','', $data->grandTotal, true);
-			$tunai = new nota('Grand Total','', $data->tunai, true);
-			$kembali = new nota('Grand Total','', $data->kembali, true);
+			$total = new nota('Grand Total','', $data[0], true);
+			$tunai = new nota('Tunai','', $data[1], true);
+			$kembali = new nota('Kembali','', $data[2], true);
 
 			/* Date is kept the same for testing */
 			// $date = date('l jS \of F Y h:i:s A');
