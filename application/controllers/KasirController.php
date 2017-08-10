@@ -101,6 +101,7 @@ class KasirController extends CI_Controller {
 		$this->load->model('M_menu');
 		$this->load->model('M_pesanan');
 		$this->load->model('M_user');
+		$this->load->model('M_nota');
 		// $this->load->library('Userauth');
 		
 	}
@@ -370,6 +371,23 @@ class KasirController extends CI_Controller {
 		$data[1] = $this->input->post('tunai');
 		$data[2] = $this->input->post('kembalian');
 		$data[3]= $this->input->post('diskon'); 
+		$dataNota['total'] = $this->input->post('grandTotal');
+		if(strpos($this->input->post('diskon'), '%')!==false){
+			$dataNota['diskon'] = str_replace("%", "", $this->input->post('diskon'));
+			
+		}else{
+			$dataNota['diskon'] = $this->input->post('diskon');
+		}
+
+		if(strpos($this->input->post('grandTotal'), '.')!==false){
+			$dataNota['total'] = str_replace(".", "", $this->input->post('grandTotal'));
+			
+		}else{
+			$dataNota['total'] = $this->input->post('grandTotal');
+		}
+		 
+		$dataNota['tgl_nota']= $this->input->post('tanggalPesanan'); 
+		$dataNota['id_pesanan']= $id; 
 		$dataMakanan = array();
 		$dataMinuman = array();
 		$indexMakanan = 0;
@@ -390,6 +408,8 @@ class KasirController extends CI_Controller {
 		}
 		// echo $data[0];
 		// exit();
+		$this->M_nota->saveNota($dataNota);
+		$this->M_pesanan->updatePesanan($id);
 		$this->nota($dataMakanan,$dataMinuman,$nomorMeja,$data);
 
 		if(strpos($nomorMeja, '-')!==false){
@@ -399,6 +419,8 @@ class KasirController extends CI_Controller {
 			$nomorMeja = array();
 			$nomorMeja[0] = $this->input->post('nomorMeja');
 		}
+
+
 		$this->M_meja->openTable($nomorMeja);
 		$this->dataPesanan();
 	}

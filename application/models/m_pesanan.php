@@ -10,6 +10,7 @@
 			$this->db->select('*');
 			$this->db->from('pesanan');
 			$this->db->where('date_pesanan',$date);
+			$this->db->where("(status_pesanan = '0')", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->result();
 		}
@@ -20,6 +21,21 @@
 			$this->db->select_max('id_pesanan');
 			$t=$this->db->get('pesanan');
 			return $t->row();
+		}
+
+		function updatePesanan($id){
+			$this->db = $this->load->database('default', true);
+			$this->db->set('status_pesanan', "1"); //value that used to update column  
+			$this->db->where('id_pesanan', $id);
+			$success = $this->db->update('pesanan');
+			if(!$success){
+				$success = false;
+				$errNo   = $this->db->_error_number();
+				$errMess = $this->db->_error_message();
+				array_push($errors, array($errNo, $errMess));
+			}
+			return $success;
+
 		}
 
 		public function savePesanan($dataPemesan, $detailPesanan, $noMeja){
@@ -139,10 +155,10 @@
 			return $success;
 		}
 
-		public function updatePesanan($id, $data)
-		{
-			return $this->db->update('pesanan', $data, array('id_pesanan' => $id));
-		}
+		// public function updatePesanan($id, $data)
+		// {
+		// 	return $this->db->update('pesanan', $data, array('id_pesanan' => $id));
+		// }
 
 		public function updateDetailPesanan($id, $data)
 		{

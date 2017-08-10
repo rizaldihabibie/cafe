@@ -40,8 +40,8 @@
 			$this->db->trans_complete();
 				if(!$success){
 					$success = false;
-					$errNo   = $this->oracle_db->_error_number();
-					$errMess = $this->oracle_db->_error_message();
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
 					array_push($errors, array($errNo, $errMess));
 				}
 
@@ -58,8 +58,8 @@
 			$this->db->trans_complete();
 			if(!$success){
 					$success = false;
-					$errNo   = $this->oracle_db->_error_number();
-					$errMess = $this->oracle_db->_error_message();
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
 					array_push($errors, array($errNo, $errMess));
 				}
 

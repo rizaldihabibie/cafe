@@ -63,7 +63,7 @@
                                             $number = 1;
                                             foreach($listDetailMenu as $row)
                                             {
-
+                                                
                                             if($number %2 == 0){
                                               echo "<tr>
                                                 <td class='bg-info'><input type='checkbox' name='$row->id_detail_pesanan' value='$row->id_detail_pesanan'/></td>
