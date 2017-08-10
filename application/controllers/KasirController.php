@@ -371,6 +371,10 @@ class KasirController extends CI_Controller {
 		$data[1] = $this->input->post('tunai');
 		$data[2] = $this->input->post('kembalian');
 		$data[3]= $this->input->post('diskon'); 
+		if($this->input->post('diskon')==null || $this->input->post('diskon')<0 || $this->input->post('diskon')==''){
+			$data[3] = 0;
+		}
+		
 		$dataNota['total'] = $this->input->post('grandTotal');
 		if(strpos($this->input->post('diskon'), '%')!==false){
 			$dataNota['diskon'] = str_replace("%", "", $this->input->post('diskon'));
@@ -611,10 +615,13 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 			$printer -> setEmphasis(false);
 			$printer -> feed();
 
-			$printer -> setEmphasis(true);
-			$printer -> text($diskon);
-			$printer -> setEmphasis(false);
-			$printer -> feed();
+			if($data[3]>0){
+				$printer -> setEmphasis(true);
+				$printer -> text($diskon);
+				$printer -> setEmphasis(false);
+				$printer -> feed();
+			}
+			
 
 			/* Tax and total */
 			$printer -> setEmphasis(true);
