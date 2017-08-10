@@ -99,7 +99,7 @@
                             <div class="col-md-4">
                                     <div class="form-group">
                                         <label >Sub Total :</label>
-                                        <input class="form-control" type="text" id="subTotal" name="subTotal" value = "<?php if($subTotal!="") echo $subTotal; ?>"name = "idPesanan"  readonly/>
+                                        <input class="form-control" type="text" id="subTotal" name="subTotal" value = "<?php if($subTotal!="") echo $subTotal; ?>" name = "idPesanan"  readonly/>
                                     </div>
                                     <div class="form-group">
                                         <label>DISKON :</label>
@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Grand Total :</label>
-                                        <input class="form-control" type="text" id="grandTotal" name = "grandTotal" readonly />
+                                        <input class="form-control" type="text" value = "<?php if($subTotal!="") echo $subTotal; ?>" id="grandTotal" name = "grandTotal" readonly />
                                     </div>
                                     <div class="form-group">
                                         <label>Tunai :</label>
