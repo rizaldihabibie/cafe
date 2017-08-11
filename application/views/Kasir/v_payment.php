@@ -11,6 +11,12 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-4">
+                                <?php if($this->session->flashdata('error')): ?>
+                                  <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                 <div class="fa fa-info-circle"></div>&nbsp;<?php echo $this->session->flashdata('error'); ?>
+                                              </div>
+                                  <?php endif; ?>
                                     <div class="form-group">
                                         <label>waitress</label>
                                         <input class="form-control" name = "namaWaitress"  value = "<?php if($waitress!="") echo $waitress->nama_user; ?>" readonly/>

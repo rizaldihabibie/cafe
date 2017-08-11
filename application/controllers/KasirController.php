@@ -371,6 +371,11 @@ class KasirController extends CI_Controller {
 		$data[1] = $this->input->post('tunai');
 		$data[2] = $this->input->post('kembalian');
 		$data[3]= $this->input->post('diskon'); 
+
+		if($data[2]<0){
+			$this->session->set_flashdata('error', 'Jumlah tunai tidak sesuai');
+			$this->paymentPage($id);
+		}
 		if($this->input->post('diskon')==null || $this->input->post('diskon')<=0 || $this->input->post('diskon')==''){
 			$data[3] = 0;
 		}

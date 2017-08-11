@@ -240,15 +240,60 @@ function addOrder() {
             
             indexRow++;
     }
+    showMenu();
  }
 
  function removeRow(index,hidden){
-    var myTable = document.getElementById('tabelOrder');
-    myTable.deleteRow(index);
+    // var myTable = document.getElementById('tabelOrder');
+    // myTable.deleteRow(index);
     order.splice(index-1, 1);
+    // var container = document.getElementById('main');
+    // var child = document.getElementById("order"+hidden);
+    // container.removeChild(child);
+    // console.log(order.length);
+    var obj = <?php echo json_encode($menuArray); ?>;
+    var myTable = document.getElementById('tabelOrder');
+    while(myTable.rows.length > 1) {
+      myTable.deleteRow(1);
+    }
+    var x;
+    var indexRow = 1;
+    
+    x = document.getElementById('listOrder').insertRow(0);
+    x.insertCell(0);
+    x.insertCell(1);
+    x.insertCell(2);
+    x.insertCell(3);
+
+    for (var i = 0; i < order.length; i++) {
+            x = document.getElementById('listOrder').insertRow(indexRow);
+            x.insertCell(0);
+            x.insertCell(1);
+            x.insertCell(2);
+            x.insertCell(3);
+            indexRow++;
+    }
+    
+    indexRow = 1;
     var container = document.getElementById('main');
-    var child = document.getElementById("order"+hidden);
-    container.removeChild(child);
+    for (var i = 0; i < order.length; i++) {
+            console.log(i);
+            myTable.rows[indexRow].cells[0].innerHTML = indexRow;
+            myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
+            myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
+            var div = document.createElement("div");
+            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
+            myTable.rows[indexRow].cells[3].appendChild(div);
+            var inputHidden = document.createElement("input");
+            inputHidden.type = "hidden";
+            inputHidden.id = "order"+order[i][0];
+            inputHidden.value = order[i][0]+"@"+order[i][2];
+            inputHidden.name = "order"+order[i][0];
+            container.appendChild(inputHidden); 
+            
+            indexRow++;
+    }
+
     
  }
  
