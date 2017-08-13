@@ -55,6 +55,7 @@
 						$isi['id_pesanan'] = $idPemesan;
 						$isi['id_menu'] = $detailPesanan[$i][0];
 						$isi['jumlah'] =  $detailPesanan[$i][1];
+						$isi['keterangan'] = $detailPesanan[$i][2];
 						$success = $this->db->insert('detail_pesanan', $isi);
 						if(!$success){
 							$success = false;

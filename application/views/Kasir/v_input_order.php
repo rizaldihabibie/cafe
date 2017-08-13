@@ -65,6 +65,7 @@
                                                 <th>No</th>
                                                 <th>Nama Menu</th>
                                                 <th>Jumlah</th>
+                                                <th>Keterangan</th>
                                             </tr>
                                         </thead>
                                         <tbody id="bookMenu">
@@ -86,7 +87,7 @@
                     <!-- <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post"> -->
                     <div class="col-md-12">
                         <div class="col-md-12">
-                            <div id="main" class="panel panel-default">
+                            <div id="main" class="panel panel-danger">
                                 <div class="panel-heading">
                                     Daftar Pesanan
                                 </div>
@@ -98,6 +99,7 @@
                                                 <th>No</th>
                                                 <th>Nama Menu</th>
                                                 <th>Jumlah</th>
+                                                <th>Keterangan</th>
                                                 <th>#</th>
                                             </tr>
                                         </thead>
@@ -147,12 +149,14 @@ function showMenu(){
     x.insertCell(0);
     x.insertCell(1);
     x.insertCell(2);
+    x.insertCell(3);
     for (var i = 0; i < obj.length; i++) {
         if(obj[i][2]==idKategori){
             x = document.getElementById('bookMenu').insertRow(indexRow);
             x.insertCell(0);
             x.insertCell(1);
             x.insertCell(2);
+            x.insertCell(3);
             indexRow++;
         }
     }
@@ -169,7 +173,17 @@ function showMenu(){
             input.value = "0";
             input.name = obj[i][0];
             input.className = "form-control"; // set the CSS class
+            
+
+            var Keterangan =  document.createElement("input");
+            Keterangan.type = "text";
+            Keterangan.id = "ket"+obj[i][0];
+            Keterangan.name = "ket"+obj[i][0];
+            Keterangan.className = "form-control"; // set the CSS class
+
             myTable.rows[indexRow].cells[2].appendChild(input); 
+            myTable.rows[indexRow].cells[3].appendChild(Keterangan);
+
             indexRow++;
         }
         
@@ -188,13 +202,12 @@ function addOrder() {
     var index = order.length;
     for (var i = 0; i < obj.length; i++) {
         listInput = document.getElementById(obj[i][0]);
+        listKeterangan = document.getElementById("ket"+obj[i][0]);
         if(listInput != null){
-            if(listInput.value){
-                if(listInput.value !== "0"){
-                    var arr1 = [obj[i][0],obj[i][1],listInput.value];
-                    order [index] = arr1;
-                    index++;
-                }
+            if(listInput.value !== "0"){
+                var arr1 = [obj[i][0],obj[i][1],listInput.value,listKeterangan.value];
+                order [index] = arr1;
+                index++;
             }
         }
 
@@ -212,6 +225,7 @@ function addOrder() {
     x.insertCell(1);
     x.insertCell(2);
     x.insertCell(3);
+    x.insertCell(4);
 
     for (var i = 0; i < order.length; i++) {
             x = document.getElementById('listOrder').insertRow(indexRow);
@@ -219,6 +233,7 @@ function addOrder() {
             x.insertCell(1);
             x.insertCell(2);
             x.insertCell(3);
+            x.insertCell(4);
             indexRow++;
     }
     
@@ -228,13 +243,14 @@ function addOrder() {
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
             myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
+            myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
             var div = document.createElement("div");
             div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
-            myTable.rows[indexRow].cells[3].appendChild(div);
+            myTable.rows[indexRow].cells[4].appendChild(div);
             var inputHidden = document.createElement("input");
             inputHidden.type = "hidden";
             inputHidden.id = "order"+order[i][0];
-            inputHidden.value = order[i][0]+"@"+order[i][2];
+            inputHidden.value = order[i][0]+"@"+order[i][2]+"@"+order[i][3];
             inputHidden.name = "order"+order[i][0];
             container.appendChild(inputHidden); 
             

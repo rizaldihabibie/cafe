@@ -202,7 +202,7 @@ class KasirController extends CI_Controller {
 		$dataPemesan['date_pesanan'] = date("Y/m/d");
 		for($i=0;$i<sizeof($daftarOrder);$i++){
 			$separate =explode("@",$daftarOrder[$i]);
-			$daftarPesanan[$i]=array($separate[0],$separate[1]);
+			$daftarPesanan[$i]=array($separate[0],$separate[1],$separate[2]);
 		}
 		$dataMakanan = array();
 		$dataMinuman = array();
@@ -212,18 +212,18 @@ class KasirController extends CI_Controller {
 			for($j=0;$j<sizeof($data['menuArray']);$j++){
 				if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 0){
 
-					$dataMakanan[$indexMakanan]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
+					$dataMakanan[$indexMakanan]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1],$daftarPesanan[$i][2]);
 					$indexMakanan++;
 			
 				}else if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 1){
-					$dataMinuman[$indexMinuman]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
+					$dataMinuman[$indexMinuman]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1],$daftarPesanan[$i][2]);
 					$indexMinuman++;
 				}
 			}
 		}
 
 		if($this->M_pesanan->savePesanan($dataPemesan,$daftarPesanan, $noMeja)){
-			$this->cetak($dataMakanan,$dataMinuman);
+			$this->cetak($dataMakanan,$dataMinuman,$noMeja);
 			$this->TambahOrderBaru();
 		}
 
@@ -434,7 +434,7 @@ class KasirController extends CI_Controller {
 		$this->dataPesanan();
 	}
 
-	public function cetak($makanan,$minuman)
+	public function cetak($makanan,$minuman,$noMeja)
 	{
 		 $this->load->library("EscPos.php");
 
@@ -453,7 +453,7 @@ class KasirController extends CI_Controller {
 				if($i==0){
 					$items[$i] = new item("=== MAKANAN ===","");
 				}else{
-					$items[$i] = new item($makanan[$i-1][0],$makanan[$i-1][1]);
+					$items[$i] = new item($makanan[$i-1][0]." ".$makanan[$i-1][2],$makanan[$i-1][1]);
 				}
 				$number++;
 				}
@@ -467,7 +467,7 @@ class KasirController extends CI_Controller {
 				$items[$number] = new item("=== MINUMAN ===","");
 				$number++;
 				for($i=0;$i<sizeof($minuman);$i++){
-					$items[$number] = new item($minuman[$i][0],$minuman[$i][1]);
+					$items[$number] = new item($minuman[$i][0]." ".$minuman[$i-1][2],$minuman[$i][1]);
 					$number++;
 				}
 			}
@@ -496,6 +496,11 @@ class KasirController extends CI_Controller {
 			/* Name of shop */
 			$printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
 			$printer -> text("WAROENG ROPAN\n");
+			$printer -> selectPrintMode();
+			$printer -> feed();
+
+			$printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+			$printer -> text("No. Meja : ".$noMeja."\n");
 			$printer -> selectPrintMode();
 			$printer -> feed();
 
