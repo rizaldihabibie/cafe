@@ -308,6 +308,16 @@ class KasirController extends CI_Controller {
 	public function saveAddOrder(){
 		$id = $this->input->post('idPesanan');
 		$data['menuArray'] = $this->M_menu->selectArray();
+		$detailMeja = $this->M_meja->findByIdPesanan($id);
+		$noMeja = "";
+		$index = 0;
+		foreach($detailMeja as $row){
+			$noMeja =$noMeja.$row->no_meja;
+			if($index != sizeof($detailMeja)-1){
+				$noMeja = $noMeja."-";
+			}
+			$index++;
+		}
 		for($i=0;$i<sizeof($data['menuArray']);$i++){
 			if($this->input->post("order".$data['menuArray'][$i][0])!=null){
 				$daftarOrder[] = $this->input->post("order".$data['menuArray'][$i][0]);
@@ -315,7 +325,7 @@ class KasirController extends CI_Controller {
 		}
 		for($i=0;$i<sizeof($daftarOrder);$i++){
 			$separate =explode("@",$daftarOrder[$i]);
-			$daftarPesanan[$i]=array($separate[0],$separate[1],$id);
+			$daftarPesanan[$i]=array($separate[0],$separate[1],$separate[2],$id);
 		}
 
 		$dataMakanan = array();
@@ -325,18 +335,18 @@ class KasirController extends CI_Controller {
 		for($i=0;$i<sizeof($daftarPesanan);$i++){
 			for($j=0;$j<sizeof($data['menuArray']);$j++){
 				if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 0){
-					$dataMakanan[$indexMakanan]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
+					$dataMakanan[$indexMakanan]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1],$daftarPesanan[$i][2]);
 					$indexMakanan++;
 				}else if($daftarPesanan[$i][0] == $data['menuArray'][$j][0] && $data['menuArray'][$j][3] == 1){
-					$dataMinuman[$indexMinuman]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1]);
+					$dataMinuman[$indexMinuman]=array($data['menuArray'][$j][1],$daftarPesanan[$i][1],$daftarPesanan[$i][2]);
 					$indexMinuman++;
 				}
 			}
 		}
 
 		if($this->M_pesanan->saveDetailPesanan($daftarPesanan)){
-			$this->cetak($dataMakanan,$dataMinuman);
-			redirect("KasirController/detailPesanan/".$id);
+			$this->cetak($dataMakanan,$dataMinuman,$noMeja);
+			$this->detailPesanan($id);
 			
 		}
 	}

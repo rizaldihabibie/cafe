@@ -280,6 +280,7 @@ function addOrder() {
     x.insertCell(1);
     x.insertCell(2);
     x.insertCell(3);
+    x.insertCell(4);
 
     for (var i = 0; i < order.length; i++) {
             x = document.getElementById('listOrder').insertRow(indexRow);
@@ -287,6 +288,7 @@ function addOrder() {
             x.insertCell(1);
             x.insertCell(2);
             x.insertCell(3);
+            x.insertCell(4);
             indexRow++;
     }
     
@@ -297,13 +299,14 @@ function addOrder() {
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
             myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
+            myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
             var div = document.createElement("div");
             div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
-            myTable.rows[indexRow].cells[3].appendChild(div);
+            myTable.rows[indexRow].cells[4].appendChild(div);
             var inputHidden = document.createElement("input");
             inputHidden.type = "hidden";
             inputHidden.id = "order"+order[i][0];
-            inputHidden.value = order[i][0]+"@"+order[i][2];
+            inputHidden.value = order[i][0]+"@"+order[i][2]+"@"+order[i][3];
             inputHidden.name = "order"+order[i][0];
             container.appendChild(inputHidden); 
             

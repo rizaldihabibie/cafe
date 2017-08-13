@@ -62,6 +62,7 @@
                                                 <th>No</th>
                                                 <th>Nama Menu</th>
                                                 <th>Jumlah</th>
+                                                <th>keterangan</th>
                                             </tr>
                                         </thead>
                                         <tbody id="bookMenu">
@@ -95,6 +96,7 @@
                                                 <th>No</th>
                                                 <th>Nama Menu</th>
                                                 <th>Jumlah</th>
+                                                <th>keterangan</th>
                                                 <th>#</th>
                                             </tr>
                                         </thead>
@@ -144,12 +146,14 @@ function showMenu(){
     x.insertCell(0);
     x.insertCell(1);
     x.insertCell(2);
+    x.insertCell(3);
     for (var i = 0; i < obj.length; i++) {
         if(obj[i][2]==idKategori){
             x = document.getElementById('bookMenu').insertRow(indexRow);
             x.insertCell(0);
             x.insertCell(1);
             x.insertCell(2);
+            x.insertCell(3);
             indexRow++;
         }
     }
@@ -160,6 +164,15 @@ function showMenu(){
         if(obj[i][2]==idKategori){
             myTable.rows[indexRow].cells[0].innerHTML = obj[i][0];
             myTable.rows[indexRow].cells[1].innerHTML = obj[i][1];
+
+            var keterangan =  document.createElement("input");
+            keterangan.type = "text";
+            keterangan.id = "ket"+obj[i][0];
+            keterangan.name = "ket"+obj[i][0];
+            keterangan.className = "form-control"; // set the CSS class
+            myTable.rows[indexRow].cells[3].appendChild(keterangan); 
+
+
             var input = document.createElement("input");
             input.type = "text";
             input.id = obj[i][0];
@@ -167,6 +180,8 @@ function showMenu(){
             input.name = obj[i][0];
             input.className = "form-control"; // set the CSS class
             myTable.rows[indexRow].cells[2].appendChild(input); 
+
+            
             indexRow++;
         }
         
@@ -185,10 +200,11 @@ function addOrder() {
     var index = order.length;
     for (var i = 0; i < obj.length; i++) {
         listInput = document.getElementById(obj[i][0]);
+        listKeterangan = document.getElementById("ket"+obj[i][0]);
         if(listInput != null){
             if(listInput.value){
                 if(listInput.value !== "0"){
-                    var arr1 = [obj[i][0],obj[i][1],listInput.value];
+                    var arr1 = [obj[i][0],obj[i][1],listInput.value,listKeterangan.value];
                     order [index] = arr1;
                     index++;
                 }
@@ -209,6 +225,7 @@ function addOrder() {
     x.insertCell(1);
     x.insertCell(2);
     x.insertCell(3);
+    x.insertCell(4);
 
     for (var i = 0; i < order.length; i++) {
             x = document.getElementById('listOrder').insertRow(indexRow);
@@ -216,6 +233,7 @@ function addOrder() {
             x.insertCell(1);
             x.insertCell(2);
             x.insertCell(3);
+            x.insertCell(4);
             indexRow++;
     }
     
@@ -225,27 +243,74 @@ function addOrder() {
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
             myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
+            myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
             var div = document.createElement("div");
             div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
-            myTable.rows[indexRow].cells[3].appendChild(div);
+            myTable.rows[indexRow].cells[4].appendChild(div);
             var inputHidden = document.createElement("input");
             inputHidden.type = "hidden";
             inputHidden.id = "order"+order[i][0];
-            inputHidden.value = order[i][0]+"@"+order[i][2];
+            inputHidden.value = order[i][0]+"@"+order[i][2]+"@"+order[i][3];
             inputHidden.name = "order"+order[i][0];
             container.appendChild(inputHidden); 
             
             indexRow++;
     }
+    showMenu();
  }
 
  function removeRow(index,hidden){
-    var myTable = document.getElementById('tabelOrder');
-    myTable.deleteRow(index);
+ //    var myTable = document.getElementById('tabelOrder');
+ //    myTable.deleteRow(index);
     order.splice(index-1, 1);
+    // var container = document.getElementById('main');
+    // var child = document.getElementById("order"+hidden);
+    // container.removeChild(child);
+    var obj = <?php echo json_encode($menuArray); ?>;
+    var myTable = document.getElementById('tabelOrder');
+    while(myTable.rows.length > 1) {
+      myTable.deleteRow(1);
+    }
+    var x;
+    var indexRow = 1;
+    
+    x = document.getElementById('listOrder').insertRow(0);
+    x.insertCell(0);
+    x.insertCell(1);
+    x.insertCell(2);
+    x.insertCell(3);
+    x.insertCell(4);
+    for (var i = 0; i < order.length; i++) {
+            x = document.getElementById('listOrder').insertRow(indexRow);
+            x.insertCell(0);
+            x.insertCell(1);
+            x.insertCell(2);
+            x.insertCell(3);
+            x.insertCell(4);
+            indexRow++;
+    }
+    
+    indexRow = 1;
     var container = document.getElementById('main');
-    var child = document.getElementById("order"+hidden);
-    container.removeChild(child);
+    for (var i = 0; i < order.length; i++) {
+            console.log(i);
+            myTable.rows[indexRow].cells[0].innerHTML = indexRow;
+            myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
+            myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
+            myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
+            var div = document.createElement("div");
+            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
+            myTable.rows[indexRow].cells[4].appendChild(div);
+            var inputHidden = document.createElement("input");
+            inputHidden.type = "hidden";
+            inputHidden.id = "order"+order[i][0];
+            inputHidden.value = order[i][0]+"@"+order[i][2]+"@"+order[i][3];
+            inputHidden.name = "order"+order[i][0];
+            container.appendChild(inputHidden); 
+            
+            indexRow++;
+    }
+
     
  }
  

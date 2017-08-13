@@ -117,9 +117,10 @@
 			
 			for($i=0;$i<sizeof($data);$i++){
 				$isi = array();
-				$isi['id_pesanan'] = $data[$i][2];
+				$isi['id_pesanan'] = $data[$i][3];
 				$isi['id_menu'] = $data[$i][0];
 				$isi['jumlah'] =  $data[$i][1];
+				$isi['keterangan'] = $data[$i][2];
 				$success = $this->db->insert('detail_pesanan', $isi);
 				if(!$success){
 					$success = false;
