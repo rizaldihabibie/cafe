@@ -71,6 +71,7 @@
                                             <th>#</th>
                                             <th>No</th>
                                             <th>Nama Menu</th>
+                                            <th>Keterangan</th>
                                             <th>Jumlah</th>
                                             
                                         </tr>
@@ -86,6 +87,7 @@
                                                 <td class='bg-info'><input type='checkbox' name='$row->id_detail_pesanan' value='$row->id_detail_pesanan'/></td>
                                                 <td class='bg-info'>".$number."</td>
                                                 <td class='bg-info'>".$row->nama_menu."</td>
+                                                <td class='bg-info'>".$row->keterangan."</td>
                                                 <td class='bg-info'>".$row->jumlah."</td>
                                               </tr>";
                                             }else{
@@ -93,6 +95,7 @@
                                               <td class='bg-warning'><input type='checkbox' name='$row->id_detail_pesanan' value='$row->id_detail_pesanan'/></td>
                                                 <td class='bg-warning'>".$number."</td>
                                                 <td class='bg-warning'>".$row->nama_menu."</td>
+                                                <td class='bg-warning'>".$row->keterangan."</td>
                                                 <td class='bg-warning'>".$row->jumlah."</td>
                                               </tr>";
                                             }

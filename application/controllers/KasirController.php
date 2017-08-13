@@ -200,6 +200,7 @@ class KasirController extends CI_Controller {
 		$dataPemesan['id_user'] = $this->input->post('waitress');
 		$dataPemesan['nama_pemesan'] = $namaPemesan;
 		$dataPemesan['date_pesanan'] = date("Y/m/d");
+
 		for($i=0;$i<sizeof($daftarOrder);$i++){
 			$separate =explode("@",$daftarOrder[$i]);
 			$daftarPesanan[$i]=array($separate[0],$separate[1],$separate[2]);
@@ -223,7 +224,7 @@ class KasirController extends CI_Controller {
 		}
 
 		if($this->M_pesanan->savePesanan($dataPemesan,$daftarPesanan, $noMeja)){
-			$this->cetak($dataMakanan,$dataMinuman,$noMeja);
+			$this->cetak($dataMakanan,$dataMinuman,$this->input->post('noMeja'));
 			$this->TambahOrderBaru();
 		}
 
@@ -467,7 +468,7 @@ class KasirController extends CI_Controller {
 				$items[$number] = new item("=== MINUMAN ===","");
 				$number++;
 				for($i=0;$i<sizeof($minuman);$i++){
-					$items[$number] = new item($minuman[$i][0]." ".$minuman[$i-1][2],$minuman[$i][1]);
+					$items[$number] = new item($minuman[$i][0]." ".$minuman[$i][2],$minuman[$i][1]);
 					$number++;
 				}
 			}

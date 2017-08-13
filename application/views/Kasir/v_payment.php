@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Tunai :</label>
-                                        <input class="form-control" type="text" onChange = "countChange()" id="tunai" name = "tunai"/>
+                                        <input class="form-control" type="text" onChange = "countChange()" id="tunai" name = "tunai" required/>
                                     </div>
                                     <div class="form-group">
                                         <label>Kembali :</label>
