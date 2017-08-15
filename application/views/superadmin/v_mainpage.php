@@ -4,15 +4,54 @@
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
-                <div class="row">
+                 <div class="row">
                     <div class="col-md-12">
-                     <h2>Dashboard</h2>   
-                        <h5>Coming Soon </h5>
-                       
+                     <div class="panel panel-default">
+                        <div class="panel-heading">
+                            DATA SALES HARIAN
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                   <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                  <tr>
+                                    <th>NO</th>
+                                    <th>TANGGAL</th>
+                                    <th>TOTAL SALES</th>
+                                    
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <?php
+                                  $nomor=1;
+                                  for($i = 0; $i<sizeof($listSales); $i++)
+                                  {
+                                  if($nomor%2){
+                                    echo "<tr>
+                                      <td class='warning'>".$nomor."</td>
+                                      <td class='warning'>".$listSales[$i]->date_pesanan."</td>
+                                      <td class='warning'>".$listSales[$i]->sales_harian."</td>
+                                      
+                                    </tr>";
+                                  }else{
+                                    echo "<tr>
+                                      <td class='warning'>".$nomor."</td>
+                                      <td class='warning'>".$listSales[$i]->date_pesanan."</td>
+                                      <td class='warning'>".$listSales[$i]->sales_harian."</td>
+                                    </tr>";
+                                  }
+                                    $nomor++;
+                                  }
+                                ?>
+                                </tbody>
+                            </table>                                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
-                 <!-- /. ROW  -->
-                 <hr />
                
     </div>
              <!-- /. PAGE INNER  -->

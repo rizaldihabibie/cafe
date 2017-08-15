@@ -13,7 +13,15 @@
     <script src="<?php echo base_url(); ?>assets/js/morris/raphael-2.1.0.min.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="<?php echo base_url(); ?>assets/js/custom.js"></script>
-    
-   
+     <script src="<?php echo base_url(); ?>assets/js/dataTables/jquery.dataTables.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/dataTables.bootstrap.js"></script>
+      <script>
+      $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+    </script>
 </body>
 </html>
