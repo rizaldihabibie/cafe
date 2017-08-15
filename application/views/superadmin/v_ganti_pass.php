@@ -23,7 +23,7 @@
                                                 </div>
                                     <?php endif; ?>
                                     <form action="<?php echo site_url('UserController/savePass'); ?>" method="post">
-                                        <input name = "idData" type="hidden" value="<?php if($user!="") echo $user->id_user; ?>"/>
+                                        <input name = "idData" type="hidden" value="<?php if($user!="") echo $user->id_credential; ?>"/>
                                          <div class="form-group">
                                             <label>Username</label>
                                             <input class="form-control" name = "username" value="<?php if($user!="") echo $user->username; ?>" placeholder="Username" disabled/>

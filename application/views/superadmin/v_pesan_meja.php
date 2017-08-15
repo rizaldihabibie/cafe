@@ -141,7 +141,7 @@
                         <div class="panel-body">
                             <div class="row">
                                  <form method="post" action="books.php">
-                                   <table border=0 width='100%'>			
+                                   <table border=0 width='100%'>		     	
 				                     <tr>
                                       <td>  <div class="pull-right">Pilih Meja Kemudian Tekan Selanjutnya.<br><input type="submit" class="btn btn-lg btn-success btn-block" value="Selanjutnya"/></div></td>
                                      </tr>
@@ -149,8 +149,7 @@
                                  <br><br><br>
 
                                 <div class="col-md-6">
-                                  
-                                 
+                               
                                   <table  border='0'  width='100%' cellspacing='0' cellpadding='0'>
                                   <tr>
                                   <td> 
