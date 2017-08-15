@@ -13,7 +13,7 @@
     <div class="container">
         
         <div class="form-bg">
-             <form role="form" action="<?php echo site_url('Welcome/login'); ?>" method="post">
+             <form role="form" action="<?php echo site_url('AdminController/generateReport'); ?>" method="post">
                 <h2>Login</h2>
                 <p><input type="text" name = "username" placeholder="Username"></p>
                 <p><input type="password" name="password" placeholder="Password"></p>
