@@ -22,6 +22,15 @@
             responsive: true
         });
     });
+     function Timer() {
+         var dt=new Date()
+         document.getElementById('time').innerHTML=dt.getHours()+":"+dt.getMinutes()+":"+dt.getSeconds()+"&nbsp;";
+         setTimeout("Timer()",1000);
+      }
+      window.onload = function() {
+        Timer();
+      };
+    </script>
     </script>
 </body>
 </html>

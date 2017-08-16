@@ -102,6 +102,7 @@ class KasirController extends CI_Controller {
 		$this->load->model('M_pesanan');
 		$this->load->model('M_user');
 		$this->load->model('M_nota');
+	    $this->load->model('M_admin');
 		// $this->load->library('Userauth');
 		
 	}
@@ -109,10 +110,12 @@ class KasirController extends CI_Controller {
 	public function index()
 	{	
 	
-		 $this->load->view('Kasir/v_header.php');
-		 $this->load->view('Kasir/v_sidebar.php');
-		 $this->load->view('Kasir/v_mainpage.php');
-		 $this->load->view('Kasir/v_footer.php');
+		 $data = array();
+		 $data['listSales'] = $this->M_admin->salesHarian();
+		 $this->load->view('Kasir/v_header.php',$data);
+		 $this->load->view('Kasir/v_sidebar.php',$data);
+		 $this->load->view('Kasir/v_mainpage.php',$data); //mainpage
+		 $this->load->view('Kasir/v_footer.php',$data);
 	}
 
 	public function TambahOrderBaru()

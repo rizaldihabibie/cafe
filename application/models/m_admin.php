@@ -8,7 +8,7 @@
 			$date = date('Y-m-d');
 			$this->db = $this->load->database('default', true);
 			$success = $this->db->query("
-		select x.date_pesanan,sum(y.qty_harga) sales_harian from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual,a.jumlah,(harga_jual * jumlah) qty_harga from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan group by date_pesanan");
+		select x.date_pesanan,sum(y.qty_harga) sales_harian from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual,a.jumlah,(harga_jual * jumlah) qty_harga from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan group by date_pesanan ORDER BY x.date_pesanan desc");
 		return $success->result();
 		}
 

@@ -30,15 +30,15 @@
                                   if($nomor%2){
                                     echo "<tr>
                                       <td class='warning'>".$nomor."</td>
-                                      <td class='warning'>".$listSales[$i]->date_pesanan."</td>
-                                      <td class='warning'>".$listSales[$i]->sales_harian."</td>
+                                      <td class='warning'>".strftime("%d/%m/%Y",strtotime($listSales[$i]->date_pesanan))."</td>
+                                      <td class='warning'> Rp. ".number_format($listSales[$i]->sales_harian,2,",",".")."</td>
                                       
                                     </tr>";
                                   }else{
                                     echo "<tr>
                                       <td class='warning'>".$nomor."</td>
-                                      <td class='warning'>".$listSales[$i]->date_pesanan."</td>
-                                      <td class='warning'>".$listSales[$i]->sales_harian."</td>
+                                      <td class='warning'>".strftime("%d/%m/%Y",strtotime($listSales[$i]->date_pesanan))."</td>
+                                      <td class='warning'> Rp. ".number_format($listSales[$i]->sales_harian,2,",",".")."</td>
                                     </tr>";
                                   }
                                     $nomor++;
