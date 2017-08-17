@@ -112,6 +112,7 @@ class KasirController extends CI_Controller {
 	
 		 $data = array();
 		 $data['listSales'] = $this->M_admin->salesHarian();
+		 $data['listDiskon'] = $this->M_admin->hitung_diskon();
 		 $this->load->view('Kasir/v_header.php',$data);
 		 $this->load->view('Kasir/v_sidebar.php',$data);
 		 $this->load->view('Kasir/v_mainpage.php',$data); //mainpage
