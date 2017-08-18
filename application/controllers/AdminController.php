@@ -31,6 +31,9 @@ class AdminController extends CI_Controller {
 		$this->output->set_header('Cache-Control:no-store, no-cache, must-revalidate');
 		$this->output->set_header('Cache-Control:post-check=0,pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
+		$this->load->helper(array('form','url', 'text_helper','date','file'));
+		$this->load->library(array('Pagination','image_lib','session'));
+		$this->load->model('M_admin');
 		//$this->load->model('M_meja');
 
 		// $this->load->library('Userauth');
@@ -39,11 +42,13 @@ class AdminController extends CI_Controller {
 
 	public function index()
 	{
-       
-		 $this->load->view('superadmin/v_header.php');
-		 $this->load->view('superadmin/v_sidebar.php');
-		 $this->load->view('superadmin/v_mainpage.php'); //mainpage
-		 $this->load->view('superadmin/v_footer.php');
+         $data = array();
+		 $data['listSales'] = $this->M_admin->salesHarian();
+		 $data['listDiskon'] = $this->M_admin->hitung_diskon();
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
+		 $this->load->view('superadmin/v_mainpage.php',$data); //mainpage
+		 $this->load->view('superadmin/v_footer.php',$data);
 
 		//$this->load->view('MainPage/v_mainpage.php');
 	}

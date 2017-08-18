@@ -102,6 +102,7 @@ class KasirController extends CI_Controller {
 		$this->load->model('M_pesanan');
 		$this->load->model('M_user');
 		$this->load->model('M_nota');
+	    $this->load->model('M_admin');
 		// $this->load->library('Userauth');
 		
 	}
@@ -109,10 +110,13 @@ class KasirController extends CI_Controller {
 	public function index()
 	{	
 	
-		 $this->load->view('Kasir/v_header.php');
-		 $this->load->view('Kasir/v_sidebar.php');
-		 $this->load->view('Kasir/v_mainpage.php');
-		 $this->load->view('Kasir/v_footer.php');
+		 $data = array();
+		 $data['listSales'] = $this->M_admin->salesHarian();
+		 $data['listDiskon'] = $this->M_admin->hitung_diskon();
+		 $this->load->view('Kasir/v_header.php',$data);
+		 $this->load->view('Kasir/v_sidebar.php',$data);
+		 $this->load->view('Kasir/v_mainpage.php',$data); //mainpage
+		 $this->load->view('Kasir/v_footer.php',$data);
 	}
 
 	public function TambahOrderBaru()
@@ -524,6 +528,16 @@ class KasirController extends CI_Controller {
 			    $printer -> text($item);
 			    $printer -> selectPrintMode();
 			}
+
+			date_default_timezone_set('Asia/Jakarta'); 
+	     	$dates =date('l jS \of F Y h:i:s A');
+
+			$printer -> setJustification(Printer::JUSTIFY_CENTER);
+			$printer -> feed(2);
+			$printer -> setEmphasis(true);
+			$printer -> text($dates . "\n");
+
+
 			// $printer -> setEmphasis(true);
 			// $printer -> text($subtotal);
 			// $printer -> setEmphasis(false);
@@ -598,7 +612,8 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 
 			/* Date is kept the same for testing */
 			// $date = date('l jS \of F Y h:i:s A');
-			$date = date("d/m/Y H:m:s");
+			date_default_timezone_set('Asia/Jakarta'); 
+		   $dates =date('l jS \of F Y h:i:s A');
 
 			/* Start the printer */
 			//$logo = EscposImage::load("../resources/escpos-php-small.png", false);
@@ -666,7 +681,7 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 			$printer -> setJustification(Printer::JUSTIFY_CENTER);
 			$printer -> text("Terima Kasih Atas Kunjungan Anda\n");
 			$printer -> feed(2);
-			$printer -> text($date . "\n");
+			$printer -> text($dates . "\n");
 
 			/* Cut the receipt and open the cash drawer */
 			$printer -> cut();

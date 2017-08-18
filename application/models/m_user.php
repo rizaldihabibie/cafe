@@ -87,9 +87,10 @@
 		public function findById($id) 
 		{
 			$this->db = $this->load->database('default', true);
-			$this->db->select('*');
+		    $this->db->select('*');
 			$this->db->from('user');
-			$this->db->where("id_user", $id);
+			$this->db->join('credential', 'credential.id_credential = user.id_credential');
+			$this->db->where("(user.id_credential = ".$id.")", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->row();
 		}
