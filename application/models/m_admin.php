@@ -23,6 +23,30 @@
 		");
 		return $success->result();
 		}
+       
+       public function hot_meals() 
+		{
+			$this->db = $this->load->database('default', true);
+			$success = $this->db->query("
+			SELECT b.nama_menu,count(a.id_menu) jml FROM `detail_pesanan` a, 
+			menu b, pesanan c where a.id_menu=b.id_menu and c.id_pesanan=a.id_pesanan and b.kategori='0' and
+			date_pesanan>=curdate()-30 and date_pesanan<=curdate()
+			group by b.nama_menu order by jml desc limit 0,3
+		");
+		return $success->result();
+		}
+       
+	   public function hot_drinks() 
+		{
+			$this->db = $this->load->database('default', true);
+			$success = $this->db->query("
+			SELECT b.nama_menu,count(a.id_menu) jml FROM `detail_pesanan` a, 
+			menu b, pesanan c where a.id_menu=b.id_menu and c.id_pesanan=a.id_pesanan and b.kategori='1' and
+			date_pesanan>=curdate()-30 and date_pesanan<=curdate()
+			group by b.nama_menu order by jml desc limit 0,3 
+		");
+		return $success->result();
+		}
 
 		function getMaxNumber()
 		{

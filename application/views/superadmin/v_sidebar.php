@@ -33,6 +33,7 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                             </li>
                         </ul>
                     </li>
+                    <!--
                     <li>
                         <a href="#">Pesanan<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -49,6 +50,7 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                             </li>
                         </ul>
                     </li>
+                    -->
                        <li>
                         <a href="#">Utilitas<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
