@@ -34,7 +34,8 @@ class AdminController extends CI_Controller {
 		$this->load->helper(array('form','url', 'text_helper','date','file'));
 		$this->load->library(array('Pagination','image_lib','session'));
 		$this->load->model('M_admin');
-		//$this->load->model('M_meja');
+		$this->load->model('M_pesanan');
+		$this->load->model('M_meja');
 
 		// $this->load->library('Userauth');
 		
@@ -100,19 +101,63 @@ class AdminController extends CI_Controller {
 				$columnIndex[8] = 'I';
 				$columnIndex[9] = 'J';
 				$columnIndex[10] = 'K';
-
+				$styleArray = array(
+				      'borders' => array(
+				          'allborders' => array(
+				              'style' => PHPExcel_Style_Border::BORDER_THIN
+				          )
+				      )
+				  );
 				$rowIndex = 5;
 				for($i=0; $i<sizeof($rowTitle);$i++){
 					$objSheet->getCell($columnIndex[$i].'5')->setValue($rowTitle[$i]);
+					$objSheet->getStyle($columnIndex[$i].'5')->applyFromArray($styleArray);
 					
+				}
+
+				$data = $this->M_pesanan->findByDate(date('Y-m-d',strtotime($this->input->post('tanggalPesanan'))));
+
+				$startIndex = 6;
+				$nomor = 1;
+				foreach($data as $row){
+					$objSheet->getCell('A'.$startIndex)->setValue($nomor);
+					$objSheet->getCell('B'.$startIndex)->setValue(date('d M Y',strtotime($row->date_pesanan)));
+					$dataMeja = $this->M_meja->findByIdPesanan($row->id_pesanan);
+					$noMeja = "";
+					$index = 0;
+					foreach($dataMeja as $row1){
+						$noMeja =$noMeja.$row1->no_meja;
+						if($index != sizeof($dataMeja)-1){
+							$noMeja = $noMeja."-";
+						}
+						$index++;
+					}
+
+					$objSheet->getCell('D'.$startIndex)->setValue($noMeja);
+					$objSheet->getCell('E'.$startIndex)->setValue($row->nama_pemesan);
+					$objSheet->getCell('F'.$startIndex)->setValue($row->nama_user);
+					$detailPesanan = $this->M_pesanan->selectDetailPesanan($row->id_pesanan);
+					$indexDetailPesanan = 0;
+					$subTotal = 0;
+					foreach ($detailPesanan as $row2) {
+						$amountPerMenu = ($row2->jumlah) * ($row2->harga_jual);
+						$subTotal = $subTotal + $amountPerMenu;
+						$objSheet->getCell('G'.$startIndex)->setValue($row2->nama_menu);
+						$objSheet->getCell('H'.$startIndex)->setValue($row2->jumlah);
+						$objSheet->getCell('I'.$startIndex)->setValue($row2->harga_jual);
+						$objSheet->getCell('J'.$startIndex)->setValue($amountPerMenu);
+						$startIndex++;
+						$indexDetailPesanan++;
+						if($indexDetailPesanan == sizeof($detailPesanan)){
+							$objSheet->getCell('k'.$startIndex)->setValue($subTotal);
+							$startIndex++;
+						}
+					}
+
 				}
 
 				for($i=0; $i<sizeof($columnIndex); $i++){
 					$objSheet->getColumnDimension($columnIndex[$i])->setAutoSize(true);
-					$objSheet->getStyle($columnIndex[$i].'5')->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-					$objSheet->getStyle($columnIndex[$i].'5')->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-					$objSheet->getStyle($columnIndex[$i].'5')->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-					$objSheet->getStyle($columnIndex[$i].'5')->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 				}
 
 				$filename = "Generate Report Cafe";
@@ -126,5 +171,16 @@ class AdminController extends CI_Controller {
 				$objWriter->save('php://output');
 		        // $objWriter->save("D://Test/".$filename.".xlsx");
 
+	}
+
+	public function reportPage()
+	{
+         $data = array();
+		 $this->load->view('superadmin/v_header.php',$data);
+		 $this->load->view('superadmin/v_sidebar.php',$data);
+		 $this->load->view('superadmin/v_report.php',$data); //mainpage
+		 $this->load->view('superadmin/v_footer.php',$data);
+
+		//$this->load->view('MainPage/v_mainpage.php');
 	}
 }

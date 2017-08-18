@@ -12,7 +12,7 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                 </li>
                 
                    <li>
-                        <a href="#">Menu Makanan<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
+                        <a href="#">Menu Makanan<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a  href="<?php echo site_url('MenuMakananController/index'); ?>">Tambah Makanan</a>
@@ -23,7 +23,7 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                         </ul>
                     </li> 
                      <li>
-                        <a href="#">Menu Minuman<i class="fa fa-glass fa-3x"></i><span class="fa arrow"></span></a>
+                        <a href="#">Menu Minuman<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a  href="<?php echo site_url('MenuMinumanController/index'); ?>">Tambah Minuman</a>
@@ -34,7 +34,7 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Pesanan<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
+                        <a href="#">Pesanan<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a  href="<?php echo site_url('PesanMejaController/index'); ?>">Buat Pesanan Baru</a>
@@ -42,18 +42,21 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Pembayaran<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
+                        <a href="#">Pembayaran<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a  href="<?php echo site_url('PembayaranController/index'); ?>">Tutup Pesanan</a>
                             </li>
                         </ul>
                     </li>
-                       <li>
-                        <a href="#">Utilitas<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
+                    <li>
+                        <a href="#">Utilitas<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a  href="<?php echo site_url('UserController/index'); ?>">Manajemen User</a>
+                            </li>
+                            <li>
+                                <a  href="<?php echo site_url('AdminController/reportPage'); ?>">Report</a>
                             </li>
                         </ul>
                     </li>

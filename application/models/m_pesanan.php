@@ -188,6 +188,18 @@
 			return $query->row();
 		}
 
+		public function findByDate($date){
+			// echo $date;
+			// exit();
+			$this->db = $this->load->database('default', true);
+			$this->db->select('pesanan.*,user.*');    
+			$this->db->from('pesanan');
+			$this->db->join('user', 'pesanan.id_user = user.id_user');
+			$this->db->where('date_pesanan',$date);
+			$query = $this->db->get();
+			return $query->result();
+		}
+
 	}
 
 ?>
