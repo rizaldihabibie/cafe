@@ -28,7 +28,7 @@
                                           <label>Tanggal Pesanan</label>
                                           <input class="form-control" id="date" name="tanggalPesanan" placeholder="DD/MM/YYYY" type="text" required/>
                                         </div>
-                                        <button type="submit" class="btn btn-success">SIMPAN</button>
+                                        <button type="submit" class="btn btn-success">GENERATE</button>
                                                                    
                                 </div>
                             </div>

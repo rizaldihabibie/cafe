@@ -28,6 +28,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="">ADMIN</a> 
+                <a class="navbar-brand" href="<?php echo site_url('AdminController/index'); ?>">ADMIN</a> 
             </div>
   

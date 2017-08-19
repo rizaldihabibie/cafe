@@ -46,6 +46,8 @@ class AdminController extends CI_Controller {
          $data = array();
 		 $data['listSales'] = $this->M_admin->salesHarian();
 		 $data['listDiskon'] = $this->M_admin->hitung_diskon();
+		 $data['listFavMakanan'] = $this->M_admin->hot_meals();
+		 $data['listFavMinuman'] = $this->M_admin->hot_drinks();
 		 $this->load->view('superadmin/v_header.php',$data);
 		 $this->load->view('superadmin/v_sidebar.php',$data);
 		 $this->load->view('superadmin/v_mainpage.php',$data); //mainpage

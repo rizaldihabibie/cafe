@@ -5,7 +5,7 @@
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-12">
                                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                   <tr>
