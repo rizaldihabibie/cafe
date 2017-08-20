@@ -19,7 +19,7 @@
 			$success = $this->db->query("
 			SELECT sum(x.diskon)tot_dis, sum(ceil((diskon/100)*total)) diskonan, 
              y.date_pesanan
-             FROM pesanan y left join nota x on y.id_pesanan=x.id_pesanan group by date_pesanan
+             FROM pesanan y left join nota x on y.id_pesanan=x.id_pesanan group by date_pesanan desc
 		");
 		return $success->result();
 		}

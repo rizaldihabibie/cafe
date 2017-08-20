@@ -36,14 +36,17 @@
                                        <td class='warning'>".$listSales[$i]->jml_pesanan."</td>
                                       <td class='warning'> Rp. ".number_format($listSales[$i]->sales_harian,2,",",".")."</td>";
                                     
-                                      if(($listDiskon[$i]->tot_dis == NULL) && ($listDiskon[$i]->diskonan == NULL) )
-                                       {
-                                       $diskon=0;
-                                       }
-                                       else
-                                       {
-                                        $diskon=$listDiskon[$i]->diskonan; 
-                                       }
+                                      if($listDiskon[$i]->date_pesanan == $listSales[$i]->date_pesanan )
+                                        {
+                                        if(($listDiskon[$i]->tot_dis == NULL) && ($listDiskon[$i]->diskonan == NULL) )
+                                         {
+                                          $diskon=0;
+                                         }
+                                         else
+                                         {
+                                          $diskon=$listDiskon[$i]->diskonan; 
+                                         }
+                                        } 
                                         $net_sales=$listSales[$i]->sales_harian-$diskon;
                                     echo
                                     "<td class='warning'>Rp. ".number_format($diskon,2,",",".")."</td>
