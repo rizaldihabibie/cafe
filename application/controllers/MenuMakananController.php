@@ -105,7 +105,7 @@ class MenuMakananController extends CI_Controller {
 		$namaMakanan = $this->input->post('namaMakanan');
 		$hargaPokokMakanan = $this->input->post('hargaPokokMakanan');
 		$hargaJualMakanan = $this->input->post('hargaJualMakanan');
-		$Status = $this->input->post('status');
+		
 		$id = $this->input->post("idData");
 
 		$data = array();
@@ -113,7 +113,7 @@ class MenuMakananController extends CI_Controller {
 		$data["harga_pokok"] = $hargaPokokMakanan;
 		$data["nama_menu"] = $namaMakanan;
 		$data["harga_jual"] = $hargaJualMakanan;
-		$data["status"] = $Status;
+		
 		$data["kategori"] = 0;
 		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');

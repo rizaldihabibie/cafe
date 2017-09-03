@@ -114,7 +114,6 @@ class MenuMinumanController extends CI_Controller {
 		$data["harga_pokok"] = $hargaPokokMakanan;
 		$data["nama_menu"] = $namaMakanan;
 		$data["harga_jual"] = $hargaJualMakanan;
-		$data["status"] = $Status;
 		$data["kategori"] = 1;
 		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');

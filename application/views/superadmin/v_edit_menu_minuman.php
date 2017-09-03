@@ -56,45 +56,7 @@
                                             <label>Harga Jual Makanan</label>
                                             <input class="form-control" value="<?php if($menu!="") echo $menu->harga_jual; ?>"name = "hargaJualMakanan" placeholder="Harga Makanan" required/>
                                     </div>
-                               <?php
-                                        if($menu->status == 'AKTIF')
-                                        {
-                                        ?>
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="AKTIF" checked />AKTIF
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="PASIF"/>NON AKTIF
-                                                </label>
-                                            </div>
-                                        </div>
-                                      <?php
-                                        }
-                                       else if($menu->status=='PASIF')
-                                       { 
-                                      ?> 
-                                       <div class="form-group">
-                                            <label>Status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="AKTIF"  />AKTIF
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="PASIF" checked/>NON AKTIF
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <?php
-                                       }
-                                        ?> 
-        
+                              
                                 </div> 
                                     <div class="form-group">
                                          <button type="submit" class="btn btn-success">SIMPAN PERUBAHAN</button>

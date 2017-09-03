@@ -20,7 +20,7 @@
 		insert into user (id_credential,nama_user,alamat_user,no_ktp,no_telp) (select max(id_user)+1 id_baru,".$this->db->escape($data['namalengkap']).",".$this->db->escape($data['alamat'])."
 		,".$this->db->escape($data['noktp']).",".$this->db->escape($data['notelepon'])." from user)");
 		    $success2 = $this->db->query("
-		insert into credential (username,password,privilege,status) values(".$this->db->escape($data['username']).",".$this->db->escape($data['password']).",".$this->db->escape($data['jabatan']).",".$this->db->escape($data['status']).")");
+		insert into credential (username,password,privilege,status) values(".$this->db->escape($data['username']).",".$this->db->escape($data['password']).",".$this->db->escape($data['jabatan']).",'AKTIF')");
 			$this->db->trans_commit();
 			$this->db->trans_complete();
 				if(!$success){
@@ -43,7 +43,7 @@
 			$this->db = $this->load->database('default', true);
 			$this->db->trans_begin();
 		    $success = $this->db->query("update user set nama_user=".$this->db->escape($data['namalengkap']).",alamat_user=".$this->db->escape($data['alamat']).",no_ktp=".$this->db->escape($data['noktp']).",no_telp=".$this->db->escape($data['notelepon'])." where id_user=".$this->db->escape($data['id'])." ");
-			 $success2 = $this->db->query("update credential set privilege=".$this->db->escape($data['jabatan']).",status=".$this->db->escape($data['status'])." where id_credential=".$this->db->escape($data['id'])." ");
+			 $success2 = $this->db->query("update credential set privilege=".$this->db->escape($data['jabatan'])." where id_credential=".$this->db->escape($data['id'])." ");
 			$this->db->trans_commit();
 			$this->db->trans_complete();
 			if(!$success){

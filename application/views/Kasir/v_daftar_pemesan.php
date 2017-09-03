@@ -39,7 +39,7 @@
                                               echo "<tr>
                                                 <td class='bg-success'>".$number."</td>
                                                 <td class='bg-success'>".$date."</td>
-                                                  <td class='bg-danger'>".$row->no_meja."</td>
+                                                  <td class='bg-success'>".$row->no_meja."</td>
                                                 <td class='bg-success'>".$row->nama_pemesan."</td>
                                                 <td class='bg-success'><a href = 'detailPesanan/$row->id_pesanan'>DETAIL</a></td>
                                                 <td class='bg-success'><a href = 'paymentPage/$row->id_pesanan'>BAYAR</a></td>
