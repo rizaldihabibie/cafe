@@ -65,6 +65,17 @@ class KategoriMinumanController extends CI_Controller {
 			}
 		}
 	}
+    	public function deleteKategoriMinuman()
+	{
+			$id = $this->input->post('idDeleteKategoriMinuman');
+			$dataKategoriMinum = array();
+			$dataKategoriMinum['status'] = "NON AKTIF";
+			if($this->M_jenis_makanan->deleteCategoryDrink($id,$dataKategoriMinum)){
+				$this->index();
+			}
+	}
+
+
 	public function editKategori($idKategori)
 	{
 		 $data = array();

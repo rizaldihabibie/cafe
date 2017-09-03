@@ -90,6 +90,17 @@ class MenuMinumanController extends CI_Controller {
 		 $this->load->view('superadmin/v_footer.php',$data);
 	}
 
+		public function deleteMenuMinuman()
+	{
+			$id = $this->input->post('idDeleteMenuMinuman');
+			$dataMenuMinum = array();
+			$dataMenuMinum['status'] = "NON AKTIF";
+			if($this->M_menu->updateMenu($id,$dataMenuMinum)){
+				$this->index();
+			}
+	}
+
+
 	public function saveUpdate(){
 		$categoryName = $this->input->post('namaKategori');
 		$namaMakanan = $this->input->post('namaMakanan');

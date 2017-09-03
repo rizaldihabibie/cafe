@@ -8,7 +8,7 @@
 			$this->db = $this->load->database('default', true);
 			
 			$success = $this->db->query("
-		select a.*,b.username,b.privilege,b.status from user a,credential b where a.id_credential =b.id_credential");
+		select a.*,b.username,b.privilege,b.status from user a,credential b where a.id_credential =b.id_credential and b.status='AKTIF' ");
 		return $success->result();
 		}
       
@@ -61,6 +61,24 @@
 			$this->db->trans_begin();
 		    
 			 $success = $this->db->query("update credential set password=".$this->db->escape($data['password_baru'])." where id_credential=".$this->db->escape($data['id'])." ");
+			$this->db->trans_commit();
+			$this->db->trans_complete();
+			if(!$success){
+					$success = false;
+					$errNo   = $this->db->_error_number();
+					$errMess = $this->db->_error_message();
+					array_push($errors, array($errNo, $errMess));
+				}
+
+			return $success;
+		}
+
+		public function deleteUser($id, $data)
+		{
+			$this->db = $this->load->database('default', true);
+			$this->db->trans_begin();
+		    
+			 $success = $this->db->query("update credential set status=".$this->db->escape($data['status'])." where id_credential=".$id." ");
 			$this->db->trans_commit();
 			$this->db->trans_complete();
 			if(!$success){

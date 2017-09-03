@@ -71,6 +71,18 @@ class KategoriMakananController extends CI_Controller {
 			}
 		}
 	}
+
+		public function deleteKategoriMakanan()
+	{
+			$id = $this->input->post('idDeleteKategoriMakanan');
+			$dataKategoriMakan = array();
+			$dataKategoriMakan['status'] = "NON AKTIF";
+			if($this->M_jenis_makanan->deleteCategoryFood($id,$dataKategoriMakan)){
+				$this->index();
+			}
+	}
+
+
 	public function editKategori($idKategori)
 	{
 		 $data = array();

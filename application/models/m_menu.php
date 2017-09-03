@@ -9,6 +9,7 @@
 			
 			$this->db->select('*');
 			$this->db->from('menu');
+			$this->db->where("(status = 'AKTIF')", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->result();
 		}
@@ -18,6 +19,7 @@
 			$this->db = $this->load->database('default', true);
 			$this->db->select('*');
 			$this->db->from('menu');
+			$this->db->where("(status = 'AKTIF')", NULL, FALSE);
 			$query = $this->db->get();
 			$data = array();
 			$list = $query->result();
@@ -48,6 +50,8 @@
 			return $success;
 		}
 
+	
+
 		public function updateMenu($id, $data)
 		{
 			$this->db = $this->load->database('default', true);
@@ -73,6 +77,7 @@
 			$this->db->select('*');
 			$this->db->from('menu');
 			$this->db->where("(kategori = '0')", NULL, FALSE);
+			$this->db->where("(status = 'AKTIF')", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->result();
 		}
@@ -83,6 +88,7 @@
 			$this->db->select('*');
 			$this->db->from('menu');
 			$this->db->where("(kategori = '1')", NULL, FALSE);
+			$this->db->where("(status = 'AKTIF')", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->result();
 		}

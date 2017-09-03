@@ -70,7 +70,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
+                                <table class="table table-striped table-bordered table-hover"  id='dataTables-menumakanan'>
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -91,7 +91,7 @@
                                                 <td class='warning'>".$row->nama_menu."</td>
                                                 <td class='warning'>".$row->harga_pokok."</td>
                                                 <td class='warning'>".$row->harga_jual."</td>
-                                                <td class='warning'><a href = 'editMakanan/$row->id_menu'>EDIT</a></td>
+                                                <td class='warning'><a href = 'editMakanan/$row->id_menu'>EDIT</a> |  <a id = '".$row->id_menu."' data-title='Delete' data-toggle='modal' data-target='#deleteMenuMakanan'   >HAPUS</a> </td>
                                               </tr>";
                                             }else{
                                               echo "<tr>
@@ -99,7 +99,7 @@
                                                 <td class='info'>".$row->nama_menu."</td>
                                                 <td class='info'>".$row->harga_pokok."</td>
                                                 <td class='info'>".$row->harga_jual."</td>
-                                                <td class='info'><a href = 'editMakanan/$row->id_menu'>EDIT</a></td>
+                                                <td class='info'><a href = 'editMakanan/$row->id_menu'>EDIT</a>  |  <a id = '".$row->id_menu."' data-title='Delete' data-toggle='modal' data-target='#deleteMenuMakanan'   >HAPUS</a> </td>
                                               </tr>";
                                             }
                                               $nomor++;
@@ -120,3 +120,27 @@
         </div>
         <!-- /. PAGE WRAPPER  -->
        
+          <!-- Modal -->
+<div id="deleteMenuMakanan" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">DELETE DATA</h4>
+      </div>
+      <div class="modal-body">
+         <form id="demo-form2" role="form" method="post" action="<?php echo base_url()?>index.php/MenuMakananController/deleteMenuMakanan" data-parsley-validate class="form-horizontal form-label-left">
+            <input type="hidden" name = "idDeleteMenuMakanan" id= "idDeleteMenuMakanan"/>
+            <p>Yakin ingin menghapus ?</p>
+            <div class="form-group">
+              <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-6">
+                <button type="submit" class="btn btn-success">YA</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

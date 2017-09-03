@@ -104,6 +104,17 @@ class UserController extends CI_Controller {
 		 $this->load->view('superadmin/v_ganti_pass.php',$data);
 		 $this->load->view('superadmin/v_footer.php',$data);
 	}
+
+     	public function deleteUser()
+	{
+			$id = $this->input->post('idDeleteUser');
+			$dataUser = array();
+			$dataUser['status'] = "PASIF";
+			if($this->M_user->deleteUser($id,$dataUser)){
+				$this->index();
+			}
+	}
+
 	public function saveUpdate(){
 	    $Username = $this->input->post('username');
 		$NamaLengkap = $this->input->post('namalengkap');

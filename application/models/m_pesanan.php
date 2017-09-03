@@ -7,7 +7,13 @@
 		{
 			$date = date('Y-m-d');
 			$this->db = $this->load->database('default', true);
-			$this->db->select('*');
+            $success = $this->db->query("
+			SELECT a.*,c.no_meja FROM `pesanan` a,detail_meja b,meja c 
+			where a.id_pesanan=b.id_pesanan and b.id_meja=c.id_meja and a.status_pesanan='0' and a.date_pesanan=".$this->db->escape($date)." 
+		");
+		return $success->result();
+
+			$this->db->select('pesanan.*');
 			$this->db->from('pesanan');
 			$this->db->where('date_pesanan',$date);
 			$this->db->where("(status_pesanan = '0')", NULL, FALSE);

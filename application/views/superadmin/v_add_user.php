@@ -70,19 +70,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="AKTIF" checked />AKTIF
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="PASIF"/>NON AKTIF
-                                                </label>
-                                            </div>
-                                        </div>
+                                     
                                                 
                                     <div class="form-group">
                                          <button type="submit" class="btn btn-success">SIMPAN</button>
@@ -104,7 +92,7 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover">
+                                <table class="table table-striped table-bordered table-hover"  id="dataTables-user">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -117,6 +105,7 @@
                                             <th>Status</th>
                                             <th>&nbsp;</th>
                                             <th>&nbsp;</th>
+                                             <th>&nbsp;</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -136,6 +125,7 @@
                                                 <td class='warning'>".$row->status."</td> 
                                                 <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a></td>
                                                <td class='warning'><a href = 'gantiPass/$row->id_user'>Ganti Password</a>
+                                                <td class='warning'><a id = '".$row->id_user."' data-title='Edit' data-toggle='modal' data-target='#delete'   >HAPUS</a>
                                                 </td>
                                               </tr>";
                                             }else{
@@ -150,6 +140,7 @@
                                                 <td class='warning'>".$row->status."</td> 
                                                 <td class='warning'><a href = 'editUser/$row->id_user'>EDIT</a></td>
                                                 <td class='warning'><a href = 'gantiPass/$row->id_user'>Ganti Password</a>
+                                                  <td class='warning'><a id = '".$row->id_user."' data-title='Edit' data-toggle='modal' data-target='#delete'   >HAPUS</a>
                                                 </td>
                                               </tr>";                                            }
                                               $nomor++;
@@ -169,4 +160,27 @@
              <!-- /. PAGE INNER  -->
         </div>
         <!-- /. PAGE WRAPPER  -->
-       
+       <!-- Modal -->
+<div id="delete" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">DELETE DATA</h4>
+      </div>
+      <div class="modal-body">
+         <form id="demo-form2" role="form" method="post" action="<?php echo base_url()?>index.php/UserController/deleteUser" data-parsley-validate class="form-horizontal form-label-left">
+            <input type="hidden" name = "idDeleteUser" id= "idDeleteUser"/>
+            <p>Yakin ingin menghapus ?</p>
+            <div class="form-group">
+              <div class="col-md-10 col-sm-10 col-xs-12 col-md-offset-6">
+                <button type="submit" class="btn btn-success">YA</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>

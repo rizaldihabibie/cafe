@@ -90,6 +90,16 @@ class MenuMakananController extends CI_Controller {
 		 $this->load->view('superadmin/v_footer.php',$data);
 	}
 
+			public function deleteMenuMakanan()
+	{
+			$id = $this->input->post('idDeleteMenuMakanan');
+			$dataMenuMakan = array();
+			$dataMenuMakan['status'] = "NON AKTIF";
+			if($this->M_menu->updateMenu($id,$dataMenuMakan)){
+				$this->index();
+			}
+	}
+
 	public function saveUpdate(){
 		$categoryName = $this->input->post('namaKategori');
 		$namaMakanan = $this->input->post('namaMakanan');

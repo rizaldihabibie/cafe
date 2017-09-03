@@ -29,44 +29,7 @@
                                             <label>Nama Kategori</label>
                                             <input class="form-control" value="<?php if($kategori!="") echo $kategori->nama_jenis_makanan; ?>" name = "namaKategori" placeholder="Kategori Makanan" />
                                         </div>
-                                      <?php
-                                        if($kategori->status == 'AKTIF')
-                                        {
-                                        ?>
-                                        <div class="form-group">
-                                            <label>Status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="AKTIF" checked />AKTIF
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="PASIF"/>NON AKTIF
-                                                </label>
-                                            </div>
-                                        </div>
-                                      <?php
-                                        }
-                                       else if($kategori->status=='PASIF')
-                                       { 
-                                      ?> 
-                                       <div class="form-group">
-                                            <label>Status</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="AKTIF"  />AKTIF
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="status" id="status" value="PASIF" checked/>NON AKTIF
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <?php
-                                       }
-                                        ?> 
+                                     
                                 </div>  
                                                                        
                                 </div>
