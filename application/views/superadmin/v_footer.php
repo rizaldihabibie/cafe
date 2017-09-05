@@ -125,5 +125,18 @@
         $("#namaKategori").val(data[1]);
         })
     </script>
+    <script>
+    $('#editMenuMakanan').on('show.bs.modal', function(e) {
+        var $modal = $(this),
+        data = e.relatedTarget.id;
+        data = data.split("@");
+        $("#idData").val(data[0]);
+        $("#namaMakanan").val(data[1]);
+        $("#hargaPokokMakanan").val(data[2]);
+        $("#hargaJualMakanan").val(data[3]);
+        $("#namaKategori").val(data[4]);
+        })
+    </script>
+
 </body>
 </html>
