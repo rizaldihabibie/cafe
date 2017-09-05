@@ -126,6 +126,15 @@
         })
     </script>
     <script>
+    $('#editKatMinuman').on('show.bs.modal', function(e) {
+        var $modal = $(this),
+        data = e.relatedTarget.id;
+        data = data.split("@");
+        $("#idData").val(data[0]);
+        $("#namaKategori").val(data[1]);
+        })
+    </script>
+    <script>
     $('#editMenuMakanan').on('show.bs.modal', function(e) {
         var $modal = $(this),
         data = e.relatedTarget.id;
@@ -134,6 +143,19 @@
         $("#namaMakanan").val(data[1]);
         $("#hargaPokokMakanan").val(data[2]);
         $("#hargaJualMakanan").val(data[3]);
+        $("#namaKategori").val(data[4]);
+        })
+    </script>
+
+    <script>
+    $('#editMenuMinuman').on('show.bs.modal', function(e) {
+        var $modal = $(this),
+        data = e.relatedTarget.id;
+        data = data.split("@");
+        $("#idData").val(data[0]);
+        $("#namaMinuman").val(data[1]);
+        $("#hargaPokokMinuman").val(data[2]);
+        $("#hargaJualMinuman").val(data[3]);
         $("#namaKategori").val(data[4]);
         })
     </script>

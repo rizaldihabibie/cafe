@@ -103,9 +103,9 @@ class MenuMinumanController extends CI_Controller {
 
 	public function saveUpdate(){
 		$categoryName = $this->input->post('namaKategori');
-		$namaMakanan = $this->input->post('namaMakanan');
-		$hargaPokokMakanan = $this->input->post('hargaPokokMakanan');
-		$hargaJualMakanan = $this->input->post('hargaJualMakanan');
+		$namaMakanan = $this->input->post('namaMinuman');
+		$hargaPokokMakanan = $this->input->post('hargaPokokMinuman');
+		$hargaJualMakanan = $this->input->post('hargaJualMinuman');
 		$Status = $this->input->post('status');
 		$id = $this->input->post("idData");
 
@@ -115,6 +115,7 @@ class MenuMinumanController extends CI_Controller {
 		$data["nama_menu"] = $namaMakanan;
 		$data["harga_jual"] = $hargaJualMakanan;
 		$data["kategori"] = 1;
+		$data["status"] = "AKTIF";
 		if($categoryName == "0-0" || $hargaPokokMakanan == "" || $hargaJualMakanan = ""){
 			$this->session->set_flashdata('error', 'Isi Semua Data !');
 			$this->index();

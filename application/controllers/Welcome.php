@@ -32,6 +32,7 @@ class Welcome extends CI_Controller {
 		$this->output->set_header('Cache-Control:post-check=0,pre-check=0',false);
 		$this->output->set_header('Pragma: no-cache');
 		$this->load->model('m_login');
+		session_start();
 		// $this->load->library('Userauth');
 		
 	}
@@ -72,6 +73,7 @@ class Welcome extends CI_Controller {
 	}
 	function logout()
 	{
+
 		session_destroy();
 		echo "<meta http-equiv='refresh' content='0; url=".base_url()."'>";
 	}
