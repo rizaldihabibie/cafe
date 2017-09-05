@@ -116,5 +116,14 @@
         $("#idDeleteMenuMakanan").val(data);
         })
     </script>
+    <script>
+    $('#editKatMakanan').on('show.bs.modal', function(e) {
+        var $modal = $(this),
+        data = e.relatedTarget.id;
+        data = data.split("@");
+        $("#idData").val(data[0]);
+        $("#namaKategori").val(data[1]);
+        })
+    </script>
 </body>
 </html>

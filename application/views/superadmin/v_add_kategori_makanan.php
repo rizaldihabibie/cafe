@@ -62,13 +62,14 @@
                                               echo "<tr>
                                                 <td class='warning'>".$nomor."</td>
                                                 <td class='warning'>".$row->nama_jenis_makanan."</td>
-                                                <td class='warning'><a href = 'editKategori/$row->id_jenis_makanan'>EDIT</a>  |  <a id = '".$row->id_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#deleteKatMakanan'   >HAPUS</a> </td>
+                                                <td class='warning'><button class='btn btn-primary btn-xs'  id = '".$row->id_jenis_makanan."@".$row->nama_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#editKatMakanan' ><span class='glyphicon glyphicon-pencil'></span></button> |  <button class='btn btn-danger btn-xs' id = '".$row->id_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#deleteKatMakanan' ><span class='glyphicon glyphicon-trash'></span></button></td>
                                               </tr>";
                                             }else{
                                               echo "<tr>
                                                 <td class='info'>".$nomor."</td>
                                                 <td class='info'>".$row->nama_jenis_makanan."</td>
-                                                <td class='info'><a href = 'editKategori/$row->id_jenis_makanan'>EDIT</a> |  <a id = '".$row->id_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#deleteKatMakanan'   >HAPUS</a></td></td>
+                                                <td class='info'><button class='btn btn-primary btn-xs'  id = '".$row->id_jenis_makanan."@".$row->nama_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#editMakanan' ><span class='glyphicon glyphicon-pencil'></span></button> |  <button class='btn btn-danger btn-xs' id = '".$row->id_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#deleteKatMakanan' ><span class='glyphicon glyphicon-trash'></span></button></td>
+                                                
                                               </tr>";
                                             }
                                               $nomor++;
@@ -93,7 +94,6 @@
           <!-- Modal -->
 <div id="deleteKatMakanan" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -110,6 +110,29 @@
               </div>
             </div>
           </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editKatMakanan" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">EDIT DATA</h4>
+      </div>
+      <div class="modal-body">
+         <form role="form" action="<?php echo site_url('KategoriMakananController/saveUpdate'); ?>" method="post">
+            <input name = "idData" id="idData" type="hidden"/>
+            <input name = "status" id="status" value="AKTIF" type="hidden"/>
+            <div class="form-group">
+              <label>Nama Kategori</label>
+              <input class="form-control" id="namaKategori" name = "namaKategori" placeholder="Kategori Makanan" />
+            </div>
+            <button type="submit" class="btn btn-success">SIMPAN PERUBAHAN</button>
+        </form>
       </div>
     </div>
   </div>
