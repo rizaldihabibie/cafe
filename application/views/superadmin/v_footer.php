@@ -60,7 +60,7 @@
       var date_input=$('input[name="tanggalPesanan"]'); //our date input has the name "date"
       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options={
-       
+       language:'id',
         format: 'dd MM yyyy',
         container: container,
         todayHighlight: true,
