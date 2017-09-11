@@ -4,7 +4,7 @@
                     <div class="col-md-12">
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                            Tambah Kategori Makanan
+                            Report
                         </div>
                         <form class="form"  role="form" action="<?php echo site_url('adminController/generateReport'); ?>" method="post">
                         <div class="panel-body">
