@@ -116,6 +116,16 @@
                                         <input class="form-control" type="text" value = "<?php if($subTotal!="") echo $subTotal; ?>" id="grandTotal" name = "grandTotal" readonly />
                                     </div>
                                     <div class="form-group">
+                                      <div class="radio">
+                                        <label>
+                                            <input type="radio" name="paymentOption" id="tunai" value="Tunai" checked>Tunai
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="paymentOption" id="debit" value="Debit">Debit
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label>Tunai :</label>
                                         <input class="form-control" type="text" onChange = "countChange()" id="tunai" name = "tunai" required/>
                                     </div>
