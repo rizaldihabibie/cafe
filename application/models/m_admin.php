@@ -17,9 +17,12 @@
 			
 			$this->db = $this->load->database('default', true);
 			$success = $this->db->query("
-			SELECT sum(x.diskon)tot_dis, sum(ceil((diskon/100)*total)) diskonan, 
-             y.date_pesanan
-             FROM pesanan y left join nota x on y.id_pesanan=x.id_pesanan group by date_pesanan desc
+			SELECT sum(x.diskon) tot_dis, sum(ceil((diskon/100)* y.total_pesanan)) diskonan, 
+             y.date_pesanan FROM (select r.total_pesanan,c.id_pesanan,c.date_pesanan from(
+select sum(f.qty_harga) total_pesanan,f.id_pesanan from (		
+select a.id_pesanan,b.id_menu,b.harga_jual,a.jumlah,(harga_jual * jumlah) qty_harga from menu b,detail_pesanan a
+			 where a.id_menu=b.id_menu and a.status='Confirmed' ) f group by f.id_pesanan ) r, pesanan c where r.id_pesanan=c.id_pesanan) y,nota x where x.id_pesanan=y.id_pesanan group by date_pesanan
+ order by date_pesanan desc
 		");
 		return $success->result();
 		}
