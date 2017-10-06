@@ -411,7 +411,9 @@ class KasirController extends CI_Controller {
 		}
 		 
 		$dataNota['tgl_nota']= $this->input->post('tanggalPesanan'); 
-		$dataNota['id_pesanan']= $id; 
+		$dataNota['id_pesanan']= $id;
+		$dataNota['payment'] = $this->input->post('paymentOption');
+		$dataNota['card_number'] = $this->input->post('cardNumber');
 		$dataMakanan = array();
 		$dataMinuman = array();
 		$indexMakanan = 0;
