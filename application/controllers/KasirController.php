@@ -386,7 +386,7 @@ class KasirController extends CI_Controller {
 		$data[1] = $this->input->post('tunai');
 		$data[2] = $this->input->post('kembalian');
 		$data[3]= $this->input->post('diskon'); 
-
+        $data[4] = $this->input->post('paymentOption');
 		if($data[2]<0){
 			$this->session->set_flashdata('error', 'Jumlah tunai tidak sesuai');
 			$this->paymentPage($id);
@@ -611,6 +611,9 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 			$total = new nota('Grand Total','', $data[0], true);
 			$tunai = new nota('Tunai','', $data[1], true);
 			$kembali = new nota('Kembali','', $data[2], true);
+			$jenis = new nota('Payment by','', $data[4], true);
+			
+			
 
 			/* Date is kept the same for testing */
 			// $date = date('l jS \of F Y h:i:s A');
@@ -675,6 +678,11 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 
 			$printer -> setEmphasis(true);
 			$printer -> text($kembali);
+			$printer -> setEmphasis(false);
+			$printer -> feed();
+			
+			$printer -> setEmphasis(true);
+			$printer -> text($jenis);
 			$printer -> setEmphasis(false);
 			$printer -> feed();
 

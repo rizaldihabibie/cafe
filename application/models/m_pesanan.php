@@ -179,6 +179,7 @@
 			$this->db->from('pesanan');
 			$this->db->join('detail_pesanan', 'pesanan.id_pesanan = detail_pesanan.id_pesanan');
 			$this->db->join('menu', 'detail_pesanan.id_menu = menu.id_menu');
+			
 			$this->db->where('pesanan.id_pesanan',$idPesanan);
 			$this->db->where('detail_pesanan.status',"CONFIRMED");
 			$query = $this->db->get();

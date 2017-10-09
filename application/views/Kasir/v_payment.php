@@ -173,6 +173,7 @@
       function selectPayment(){
         if (document.getElementById("cash").checked == true) {
           document.getElementById("cardNumber").disabled = true; 
+		   document.getElementById("cardNumber").value = ''; 
           document.getElementById("tunai").readOnly = false; 
           document.getElementById('tunai').value = '';
           document.getElementById('kembalian').value = '';
