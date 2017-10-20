@@ -50,6 +50,18 @@ select a.id_pesanan,b.id_menu,b.harga_jual,a.jumlah,(harga_jual * jumlah) qty_ha
 		");
 		return $success->result();
 		}
+		
+		   function hitung_resource() 
+		{
+			$this->db = $this->load->database('default', true);
+			$success = $this->db->query("
+			select z.id_menu,z.nama_menu,qty,harga_jual, (qty*harga_jual) total_harga,date_pesanan  FROM (
+            select c.id_menu,c.nama_menu,sum(jumlah) qty,harga_jual, date_pesanan from pesanan a,detail_pesanan b, menu c 
+            where a.id_pesanan=b.id_pesanan and c.id_menu=b.id_menu and b.status='CONFIRMED' and date_pesanan='2017-08-22' 
+            group by c.id_menu,c.nama_menu,harga_jual,date_pesanan) z order by qty desc,id_menu
+		");
+		return $success->result();
+		}
 
 		function getMaxNumber()
 		{
