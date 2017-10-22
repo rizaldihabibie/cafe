@@ -24,7 +24,7 @@
                                   <tr>
                                     <th>NO</th>
                                     <th>TANGGAL</th>
-                                    <th>SALES QTY</th>
+                                    <th>MENU QTY</th>
                                     <th>SALES BRUTO</th>
                                     <th>DISCOUNT</th>
                                     <th>NET SALES</th>
@@ -91,11 +91,12 @@
                      <div class="panel panel-default">
                         <div class="panel-heading">
 						<?php
-						$hari_ini=date("Y/m/d");
-                        $hari_ini=strftime("%d/%m/%Y",strtotime($hari_ini));
-                       
+				     	$akhir=date("Y/m/d");
+                        $akhir=strftime("%d/%m/%Y",strtotime($akhir));
+                        $awal= date('Y/m/d', strtotime("-7 days"));
+                        $awal=strftime("%d/%m/%Y",strtotime($awal));
 						?>
-                            DATA PENJUALAN per MENU tanggal <?php echo $hari_ini; ?>
+                            DATA PENJUALAN per MENU tanggal  <?php echo $awal.' - '.$akhir; ?>
                         </div>
                         <div class="panel-body">
                             <div class="row">

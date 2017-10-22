@@ -112,7 +112,7 @@ class KasirController extends CI_Controller {
 	
 		 $data = array();
 		 $data['listSales'] = $this->M_admin->salesMingguan();
-		 $data['listDiskon'] = $this->M_admin->hitung_diskon();
+		 $data['listDiskon'] = $this->M_admin->hitung_diskon_mingguan();
 		  $data['listResources'] = $this->M_admin->hitung_resource();
 		 $this->load->view('Kasir/v_header.php',$data);
 		 $this->load->view('Kasir/v_sidebar.php',$data);
