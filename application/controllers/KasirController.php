@@ -304,10 +304,15 @@ class KasirController extends CI_Controller {
 			}
 				
 		}
-
-		if($this->M_pesanan->cancelOrder($input)){
+		if(sizeof($input)>0){
+			if($this->M_pesanan->cancelOrder($input)){
+			redirect("KasirController/detailPesanan/".$id);
+			}
+		}else{
 			redirect("KasirController/detailPesanan/".$id);
 		}
+
+		
 	}
 
 	public function saveAddOrder(){
