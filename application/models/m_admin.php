@@ -8,21 +8,40 @@
 			$date = date('Y-m-d');
 			$this->db = $this->load->database('default', true);
 			$success = $this->db->query("
-		select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual,a.jumlah,(harga_jual * jumlah) qty_harga from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan group by date_pesanan ORDER BY x.date_pesanan desc");
+		select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual
+		,a.jumlah,(harga_jual * jumlah) qty_harga 
+		from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan group by date_pesanan 
+		ORDER BY x.date_pesanan desc");
 		return $success->result();
 		}
 		
-		public function hitung_diskon() 
+		public function salesMingguan() 
 		{
-			
+			$date = date('Y-m-d');
 			$this->db = $this->load->database('default', true);
 			$success = $this->db->query("
-			SELECT sum(x.diskon) tot_dis, sum(ceil((diskon/100)* y.total_pesanan)) diskonan, 
-             y.date_pesanan FROM (select r.total_pesanan,c.id_pesanan,c.date_pesanan from(
-select sum(f.qty_harga) total_pesanan,f.id_pesanan from (		
-select a.id_pesanan,b.id_menu,b.harga_jual,a.jumlah,(harga_jual * jumlah) qty_harga from menu b,detail_pesanan a
-			 where a.id_menu=b.id_menu and a.status='Confirmed' ) f group by f.id_pesanan ) r, pesanan c where r.id_pesanan=c.id_pesanan) y,nota x where x.id_pesanan=y.id_pesanan group by date_pesanan
- order by date_pesanan desc
+		select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual
+		,a.jumlah,(harga_jual * jumlah) qty_harga 
+		from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan 
+		and date_pesanan>=curdate()-7 and date_pesanan<=curdate()
+		group by date_pesanan 
+		ORDER BY x.date_pesanan desc");
+		return $success->result();
+		}
+		//select r.date_pesanan,(sales_harian-total_bersih) diskonan from 
+//(select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual
+		//,a.jumlah,(harga_jual * jumlah) qty_harga 
+		//from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan group by date_pesanan)r, 
+//(select date_pesanan,sum(total) total_bersih from pesanan a,nota b where a.id_pesanan =b.id_pesanan group by date_pesanan) t where r.date_pesanan=t.date_pesanan order by r.date_pesanan desc
+		
+		public function hitung_diskon() 
+		{
+			//hasil sales total-total nota harian
+			$this->db = $this->load->database('default', true);
+			$success = $this->db->query("
+			SELECT sum(x.diskon)tot_dis, sum(ceil((diskon/100)*total)) diskonan, 
+             y.date_pesanan
+             FROM pesanan y left join nota x on y.id_pesanan=x.id_pesanan group by date_pesanan desc
 		");
 		return $success->result();
 		}
@@ -51,18 +70,18 @@ select a.id_pesanan,b.id_menu,b.harga_jual,a.jumlah,(harga_jual * jumlah) qty_ha
 		return $success->result();
 		}
 		
-		   function hitung_resource() 
+          function hitung_resource() 
 		{
 			$this->db = $this->load->database('default', true);
 			$success = $this->db->query("
 			select z.id_menu,z.nama_menu,qty,harga_jual, (qty*harga_jual) total_harga,date_pesanan  FROM (
             select c.id_menu,c.nama_menu,sum(jumlah) qty,harga_jual, date_pesanan from pesanan a,detail_pesanan b, menu c 
-            where a.id_pesanan=b.id_pesanan and c.id_menu=b.id_menu and b.status='CONFIRMED' and date_pesanan='2017-08-22' 
+            where a.id_pesanan=b.id_pesanan and c.id_menu=b.id_menu and b.status='CONFIRMED' and date_pesanan=curdate() 
             group by c.id_menu,c.nama_menu,harga_jual,date_pesanan) z order by qty desc,id_menu
 		");
 		return $success->result();
 		}
-
+		
 		function getMaxNumber()
 		{
 			$this->db=$this->load->database('default',true);

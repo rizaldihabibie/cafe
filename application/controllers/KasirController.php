@@ -111,8 +111,9 @@ class KasirController extends CI_Controller {
 	{	
 	
 		 $data = array();
-		 $data['listSales'] = $this->M_admin->salesHarian();
+		 $data['listSales'] = $this->M_admin->salesMingguan();
 		 $data['listDiskon'] = $this->M_admin->hitung_diskon();
+		  $data['listResources'] = $this->M_admin->hitung_resource();
 		 $this->load->view('Kasir/v_header.php',$data);
 		 $this->load->view('Kasir/v_sidebar.php',$data);
 		 $this->load->view('Kasir/v_mainpage.php',$data); //mainpage
@@ -386,7 +387,7 @@ class KasirController extends CI_Controller {
 		$data[1] = $this->input->post('tunai');
 		$data[2] = $this->input->post('kembalian');
 		$data[3]= $this->input->post('diskon'); 
-        $data[4] = $this->input->post('paymentOption');
+
 		if($data[2]<0){
 			$this->session->set_flashdata('error', 'Jumlah tunai tidak sesuai');
 			$this->paymentPage($id);
@@ -411,9 +412,7 @@ class KasirController extends CI_Controller {
 		}
 		 
 		$dataNota['tgl_nota']= $this->input->post('tanggalPesanan'); 
-		$dataNota['id_pesanan']= $id;
-		$dataNota['payment'] = $this->input->post('paymentOption');
-		$dataNota['card_number'] = $this->input->post('cardNumber');
+		$dataNota['id_pesanan']= $id; 
 		$dataMakanan = array();
 		$dataMinuman = array();
 		$indexMakanan = 0;
@@ -526,7 +525,7 @@ class KasirController extends CI_Controller {
 			$printer -> text("Daftar Pesanan\n");
 			$printer -> setEmphasis(false);
 			foreach ($items as $item) {
-				$printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
+				//$printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
 			    $printer -> text($item);
 			    $printer -> selectPrintMode();
 			}
@@ -611,9 +610,6 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 			$total = new nota('Grand Total','', $data[0], true);
 			$tunai = new nota('Tunai','', $data[1], true);
 			$kembali = new nota('Kembali','', $data[2], true);
-			$jenis = new nota('Payment by','', $data[4], true);
-			
-			
 
 			/* Date is kept the same for testing */
 			// $date = date('l jS \of F Y h:i:s A');
@@ -678,11 +674,6 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 
 			$printer -> setEmphasis(true);
 			$printer -> text($kembali);
-			$printer -> setEmphasis(false);
-			$printer -> feed();
-			
-			$printer -> setEmphasis(true);
-			$printer -> text($jenis);
 			$printer -> setEmphasis(false);
 			$printer -> feed();
 

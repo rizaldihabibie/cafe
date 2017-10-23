@@ -90,7 +90,6 @@ class AdminController extends CI_Controller {
 				$rowTitle[8] = 'HARGA JUAL';
 				$rowTitle[9] = 'TOTAL';
 				$rowTitle[10] = '';
-				
 
 				$columnIndex = array();
 				$columnIndex[0] = 'A';
@@ -104,7 +103,6 @@ class AdminController extends CI_Controller {
 				$columnIndex[8] = 'I';
 				$columnIndex[9] = 'J';
 				$columnIndex[10] = 'K';
-				
 				$styleArray = array(
 				      'borders' => array(
 				          'allborders' => array(
@@ -153,8 +151,7 @@ class AdminController extends CI_Controller {
 						$startIndex++;
 						$indexDetailPesanan++;
 						if($indexDetailPesanan == sizeof($detailPesanan)){
-							$objSheet->getCell('K'.$startIndex)->setValue($subTotal);
-							
+							$objSheet->getCell('k'.$startIndex)->setValue($subTotal);
 							$startIndex++;
 						}
 					}

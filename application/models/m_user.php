@@ -98,6 +98,7 @@
 			$this->db->from('user');
 			$this->db->join('credential', 'credential.id_credential = user.id_credential');
 			$this->db->where("(credential.privilege = 'waitress')", NULL, FALSE);
+                        $this->db->where("(credential.status = 'AKTIF')", NULL, FALSE);   
 			$query = $this->db->get();
 			return $query->result();
 		}

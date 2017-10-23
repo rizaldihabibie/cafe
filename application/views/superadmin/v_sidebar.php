@@ -56,7 +56,7 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
 =======
                     -->
                        <li>
-                        <a href="#">Utilitas<span class="fa arrow"></span></a>
+                        <a href="#">Utilitas<i class="fa fa-spoon fa-3x"></i><span class="fa arrow"></span></a>
 
                         <ul class="nav nav-second-level">
                             <li>

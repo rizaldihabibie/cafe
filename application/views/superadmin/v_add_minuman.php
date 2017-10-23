@@ -91,7 +91,7 @@
                                                 <td class='warning'>".$row->nama_menu."</td>
                                                 <td class='warning'>".$row->harga_pokok."</td>
                                                 <td class='warning'>".$row->harga_jual."</td>
-                                                <td class='warning'><button class='btn btn-primary btn-xs'  id = '".$row->id_menu."@".$row->nama_menu."@".$row->harga_pokok."@".$row->harga_jual."@".$row->id_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#editMenuMinuman' ><span class='glyphicon glyphicon-pencil'></span></button> |  <button class='btn btn-danger btn-xs' id = '".$row->id_menu."' data-title='Edit' data-toggle='modal' data-target='#deleteMenuMinuman' ><span class='glyphicon glyphicon-trash'></span></button></td>
+                                                <td class='warning'><a href = 'editMinuman/$row->id_menu'>EDIT</a> |  <a id = '".$row->id_menu."' data-title='Delete' data-toggle='modal' data-target='#deleteMenuMinuman'   >HAPUS</a> </td>
                                               </tr>";
                                             }else{
                                               echo "<tr>
@@ -99,7 +99,7 @@
                                                 <td class='info'>".$row->nama_menu."</td>
                                                 <td class='info'>".$row->harga_pokok."</td>
                                                 <td class='info'>".$row->harga_jual."</td>
-                                                <td class='info'><button class='btn btn-primary btn-xs'  id = '".$row->id_menu."@".$row->nama_menu."@".$row->harga_pokok."@".$row->harga_jual."@".$row->id_jenis_makanan."' data-title='Edit' data-toggle='modal' data-target='#editMenuMinuman' ><span class='glyphicon glyphicon-pencil'></span></button> |  <button class='btn btn-danger btn-xs' id = '".$row->id_menu."' data-title='Edit' data-toggle='modal' data-target='#deleteMenuMinuman' ><span class='glyphicon glyphicon-trash'></span></button></td>
+                                                <td class='info'><a href = 'editMinuman/$row->id_menu'>EDIT</a> |  <a id = '".$row->id_menu."' data-title='Delete' data-toggle='modal' data-target='#deleteMenuMinuman'   >HAPUS</a> </td>
                                               </tr>";
                                             }
                                               $nomor++;
@@ -140,54 +140,6 @@
               </div>
             </div>
           </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="editMenuMinuman" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">EDIT DATA</h4>
-      </div>
-      <div class="modal-body">
-        <form action="<?php echo site_url('MenuMinumanController/saveUpdate'); ?>" method="post">
-          <input name = "idData" id="idData" type="hidden"/>
-
-          <div class="form-group">
-            <label>Nama Menu</label>
-            <input class="form-control" id="namaMinuman" name = "namaMinuman" placeholder="Nama Makanan" required/>
-          </div>
-
-          <div class="form-group">
-            <label>Jenis Menu</label>
-            <select class="form-control" id="namaKategori" name = "namaKategori">
-              <option value="0-0">-- Pilih Kategori --</option>
-              <?php
-              foreach($listKategori as $row){
-                echo '<option value="'.$row->id_jenis_makanan.'">'.$row->nama_jenis_makanan.'</option>';
-              }
-              ?>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Harga Pokok Makanan</label>
-            <input class="form-control" id ="hargaPokokMinuman" name = "hargaPokokMinuman" required />
-          </div>
-          <div class="form-group">
-            <label>Harga Jual Makanan</label>
-            <input class="form-control" id="hargaJualMinuman" name = "hargaJualMinuman" required/>
-          </div>
-
-          <div class="form-group">
-            <button type="submit" class="btn btn-success">SIMPAN PERUBAHAN</button>
-          </div>
-
-        </form>
       </div>
     </div>
   </div>

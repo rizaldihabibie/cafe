@@ -116,20 +116,6 @@
                                         <input class="form-control" type="text" value = "<?php if($subTotal!="") echo $subTotal; ?>" id="grandTotal" name = "grandTotal" readonly />
                                     </div>
                                     <div class="form-group">
-                                      <div class="radio">
-                                        <label>
-                                            <input type="radio" name="paymentOption" id="cash" value="CASH" onClick='selectPayment()' checked>Tunai
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="paymentOption" id="debit" value="DEBIT" onClick='selectPayment()'>Debit
-                                        </label>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Nomor Kartu :</label>
-                                        <input class="form-control" type="text" id="cardNumber" name = "cardNumber" required/>
-                                    </div>
-                                    <div class="form-group">
                                         <label>Tunai :</label>
                                         <input class="form-control" type="text" onChange = "countChange()" id="tunai" name = "tunai" required/>
                                     </div>
@@ -154,44 +140,8 @@
              <!-- /. PAGE INNER  -->
         </div>
         <!-- /. PAGE WRAPPER  -->
-<script>
-    var rad = document.myForm.paymentO;
-    var prev = null;
-    for(var i = 0; i < rad.length; i++) {
-        rad[i].onclick = function() {
-            (prev)? console.log(prev.value):null;
-            if(this !== prev) {
-                prev = this;
-            }
-            console.log(this.value)
-        };
-    }
-</script>
 
 <script type="text/Javascript">
-      window.onload = selectPayment();
-      function selectPayment(){
-        if (document.getElementById("cash").checked == true) {
-          document.getElementById("cardNumber").disabled = true; 
-		   document.getElementById("cardNumber").value = ''; 
-          document.getElementById("tunai").readOnly = false; 
-          document.getElementById('tunai').value = '';
-          document.getElementById('kembalian').value = '';
-        }else{
-          document.getElementById("cardNumber").disabled = false; 
-        }
-
-        if (document.getElementById("debit").checked == true) {
-          
-          document.getElementById("cardNumber").disabled = false; 
-          document.getElementById('tunai').value = document.getElementById('grandTotal').value;
-          document.getElementById("tunai").readOnly = true; 
-          countChange();
-        }else{
-          document.getElementById("tunai").readOnly = false; 
-          document.getElementById("cardNumber").disabled = true; 
-        }
-      }
       function countDiskon() {
        var diskon = document.getElementById('diskon').value;
        diskon = diskon.replace('%','');

@@ -60,7 +60,7 @@
       var date_input=$('input[name="tanggalPesanan"]'); //our date input has the name "date"
       var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
       var options={
-       language:'id',
+       
         format: 'dd MM yyyy',
         container: container,
         todayHighlight: true,
@@ -116,49 +116,5 @@
         $("#idDeleteMenuMakanan").val(data);
         })
     </script>
-    <script>
-    $('#editKatMakanan').on('show.bs.modal', function(e) {
-        var $modal = $(this),
-        data = e.relatedTarget.id;
-        data = data.split("@");
-        $("#idData").val(data[0]);
-        $("#namaKategori").val(data[1]);
-        })
-    </script>
-    <script>
-    $('#editKatMinuman').on('show.bs.modal', function(e) {
-        var $modal = $(this),
-        data = e.relatedTarget.id;
-        data = data.split("@");
-        $("#idData").val(data[0]);
-        $("#namaKategori").val(data[1]);
-        })
-    </script>
-    <script>
-    $('#editMenuMakanan').on('show.bs.modal', function(e) {
-        var $modal = $(this),
-        data = e.relatedTarget.id;
-        data = data.split("@");
-        $("#idData").val(data[0]);
-        $("#namaMakanan").val(data[1]);
-        $("#hargaPokokMakanan").val(data[2]);
-        $("#hargaJualMakanan").val(data[3]);
-        $("#namaKategori").val(data[4]);
-        })
-    </script>
-
-    <script>
-    $('#editMenuMinuman').on('show.bs.modal', function(e) {
-        var $modal = $(this),
-        data = e.relatedTarget.id;
-        data = data.split("@");
-        $("#idData").val(data[0]);
-        $("#namaMinuman").val(data[1]);
-        $("#hargaPokokMinuman").val(data[2]);
-        $("#hargaJualMinuman").val(data[3]);
-        $("#namaKategori").val(data[4]);
-        })
-    </script>
-
 </body>
 </html>
