@@ -245,7 +245,8 @@ function addOrder() {
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
             myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
             var div = document.createElement("div");
-            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
+            var componentId = "order"+order[i][0];
+            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+","+componentId+")'>";
             myTable.rows[indexRow].cells[4].appendChild(div);
             var inputHidden = document.createElement("input");
             inputHidden.type = "hidden";
@@ -259,7 +260,8 @@ function addOrder() {
     showMenu();
  }
 
- function removeRow(index,hidden){
+ function removeRow(index,hidden,idRow){
+
     // var myTable = document.getElementById('tabelOrder');
     // myTable.deleteRow(index);
     order.splice(index-1, 1);
@@ -295,13 +297,13 @@ function addOrder() {
     indexRow = 1;
     var container = document.getElementById('main');
     for (var i = 0; i < order.length; i++) {
-            console.log(i);
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
             myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
             myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
             var div = document.createElement("div");
-            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+")'>";
+            var componentId = "order+"+order[i][0];
+            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+","+componentId+")'>";
             myTable.rows[indexRow].cells[4].appendChild(div);
             var inputHidden = document.createElement("input");
             inputHidden.type = "hidden";
@@ -312,6 +314,8 @@ function addOrder() {
             
             indexRow++;
     }
+
+    container.removeChild(idRow);
     
  }
  

@@ -348,7 +348,6 @@ class KasirController extends CI_Controller {
 				}
 			}
 		}
-
 		if($this->M_pesanan->saveDetailPesanan($daftarPesanan)){
 			$this->cetak($dataMakanan,$dataMinuman,$noMeja);
 			$this->detailPesanan($id);
