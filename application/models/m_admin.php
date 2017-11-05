@@ -2,8 +2,7 @@
 
 	class M_admin extends CI_Model 
 	{
-
-		public function salesHarian() 
+	public function salesHarian() 
 		{
 			$date = date('Y-m-d');
 			$this->db = $this->load->database('default', true);
@@ -36,9 +35,9 @@
 			$this->db = $this->load->database('default', true);
 			$success = $this->db->query("
 			select r.date_pesanan,(sales_harian-total_bersih) diskonan,t.tot_dis from 
-(select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual
+(select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select c.id_pesanan,b.id_menu,b.harga_jual
 		,a.jumlah,(harga_jual * jumlah) qty_harga 
-		from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan group by date_pesanan)r, 
+		from menu b,detail_pesanan a,nota c where a.id_menu=b.id_menu and a.status='Confirmed' and c.id_pesanan=a.id_pesanan) y where x.id_pesanan=y.id_pesanan group by date_pesanan)r, 
 (select date_pesanan,sum(total) total_bersih,sum(b.diskon)tot_dis from pesanan a,nota b where a.id_pesanan =b.id_pesanan group by date_pesanan) t where r.date_pesanan=t.date_pesanan order by r.date_pesanan desc
 		");
 		return $success->result();
@@ -50,9 +49,9 @@
 			$this->db = $this->load->database('default', true);
 			$success = $this->db->query("
 			select r.date_pesanan,(sales_harian-total_bersih) diskonan,t.tot_dis from 
-(select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select a.id_pesanan,b.id_menu,b.harga_jual
+(select x.date_pesanan,sum(y.qty_harga) sales_harian,count(x.id_pesanan) jml_pesanan from pesanan x,(select c.id_pesanan,b.id_menu,b.harga_jual
 		,a.jumlah,(harga_jual * jumlah) qty_harga 
-		from menu b,detail_pesanan a where a.id_menu=b.id_menu and a.status='Confirmed') y where x.id_pesanan=y.id_pesanan group by date_pesanan)r, 
+		from menu b,detail_pesanan a,nota c where a.id_menu=b.id_menu and a.status='Confirmed'  and c.id_pesanan=a.id_pesanan) y where x.id_pesanan=y.id_pesanan group by date_pesanan)r, 
 (select date_pesanan,sum(total) total_bersih,sum(b.diskon)tot_dis from pesanan a,nota b where a.id_pesanan =b.id_pesanan group by date_pesanan) t where r.date_pesanan=t.date_pesanan 
 and r.date_pesanan>=curdate()-7 and r.date_pesanan<=curdate()
 order by r.date_pesanan desc

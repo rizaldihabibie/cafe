@@ -18,7 +18,7 @@
                                   <tr>
                                      <th>NO</th>
                                     <th>TANGGAL</th>
-                                    <th>MENU QTY</th>
+                                    <th>SALES QTY</th>
                                     <th>SALES BRUTO</th>
                                     <th>DISCOUNT</th>
                                     <th>NET SALES</th>

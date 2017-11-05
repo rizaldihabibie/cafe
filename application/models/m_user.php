@@ -109,7 +109,7 @@
 		    $this->db->select('*');
 			$this->db->from('user');
 			$this->db->join('credential', 'credential.id_credential = user.id_credential');
-			$this->db->where("(user.id_credential = ".$id.")", NULL, FALSE);
+			$this->db->where("(user.id_user= ".$id.")", NULL, FALSE);
 			$query = $this->db->get();
 			return $query->row();
 		}

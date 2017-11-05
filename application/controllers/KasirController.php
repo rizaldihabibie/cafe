@@ -112,7 +112,7 @@ class KasirController extends CI_Controller {
 	
 		 $data = array();
 		 $data['listSales'] = $this->M_admin->salesMingguan();
-		 $data['listDiskon'] = $this->M_admin->hitung_diskon_mingguan();
+		 $data['listDiskon'] = $this->M_admin->hitung_diskon();
 		  $data['listResources'] = $this->M_admin->hitung_resource();
 		 $this->load->view('Kasir/v_header.php',$data);
 		 $this->load->view('Kasir/v_sidebar.php',$data);
@@ -383,7 +383,7 @@ class KasirController extends CI_Controller {
 		$this->load->view('Kasir/v_footer.php',$data);
 		//$this->load->view('MainPage/v_mainpage.php');
 	}
-public function bayar(){
+	public function bayar(){
 		$id = $this->input->post('idPesanan');
 		$nomorMeja = $this->input->post('nomorMeja');
 		$data = array();
@@ -416,9 +416,10 @@ public function bayar(){
 		}
 		 
 		$dataNota['tgl_nota']= $this->input->post('tanggalPesanan'); 
-		$dataNota['id_pesanan']= $id;
+		$dataNota['id_pesanan']= $id; 
 		$dataNota['payment'] = $this->input->post('paymentOption');
 		$dataNota['card_number'] = $this->input->post('cardNumber');
+		$dataNota['tgl_nota'] = date("Y/m/d");
 		$dataMakanan = array();
 		$dataMinuman = array();
 		$indexMakanan = 0;
@@ -617,8 +618,6 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 			$tunai = new nota('Tunai','', $data[1], true);
 			$kembali = new nota('Kembali','', $data[2], true);
 			$jenis = new nota('Payment by','', $data[4], true);
-			
-			
 
 			/* Date is kept the same for testing */
 			// $date = date('l jS \of F Y h:i:s A');
@@ -685,12 +684,11 @@ public function nota($makanan,$minuman,$nomorMeja,$data)
 			$printer -> text($kembali);
 			$printer -> setEmphasis(false);
 			$printer -> feed();
-			
-			$printer -> setEmphasis(true);
+            
+			$printer -> setJustification(Printer::JUSTIFY_CENTER);
 			$printer -> text($jenis);
 			$printer -> setEmphasis(false);
-			$printer -> feed();
-
+			$printer -> feed(); 
 			/* Footer */
 			$printer -> feed(2);
 			$printer -> setJustification(Printer::JUSTIFY_CENTER);
