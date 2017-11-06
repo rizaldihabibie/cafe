@@ -106,6 +106,7 @@
                                 </div>
                             </div>
                             </div>
+                            <div id="hiddenData"></div>
                             <button type="submit" id="buttonAdd" class=" form-control btn btn-success ">SIMPAN PESANAN</button>
                             
                         </div>
@@ -238,14 +239,14 @@ function addOrder() {
     }
     
     var indexRow = 1;
-    var container = document.getElementById('main');
+    var container = document.getElementById('hiddenData');
     for (var i = 0; i < order.length; i++) {
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
             myTable.rows[indexRow].cells[1].innerHTML = order[i][1]; 
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
             myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
             var div = document.createElement("div");
-            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+",order"+order[i][0]+")'>";
+            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+","+order[i][0]+")'>";
             myTable.rows[indexRow].cells[4].appendChild(div);
             var inputHidden = document.createElement("input");
             inputHidden.type = "hidden";
@@ -291,7 +292,8 @@ function addOrder() {
     }
     
     indexRow = 1;
-    var container = document.getElementById('main');
+    var container = document.getElementById('hiddenData');
+     $("#hiddenData").empty();
     for (var i = 0; i < order.length; i++) {
             console.log(i);
             myTable.rows[indexRow].cells[0].innerHTML = indexRow;
@@ -299,7 +301,7 @@ function addOrder() {
             myTable.rows[indexRow].cells[2].innerHTML = order[i][2];
             myTable.rows[indexRow].cells[3].innerHTML = order[i][3];
             var div = document.createElement("div");
-            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+",order"+order[i][0]+")'>";
+            div.innerHTML +="<input type='button' value='X'class='form-control  btn btn-danger' onclick='removeRow("+indexRow+","+obj[i][0]+","+order[i][0]+")'>";
             myTable.rows[indexRow].cells[4].appendChild(div);
             var inputHidden = document.createElement("input");
             inputHidden.type = "hidden";
@@ -310,8 +312,6 @@ function addOrder() {
             
             indexRow++;
     }
-
-    container.removeChild(idComponent);
 
  }
  

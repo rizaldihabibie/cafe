@@ -199,9 +199,11 @@ class KasirController extends CI_Controller {
 		for($i=0;$i<sizeof($data['menuArray']);$i++){
 			if($this->input->post("order".$data['menuArray'][$i][0])!=null){
 				$daftarOrder[] = $this->input->post("order".$data['menuArray'][$i][0]);
+				// echo $this->input->post("order".$data['menuArray'][$i][0]);
+				// echo "<br>";
 			}
 		}
-
+		// exit();
 		$dataPemesan['id_user'] = $this->input->post('waitress');
 		$dataPemesan['nama_pemesan'] = $namaPemesan;
 		$dataPemesan['date_pesanan'] = date("Y/m/d");
