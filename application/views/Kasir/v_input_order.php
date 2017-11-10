@@ -110,7 +110,8 @@
                             </div>
                             </div>
                             <div id="hiddenData"></div>
-                            <button type="submit" id="buttonAdd" class=" form-control btn btn-success ">SIMPAN PESANAN</button>
+							
+                            <button type="submit" id="buttonSubmit" class=" form-control btn btn-success ">SIMPAN PESANAN</button>
                             
                         </div>
                         

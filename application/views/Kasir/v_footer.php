@@ -23,11 +23,22 @@
             responsive: true
         });
     });
+	
+	
 	$(document).ready(function() {
         $('#dataTables-example2').DataTable({
             responsive: true
         });
     });
+	
+	function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+         return true;
+      }	
 	
       $(document).ready(function(){
       var date_input=$('input[name="tanggalPesanan"]'); //our date input has the name "date"

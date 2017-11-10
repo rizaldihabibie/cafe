@@ -127,11 +127,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Nomor Kartu :</label>
-                                        <input class="form-control" type="text" id="cardNumber" name = "cardNumber" required/>
+                                        <input class="form-control" type="text" id="cardNumber" name = "cardNumber"  onkeypress='return isNumberKey(event)' required/>
                                     </div>
                                     <div class="form-group">
                                         <label>Tunai :</label>
-                                        <input class="form-control" type="text" onChange = "countChange()" id="tunai" name = "tunai" required/>
+                                        <input class="form-control" type="text" onChange = "countChange()" id="tunai" name = "tunai" onkeypress='return isNumberKey(event)' required/>
                                     </div>
                                     <div class="form-group">
                                         <label>Kembali :</label>
