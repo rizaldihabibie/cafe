@@ -1,4 +1,4 @@
-        <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post">
+        <form role="form" action="<?php echo site_url('KasirController/savePesanan'); ?>" method="post" onsubmit="buttonSubmit.disabled = true; return true;">
          <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
