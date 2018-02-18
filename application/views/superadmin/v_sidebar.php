@@ -62,6 +62,9 @@ font-size: 16px;"><span><a id="time">ahahah &nbsp;</a></span><a href="<?php echo
                             <li>
                                 <a  href="<?php echo site_url('UserController/index'); ?>">Manajemen User</a>
                             </li>
+							 <li>
+                                <a  href="<?php echo site_url('AdminController/openTable'); ?>">Open Table</a>
+                            </li>
                             <li>
                                 <a  href="<?php echo site_url('AdminController/reportPage'); ?>">Report</a>
                             </li>
